@@ -1,0 +1,50 @@
+@import 'variables';
+
+
+// media queries   /////////////////////////////////////////////////
+@mixin breakpoint($point) {
+
+  @if $point=='1400' {
+    @media (max-width:1400px) {
+      @content
+    }
+  };
+
+
+
+  @if $point=='1024' {
+    @media (max-width:1024px) {
+      @content
+    }
+  };
+
+
+
+
+  @if $point=='768' {
+    @media (max-width:768px) {
+      @content
+    }
+  };
+
+
+
+  @if $point=='600' {
+    @media (max-width:600px) {
+      @content
+    }
+  }
+};
+
+
+
+//layout   ///////////////////////////////////////////////////////
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+};
+
+
+
+// ui    /////////////////////////////////////////////////////////

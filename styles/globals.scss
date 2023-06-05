@@ -1,0 +1,51 @@
+@import 'variables';
+
+*,
+* ::before,
+* ::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+
+html,
+body {
+  max-width: 100vw;
+  background-color: $color-3-dark;
+  font-family: $font-montserrat;
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: normal;
+
+}
+
+h3 {
+  font-size: 3rem;
+  font-weight: normal;
+
+}
+
+h4 {
+  font-size: 2rem;
+  font-weight: normal;
+
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: normal;
+
+}
