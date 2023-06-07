@@ -29,8 +29,8 @@
 
 
 
-  @if $point=='600' {
-    @media (max-width:600px) {
+  @if $point=='480' {
+    @media (max-width:480px) {
       @content
     }
   }

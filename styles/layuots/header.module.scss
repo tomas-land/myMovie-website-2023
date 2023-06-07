@@ -4,5 +4,16 @@
 .header {
   width: 100vw;
   height: 5rem;
- background-color: rgb(94, 43, 145);
+  background-color: black;
+  opacity: 0.2;
+
+  .container {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1600px;
+    height: 5rem;
+    outline: 1px solid red;
+  }
+
 }
