@@ -4,8 +4,8 @@
 .header {
   width: 100vw;
   height: 5rem;
-  background-color: black;
-  opacity: 0.2;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+
 
   .container {
     margin: auto;
@@ -14,6 +14,11 @@
     max-width: 1600px;
     height: 5rem;
     outline: 1px solid red;
+
+    .btns {
+      display: flex;
+      align-items: center;
+    }
   }
 
 }

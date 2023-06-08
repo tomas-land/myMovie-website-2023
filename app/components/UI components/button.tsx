@@ -1,13 +1,14 @@
 import React from 'react'
+import s from '@/styles/UI components/button.module.scss'
 
 interface iButtonProps {
-  text: string
+  label: string
 
 }
 
-const Button = ({ text }: iButtonProps) => {
+const Button = ({ label }: iButtonProps) => {
   return (
-    <button>{text}</button>
+    <button className={s.button}><span className={s.text_gradient}>{label}</span></button>
   )
 }
 
