@@ -12,6 +12,7 @@
   outline: none;
   cursor: pointer;
   background-color: rgba($color-1, $alpha: 0.1);
+  transition: all 0.2s ease-in-out;
 
   .text_gradient {
     color: #1eb381;

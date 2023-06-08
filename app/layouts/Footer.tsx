@@ -1,4 +1,4 @@
-import s from '@styles/layuots/footer.module.scss'
+import s from '@styles/layouts/footer.module.scss'
 
 const Footer = () => {
   return (
