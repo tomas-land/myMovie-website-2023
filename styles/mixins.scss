@@ -58,3 +58,11 @@
 
 
 // ui    /////////////////////////////////////////////////////////
+
+@mixin text_gradient() {
+  color: #1eb381;
+  background-image: -webkit-linear-gradient(45deg, #1eb381 25%, #1e8db3 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

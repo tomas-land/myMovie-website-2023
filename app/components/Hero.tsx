@@ -1,0 +1,33 @@
+import React from 'react'
+import Image from 'next/image'
+
+import s from '@styles/components/hero.module.scss'
+
+const Hero = () => {
+  return (
+    <section className={s.hero}>
+
+
+      <Image
+        className={s.hero_image}
+        src="/hero_blur_edges.png"
+        alt="picture of a movie"
+        fill
+      />
+      <div className={s.hero_overlay}>
+        <div className={s.hero_content}>
+          <div className={s.hero_title_wrapper}>
+            <h1 className={s.hero_title}>Discover </h1>
+            <h1 className={s.hero_title}>Collect </h1>
+            <h1 className={s.hero_title}>Recall</h1>
+          </div>
+          {/* <p className={s.hero_subtitle}>MyMovie is a place where you can discover new movies, collect your favorites and recall them whenever you want.</p> */}
+          <p className={s.hero_subtitle}>Make your movie database great again</p>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Hero
