@@ -6,8 +6,8 @@ import { Squash as Hamburger } from 'hamburger-react'
 
 import s from '@styles/layouts/header.module.scss'
 
-import Logo from '../components/UI components/Logo'
-import CustomButton from '../components/UI components/CustomButton'
+import Logo from '../components/UI/Logo'
+import Button from '../components/UI/Button'
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false)
@@ -20,12 +20,12 @@ const Header = () => {
         </Link>
         <div className={s.btns}>
           <Link href="">
-            <CustomButton label="Sign in" />
+            <Button label="sign in" />
           </Link>
+        </div>
           <div className={s.hamburger_wrapper}>
             <Hamburger toggled={isOpen} toggle={setOpen} size={25} rounded />
           </div>
-        </div>
         <div className={s.menu}>
           <div className={s.menu_list}>
             <li className={s.menu_item}>

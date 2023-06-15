@@ -9,22 +9,24 @@
   .hero_image {
     object-fit: cover;
     filter: opacity(0.2);
+
+    @include breakpoint(768) {
+      transform: translateX(-12rem);
+    }
   }
 
   .hero_overlay {
     position: absolute;
-    inset: 0;
+    top: 20%;
     width: 100%;
     height: 100%;
 
     .hero_content {
       display: flex;
       align-items: center;
-      justify-content: center;
       flex-direction: column;
-      height: 100%;
-      transform: translateY(-5rem);
       padding: 2rem;
+   
 
       .hero_title_wrapper {
         display: flex;
@@ -46,17 +48,33 @@
             text-align: center;
             font-size: 5rem;
           }
+
+          @include breakpoint(480) {
+            font-size: 4rem;
+          }
         }
       }
 
       .hero_subtitle {
-        font-size: 1.5rem;
-        font-weight: normal;
+        font-size: 1.7rem;
+        font-weight: 500;
         color: $color-1;
+        text-align: center;
 
         @include breakpoint(480) {
           text-align: center;
-          font-size: 1.2rem;
+          font-size: 1.5rem;
+        }
+      }
+
+      .search {
+        position: relative;
+        margin-top: 3rem;
+        height: 2.5rem;
+        width: 30rem;
+
+        @include breakpoint(480) {
+          display: none;
         }
       }
     }

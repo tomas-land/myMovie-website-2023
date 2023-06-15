@@ -2,22 +2,26 @@
 @import '~styles/mixins';
 
 .button {
-  padding: 0.3rem 2rem;
+  right: 0;
+  height: 2.5rem;
+  padding: 0rem 2rem;
   font-family: inherit;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.1rem;
   border: 2px solid $btn-color;
   border-radius: 2rem;
   outline: none;
   cursor: pointer;
-  background-color: rgba($color-1, $alpha: 0.1);
   transition: all 0.2s ease-in-out;
-  @include text_gradient();
+  background-color: rgba($color: #000000, $alpha: 0.1);
 
+  span {
+    @include text_gradient();
+  }
 
   &:hover {
-    background-color: rgba($color-1, $alpha: 0.2);
+    background-color: rgba($color-1, $alpha: 0.1);
     box-shadow: inset 0 0 0 0.1rem $color-1;
   }
 }
