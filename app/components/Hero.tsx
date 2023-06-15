@@ -27,7 +27,7 @@ const Hero = () => {
           {/* <p className={s.hero_subtitle}>MyMovie is a place where you can discover new movies, collect your favorites and recall them whenever you want.</p> */}
           <p className={s.hero_subtitle}>Make your movie database great again</p>
           <div className={s.search}>
-            <Input placeholder="Search for a movie..." maxLength={25}/>
+            <Input placeholder="Search for a movie..." maxLength={40}/>
             <Button label="Search" position="absolute" />
           </div>
         </div>

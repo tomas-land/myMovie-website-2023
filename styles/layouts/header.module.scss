@@ -4,8 +4,10 @@
 .header {
   width: 100%;
   min-height: 5rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 
   .container {
     margin: auto;
@@ -14,8 +16,6 @@
     align-items: center;
     flex-wrap: wrap;
     padding: 1rem 2rem 0;
-
-
 
     @include breakpoint(768) {
       padding: 1rem 1rem 0;
