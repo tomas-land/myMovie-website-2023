@@ -1,12 +1,14 @@
 import '@styles/globals.scss'
 import s from '@styles/pages/page.module.scss'
-import Hero from './components/Hero'
+
+import Hero from './Hero'
+import Trending from './Trending'
 
 export default function Home() {
   return (
     <div className={s.home}>
-      <Hero />
-      
+      {/* <Hero /> */}
+      <Trending />
       {/* //Banner */}
       {/* //Search */}
       {/* //Latest movies */}

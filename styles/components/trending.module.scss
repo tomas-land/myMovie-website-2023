@@ -1,0 +1,27 @@
+@import "~/styles/variables";
+@import "~/styles/mixins";
+
+.trending {
+  max-width: $main_container;
+  margin: auto;
+  height: 35rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 2rem;
+  margin-top: 8rem;
+  padding: 2rem;
+
+  .header {
+
+    .title {
+      width: fit-content;
+      font-weight: 800;
+      letter-spacing: 0.1rem;
+      margin-bottom: 1rem;
+      @include text_gradient();
+    }
+  }
+
+
+
+}
