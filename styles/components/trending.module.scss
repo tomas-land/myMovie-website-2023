@@ -4,7 +4,6 @@
 .trending {
   max-width: $main_container;
   margin: auto;
-  height: 35rem;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 2rem;
@@ -12,6 +11,7 @@
   padding: 2rem;
 
   .header {
+    margin-bottom: 2rem;
 
     .title {
       width: fit-content;
@@ -22,6 +22,20 @@
     }
   }
 
+  .movies_slider {
+    display: flex;
+    grid-gap: 1rem;
+
+    .movie_card {
+      position: relative;
+
+      .image {
+        border-radius: 1rem;
+        width: 15rem;
+        height: auto;
+      }
+    }
+  }
 
 
 }
