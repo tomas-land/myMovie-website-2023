@@ -1,9 +1,9 @@
 @import "~/styles/variables";
 @import "~/styles/mixins";
 
-.trending {
+.now_playing {
   max-width: $main_container;
-  margin: auto;
+  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 2rem;
@@ -21,21 +21,4 @@
       @include text_gradient();
     }
   }
-
-  .movies_slider {
-    display: flex;
-    grid-gap: 1rem;
-
-    .movie_card {
-      position: relative;
-
-      .image {
-        border-radius: 1rem;
-        width: 15rem;
-        height: auto;
-      }
-    }
-  }
-
-
 }

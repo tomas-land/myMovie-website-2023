@@ -2,8 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 
 import s from '@styles/components/hero.module.scss'
+
 import Input from './components/UI/Input'
 import Button from './components/UI/Button'
+
 
 const Hero = () => {
   return (
@@ -15,7 +17,7 @@ const Hero = () => {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: '250%', height: '100%' }}
+        style={{ width: '250%', height: '150%' }}
       />
       <div className={s.hero_overlay}>
         <div className={s.hero_content}>
