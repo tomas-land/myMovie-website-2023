@@ -2,8 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 
 import s from '@styles/components/hero.module.scss'
-import Input from './UI/Input'
-import Button from './UI/Button'
+
+import Input from './components/UI/Input'
+import Button from './components/UI/Button'
+
 
 const Hero = () => {
   return (
@@ -15,7 +17,7 @@ const Hero = () => {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: '250%', height: '100%' }}
+        style={{ width: '250%', height: '150%' }}
       />
       <div className={s.hero_overlay}>
         <div className={s.hero_content}>
@@ -27,7 +29,7 @@ const Hero = () => {
           {/* <p className={s.hero_subtitle}>MyMovie is a place where you can discover new movies, collect your favorites and recall them whenever you want.</p> */}
           <p className={s.hero_subtitle}>Make your movie database great again</p>
           <div className={s.search}>
-            <Input placeholder="Search for a movie..." maxLength={40}/>
+            <Input placeholder="Search for a movie..." maxLength={40} />
             <Button label="Search" position="absolute" />
           </div>
         </div>

@@ -5,13 +5,13 @@
   width: 100%;
   min-height: 5rem;
   background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
   backdrop-filter: blur(10px);
+  position: fixed;
   z-index: 1000;
 
   .container {
     margin: auto;
-    max-width: 1920px;
+    max-width: $main_container;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -79,10 +79,12 @@
   }
 
   .mobile_menu {
-    inset: 0;
     position: fixed;
+    inset: 0 0 0 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1100;
     background-color: $color-2;
-    z-index: 1000;
 
 
     @include breakpoint(768) {

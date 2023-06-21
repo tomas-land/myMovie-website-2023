@@ -1,0 +1,152 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["orderByNulls"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tmdbId Int    @unique
+  imdbId String @unique
+
+  title             String   @db.VarChar(256)
+  originalTitle     String?  @db.VarChar(256)
+  language          String?
+  releaseYear       Int?
+  releaseDate       String?
+  genres            String[]
+  plot              String   @db.VarChar(4096)
+  runtime           Int
+  adult             Boolean  @default(false)
+  budget            String? // overflows int (esp foreign currencies)
+  revenue           String? // overflows int (Avatar 2009)
+  homepage          String?  @db.VarChar(511)
+  status            String
+  mpaaRating        String?
+  keywords          String[] @default([])
+  countriesOfOrigin String[] @default([])
+  languages         String[] @default([])
+  cast              String[] @default([])
+  director          String?
+  production        String?
+  awardsSummary     String?
+
+  // images
+  posterUrl              String? @db.VarChar(512)
+  posterPlaceholderUrl   String? @db.VarChar(4096)
+  posterWidth            Int?
+  posterHeight           Int?
+  backdropUrl            String? @db.VarChar(512)
+  backdropPlaceholderUrl String? @db.VarChar(4096)
+  backdropWidth          Int?
+  backdropHeight         Int?
+
+  // video
+  trailerUrl       String? @db.VarChar(512)
+  trailerYouTubeId String?
+
+  // imdb
+  imdbRating Float?
+  imdbVotes  Int?
+  imdbType   String?
+
+  // tmdb
+  tmdbPopularity Float?
+  tmdbRating     Float?
+  tmdbVotes      Int?
+
+  // metacritic
+  metacriticRating Float?
+  metacriticVotes  Int?
+
+  // rotten tomatoes
+  rtCriticRating     Int?
+  rtCriticVotes      Int?
+  rtAudienceRating   Int?
+  rtAudienceVotes    Int?
+  rtCriticsConsensus String? @db.VarChar(1024)
+  rtId               String?
+  emsId              String?
+  rtUrl              String?
+
+  // letterboxd
+  letterboxdScore Int?
+  letterboxdVotes Int?
+
+  // flickmetrix
+  flickMetrixScore Int?
+  flickMetrixId    Int?
+
+  // custom / application-specific)
+  foreign              Boolean? @default(false)
+  relevancyScore       Float?
+  imdbCustomPopularity Float?
+  searchL              String?  @db.VarChar(2048)
+
+  @@index([imdbRating, releaseYear, foreign, genres, searchL, relevancyScore])
+  @@index([imdbVotes])
+  @@index([tmdbPopularity])
+  @@index([rtCriticRating])
+  @@index([rtAudienceRating])
+  @@index([releaseDate])
+  @@index([tmdbId])
+  @@index([imdbId])
+}
+
+
+//## About
+
+Building a better app for finding great movies has been on my proverbial todo list for awhile. With Next.js 13's paradigm shift, I thought it'd be the perfect time to build it and [open source my learnings along the way](https://github.com/transitive-bullshit/next-movie).
+
+## App Features
+
+- Advanced movie search by rating, genre, release date, etc
+- All movies include **YouTube trailers**
+- Most movies include **IMDB rating, RT audience score, and RT critic score**
+- Supports grid view, list view, and single movie view
+- High quality movie database
+
+## Movie Database
+
+<p align="center">
+  <a href="https://github.com/transitive-bullshit/populate-movies">
+    <img alt="Populates a full database of movies from TMDB and IMDB into Postgres." src="https://raw.githubusercontent.com/transitive-bullshit/populate-movies/main/media/banner.jpg" />
+  </a>
+</p>
+
+Under the hood, this app uses [populate-movies](https://github.com/transitive-bullshit/populate-movies) to generate it's high quality movie database, featuring:
+
+- ~73k movies (filtered from ~750k TMDB "movies")
+- Metadata from TMDB, IMDB, and Rotten Tomatoes
+- Automatable pipeline
+- Custom post-processing
+  - Selects the best available YouTube trailer for every movie
+  - Relevancy scores using a combination of popularity, rating, and release date
+  - Nuanced foreign movie detection that looks at more than just language/country
+  - [LQIP](https://github.com/transitive-bullshit/lqip-modern) preview image generation for all movie images
+  - Basic text index for searching
+- Open source using TS + Prisma + Postgres
+
+## License
+
+This project is [open source](https://github.com/transitive-bullshit/next-movie). MIT © [Travis Fischer](https://transitivebullsh.it)
+
+Support my open source work by [sponsoring me](https://github.com/sponsors/transitive-bullshit) or <a href="https://twitter.com/transitive_bs">following me on twitter</a>.
+
+<br />
+
+<p>
+  <a href="https://developers.themoviedb.org/3/getting-started/introduction"><img alt="TMDB" src="/logos/tmdb.png" height="65"></a>
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <a href="https://www.imdb.com/interfaces/"><img alt="IMDB" src="/logos/imdb.png" height="65"></a>
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <a href="https://www.rottentomatoes.com"><img alt="Rotten Tomatoes" src="/logos/rt.png" height="65"></a>
+</p>
+`
