@@ -1,30 +1,32 @@
 "use client"
 
-import React from 'react'
+import iMovie from '@/lib/interfaces';
+
+import MovieCard from './MovieCard';
+
+import s from '@styles/components/UI/slider.module.scss'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
-import Image from 'next/image';
-import s from '@styles/components/UI/slider.module.scss'
 
+interface iProps {
+  movies: iMovie[]
+}
 
-const Slider = ({ movies }: any) => {
+const Slider = ({ movies }: iProps) => {
   return (
     <Splide className={s.slider} options={{
       type: 'loop',
-      perPage: 5,
-      perMove: 1,
       gap: '1rem',
       pagination: false,
       arrows: false,
       autoWidth: true,
+      autoHeight: true,
     }
     } >
       {
-        movies.map((movie: any) => (
-          <SplideSlide key={movie.id}>
-            <div>
-              <Image className={s.image} src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} sizes='100vw' width={'0'} height={'0'} />
-            </div>
+        movies.map((movie) => (
+          <SplideSlide key={movie.id} className={s.slide}>
+            <MovieCard movie={movie} />
           </SplideSlide>
         ))
       }

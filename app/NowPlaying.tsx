@@ -24,7 +24,7 @@ const NowPlaying = async () => {
   return (
     <section className={s.now_playing}>
       <div className={s.header}>
-        <h1 className={s.title}>In theatres</h1>
+        <h1 className={s.title}>In Theatres</h1>
       </div>
       <div className={s.movies_slider}>
         <Slider movies={now_playing} />
