@@ -1,9 +1,7 @@
 "use client"
 
 import iMovie from '@/lib/interfaces';
-
 import MovieCard from './MovieCard';
-
 import s from '@styles/components/UI/slider.module.scss'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
@@ -24,7 +22,7 @@ const Slider = ({ movies }: iProps) => {
     }
     } >
       {
-        movies.map((movie) => (
+        movies?.map((movie) => (
           <SplideSlide key={movie.id} className={s.slide}>
             <MovieCard movie={movie} />
           </SplideSlide>

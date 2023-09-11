@@ -4,19 +4,16 @@
 .movie_card {
   display: flex;
   flex-direction: column;
-
   width: 16rem;
   height: 100%;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.3);
   overflow: hidden;
 
-  // box-shadow: 0 0.5rem 0.5rem $color-3;
   .poster_wrapper {
     width: 100%;
     overflow: hidden;
     position: relative;
-
 
     .btns {
       display: none;
@@ -29,8 +26,6 @@
       height: 100%;
       inset: 2rem 0 0 0;
 
-
-
       .btn {
         background-color: transparent;
         color: $color-1;
@@ -38,13 +33,11 @@
         border: 2px solid $color-1;
         border-radius: 2rem;
         cursor: pointer;
-
         font-weight: 800;
         letter-spacing: 0.1rem;
         color: $color-1-light;
       }
     }
-
 
     .poster {
       opacity: 100%;
@@ -53,13 +46,6 @@
       height: auto;
       transition: 0.5s ease;
       z-index: 999;
-
-      // &:hover {
-      //   opacity: 10%;
-      //   transform: scale(1.1);
-      // }
-
-
     }
 
     &:hover {
@@ -70,10 +56,8 @@
       .poster {
         opacity: 10%;
         transform: scale(1.1);
-
       }
     }
-
   }
 
   .content {
@@ -91,7 +75,6 @@
     }
 
     .btns {
-
       margin-top: 1rem;
       display: flex;
       justify-content: space-between;
@@ -114,7 +97,6 @@
           fill: $color-1-dark;
           color: $color-1;
         }
-
       }
 
       .rating {
@@ -131,7 +113,6 @@
 
         span {
           color: $color-1-light;
-
         }
       }
     }

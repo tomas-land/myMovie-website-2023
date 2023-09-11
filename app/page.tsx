@@ -1,18 +1,17 @@
-import '@styles/globals.scss'
-import s from '@styles/pages/page.module.scss'
+import '@styles/globals.scss';
+import s from '@styles/pages/page.module.scss';
+import axios from 'axios';
 
-import Hero from './Hero'
-import Trending from './NowPlaying'
-import NowPlaying from './NowPlaying'
+import Hero from './Hero';
+import NowPlayingMovies from './NowPlayingMovies';
 
 export default function Home() {
   return (
     <div className={s.home}>
-      {/* <Hero /> */}
-      {/* @ts-ignore */}
-      <NowPlaying />
+      <Hero />
+      <NowPlayingMovies />
       {/* //Search */}
       {/* //Latest movies */}
     </div>
-  )
+  );
 }
