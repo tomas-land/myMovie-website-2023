@@ -1,0 +1,140 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+.header {
+  width: 100%;
+  min-height: 5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  z-index: 1000;
+
+  .container {
+    margin: auto;
+    max-width: $main_container;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem 2rem 0;
+
+    @include breakpoint(768) {
+      padding: 1rem 1rem 0;
+      justify-content: space-between;
+    }
+
+    .hamburger_wrapper {
+      display: none;
+      margin-left: 1rem;
+      color: $color-1;
+
+      @include breakpoint(768) {
+        display: block;
+      }
+    }
+
+    .btns {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+
+      @include breakpoint(768) {
+        display: none;
+      }
+    }
+
+    .menu {
+      width: 100%;
+      height: 3rem;
+
+      @include breakpoint(768) {
+        display: none;
+      }
+
+      .menu_list {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+
+        .menu_item {
+          .link {
+            display: block;
+            padding: 1rem 0 0;
+            letter-spacing: 0.1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: $color-3;
+            transition: all 0.2s ease-in-out;
+
+            &:focus {
+              color: $color-1;
+              font-size: 1.4rem;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .mobile_menu {
+    position: fixed;
+    inset: 0 0 0 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1100;
+    background-color: $color-2;
+
+
+    @include breakpoint(768) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hamburger_wrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 5rem;
+      padding: 0 1rem;
+      color: $color-1;
+      background-color: rgba($color: #000000, $alpha: 0.2);
+    }
+
+    .mobile_menu_list {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding: 2rem;
+
+      .mobile_menu_item {
+        .link {
+          letter-spacing: 0.1rem;
+          font-size: 1.4rem;
+          font-weight: 500;
+          color: $color-3;
+          transition: all 0.2s ease-in-out;
+
+          &:focus {
+            color: $color-1;
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  .open {
+    animation: enter 0.3s;
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
