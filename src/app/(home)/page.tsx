@@ -1,15 +1,24 @@
 import '@/styles/globals.scss';
-
 import Hero from '@/components/homepage/hero/Hero';
-import NowPlayingMovies from './NowPlayingMovies';
+import MoviesDisplay from '@/components/homepage/movies_display/MoviesDisplay';
+import { getNowPlayingMovies, getTopRatedMovies } from '@/lib/requests/movies';
+import { getUpcomingMovies } from '@/lib/requests/movies';
 
-export default function Home() {
+const Home = async () => {
+  const nowPlayingMovies = await getNowPlayingMovies();
+  const upcomingMovies = await getUpcomingMovies();
+  const topRatedMovies = await getTopRatedMovies();
+  console.log(nowPlayingMovies);
   return (
     <div>
       <Hero />
-      <NowPlayingMovies />
+      <MoviesDisplay movies={nowPlayingMovies} headerTitle="In Theatres" />
+      <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" />
+      <MoviesDisplay movies={topRatedMovies} headerTitle="Top Rated" />
       {/* //Search */}
       {/* //Latest movies */}
     </div>
   );
-}
+};
+
+export default Home;
