@@ -1,4 +1,31 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
 .slider {
   display: flex;
+  .last_slide {
+    height: 100%;
+    width: 16rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    .button_more {
+      background-color: transparent;
+      color: $color-1;
+      padding: 1rem 3rem;
+      border: 2px solid $color-1;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: 0.1rem;
+      color: $color-1-light;
+      transition: all 0.3s ease-in-out;
 
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
 }

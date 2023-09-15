@@ -4,11 +4,12 @@ import MoviesDisplay from '@/components/homepage/movies_display/MoviesDisplay';
 import { getNowPlayingMovies, getTopRatedMovies } from '@/lib/requests/movies';
 import { getUpcomingMovies } from '@/lib/requests/movies';
 
+
 const Home = async () => {
   const nowPlayingMovies = await getNowPlayingMovies();
   const upcomingMovies = await getUpcomingMovies();
   const topRatedMovies = await getTopRatedMovies();
-  console.log(nowPlayingMovies);
+  
   return (
     <div>
       <Hero />
