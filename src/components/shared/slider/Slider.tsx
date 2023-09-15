@@ -9,16 +9,18 @@ import '@splidejs/react-splide/css/core';
 
 interface iProps {
   movies: iMovie[];
+  endpoint: string;
 }
 
-const Slider = ({ movies }: iProps) => {
+const Slider = ({ movies, endpoint }: iProps) => {
   const [moviesToShow, setMoviesToShow] = useState<iMovie[]>(movies);
   const [pageToShow, setPageToShow] = useState<number>(2);
 
   const handleShowMoreMovies = async () => {
     setPageToShow(pageToShow + 1);
     try {
-      const moreMovies = await axios.get('/api/movies/getNowPlaying', { params: { page: pageToShow } });
+      const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: pageToShow, endpoint: endpoint } });
+      console.log(moreMovies.data.data);
       setMoviesToShow(() => [...moviesToShow, ...moreMovies.data.data]);
     } catch (error) {
       console.error('Error fetching more movies:', error);
