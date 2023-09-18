@@ -43,13 +43,15 @@ const Slider = ({ movies, endpoint }: iProps) => {
           <MovieCard movie={movie} />
         </SplideSlide>
       ))}
-      <SplideSlide className={s.slide}>
-        <div className={s.last_slide}>
-          <button className={s.button_more} onClick={handleShowMoreMovies}>
-            Show more..
-          </button>
-        </div>
-      </SplideSlide>
+      {endpoint === 'top_rated' ? null : (
+        <SplideSlide className={s.slide}>
+          <div className={s.last_slide}>
+            <button className={s.button_more} onClick={handleShowMoreMovies}>
+              Show more..
+            </button>
+          </div>
+        </SplideSlide>
+      )}
     </Splide>
   );
 };

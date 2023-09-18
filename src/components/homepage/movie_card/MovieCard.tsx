@@ -33,7 +33,7 @@ const MovieCard = ({ movie }: iProps) => {
       <div className={s.content}>
         <h3 className={s.title}>{movie.title}</h3>
         <div className={s.btns}>
-          <div className={s.rating}><span>7.6</span></div>
+          <div className={s.rating}><span>{movie.vote_average}</span></div>
           <button className={`${s.btn} ${isFavorite ? s.fill_icon : ''}`}><FiStar size={25} onClick={toggleFavorite} /></button>
           <button className={`${s.btn} ${isInWatchlist ? s.fill_icon : ''}`}><FiHeart size={25} onClick={toggleWatchlist} /></button>
           <button className={s.btn}><IoPlayOutline size={30} /></button>
