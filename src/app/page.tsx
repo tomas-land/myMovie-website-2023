@@ -1,0 +1,40 @@
+import '@/styles/globals.scss';
+import { Suspense } from 'react';
+import Hero from '@/components/homepage/hero/Hero';
+import MoviesDisplay from '@/components/homepage/movies_display/MoviesDisplay';
+import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib/requests/movies';
+import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
+import requests from '@/lib/requests/movies';
+import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
+
+export const dynamic = 'force-dynamic';
+
+const Home = async () => {
+  const fetchMoviesWithTimeout = async (time: number) => {
+    const movies = await getNowPlayingMovies();
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(movies);
+      }, time);
+    });
+  };
+  const nowPlayingMovies = await fetchMoviesWithTimeout(3000);
+  // console.log(requests.getNowPlayingMovies)
+  // const nowPlayingMovies = await getNowPlayingMovies();
+  // const upcomingMovies = await getUpcomingMovies();
+  // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
+  return (
+    <div>
+      {/* <Hero /> */}
+      <Suspense fallback={<div><LoadingSpinner/></div>}>
+        <MoviesDisplay headerTitle="In Theatres" endpoint="now_playing" movies={nowPlayingMovies} />
+      </Suspense>
+      {/* <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" endpoint="upcoming" />
+      <MoviesDisplay movies={sortedByVoteTopRatedMovies} headerTitle="Top Rated" endpoint="top_rated" /> */}
+      {/* //Search */}
+      {/* //Latest movies */}
+    </div>
+  );
+};
+
+export default Home;
