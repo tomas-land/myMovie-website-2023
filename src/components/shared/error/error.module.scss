@@ -1,0 +1,35 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.error {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    color: $color-1-light;
+    text-shadow: 0 0 1rem #000;
+  }
+  button {
+    background-color: transparent;
+    color: $color-1;
+    padding: 1rem 3rem;
+    border: 2px solid $color-1;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: 0.1rem;
+    color: $color-1-light;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}
