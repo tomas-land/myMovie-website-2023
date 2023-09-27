@@ -1,14 +1,14 @@
-@import "~src/styles/mixins";
-@import "~src/styles/variables";
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
 
 .movies_display {
   max-width: $main_container;
-  min-height: 16rem;
+  min-height: 39rem;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 2rem;
-  margin-top: 8rem;
+  margin-top: 4rem;
   padding: 2rem;
 
   .header {
