@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import iMovie from '@/lib/interfaces';
 import MovieCard from '@/components/homepage/movie_card/MovieCard';
 import s from './slider.module.scss';

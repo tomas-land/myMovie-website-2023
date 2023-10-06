@@ -12,6 +12,7 @@ import Loading from './loading';
 export const dynamic = 'force-dynamic';
 
 const Home = async () => {
+ 
   // const fetchMoviesWithTimeout = async (time: number) => {
   //   const movies = await getNowPlayingMovies();
   //   return new Promise((resolve) => {
@@ -23,15 +24,14 @@ const Home = async () => {
   // const nowPlayingMovies = await fetchMoviesWithTimeout(6000);
   const nowPlayingMovies = await getNowPlayingMovies();
   const upcomingMovies = await getUpcomingMovies();
-  const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
+  // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
   return (
     <div>
       <Hero />
-      <MoviesDisplay headerTitle="In Theatres" endpoint="now_playing" movies={nowPlayingMovies} />
-      <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" endpoint="upcoming" />
-      <MoviesDisplay movies={sortedByVoteTopRatedMovies} headerTitle="Top Rated" endpoint="top_rated" />
       {/* //Search */}
-      {/* //Latest movies */}
+      <MoviesDisplay headerTitle="In Theatres" endpoint="now_playing" movies={nowPlayingMovies} />
+      {/* <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" endpoint="upcoming" /> */}
+      {/* <MoviesDisplay movies={sortedByVoteTopRatedMovies} headerTitle="Top Rated" endpoint="top_rated" /> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { last30days, currentDay } from '@/lib/dayJS';
-import { TMDB_API_KEY } from '@/config';
+import { TMDB_API_KEY } from '@/lib/config';
 
 
 export async function GET(request: Request) {

@@ -1,122 +1,136 @@
-@import "~src/styles/mixins";
-@import "~src/styles/variables";
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
 
 .movie_card {
   display: flex;
-  flex-direction: column;
-  width: 16rem;
-  height: 100%;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.3);
   overflow: hidden;
 
-  .poster_wrapper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-
-    .btns {
-      display: none;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      gap: 2rem;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      inset: 2rem 0 0 0;
-
-      .btn {
-        background-color: transparent;
-        color: $color-1;
-        padding: 1rem 3rem;
-        border: 2px solid $color-1;
-        border-radius: 2rem;
-        cursor: pointer;
-        font-weight: 800;
-        letter-spacing: 0.1rem;
-        color: $color-1-light;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-          scale: 1.1;
-        }
-      }
-    }
-
-    .poster {
-      opacity: 100%;
-      display: block;
-      width: 100%;
-      height: auto;
-      transition: 0.5s ease;
-      z-index: 999;
-    }
-
-    &:hover {
-      .btns {
-        display: flex;
-      }
-
-      .poster {
-        opacity: 10%;
-        transform: scale(1.1);
-      }
-    }
-  }
-
-  .content {
-    flex: 1;
+  .movie_card_wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
+    width: 16rem;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
 
-    .title {
-      line-height: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.1rem;
-      color: $color-1-light;
+    .poster_wrapper {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+
+      .poster {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: 0.5s ease;
+        z-index: 999;
+        cursor: pointer;
+      }
+
+      .btns {
+        display: none;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 2rem 0 0 0;
+
+        .btn {
+          background-color: transparent;
+          color: $color-1;
+          padding: 1rem 3rem;
+          border: 2px solid $color-1;
+          border-radius: 2rem;
+          cursor: pointer;
+          font-weight: 800;
+          letter-spacing: 0.1rem;
+          color: $color-1-light;
+          transition: all 0.3s ease-in-out;
+          &:hover {
+            scale: 1.1;
+          }
+        }
+      }
+
+      &:hover {
+        .btns {
+          display: flex;
+          @include breakpoint(768) {
+            display: none;
+          }
+        }
+
+        .poster {
+          opacity: 0.1;
+          transform: scale(1.1);
+          @include breakpoint(768) {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      }
     }
 
-    .btns {
-      margin-top: 1rem;
+    .content {
+      flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
+      padding: 1rem;
 
-      .btn {
-        background-color: transparent;
-        padding: 0.4rem 0.6rem;
-        color: $color-1-dark;
+      .title {
+        line-height: 1.2rem;
         font-weight: 700;
-        cursor: pointer;
-
-        &:hover {
-          color: $color-1;
-          scale: 1.1;
-        }
+        letter-spacing: 0.1rem;
+        color: $color-1-light;
       }
 
-      .fill_icon {
-        svg {
-          fill: $color-1-dark;
-          color: $color-1;
-        }
-      }
-
-      .rating {
-        width: 3rem;
-        height: 3rem;
+      .btns {
+        margin-top: 1rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        font-size: 1.2rem;
-        color: $color-1;
-        border: 2px solid $color-1-dark;
-        border-radius: 50%;
+        justify-content: space-between;
 
-        span {
-          color: $color-1-light;
+        .btn {
+          background-color: transparent;
+          padding: 0.4rem 0.6rem;
+          color: $color-1-dark;
+          font-weight: 700;
+          cursor: pointer;
+
+          &:hover {
+            color: $color-1;
+            scale: 1.1;
+          }
+        }
+
+        .fill_icon {
+          svg {
+            fill: $color-1-dark;
+            color: $color-1;
+          }
+        }
+
+        .rating {
+          width: 3rem;
+          height: 3rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          letter-spacing: 2px;
+          font-weight: 700;
+          font-size: 1.2rem;
+          color: $color-1;
+          border: 2px solid $color-1-dark;
+          border-radius: 50%;
+
+          span {
+            color: $color-1-light;
+          }
         }
       }
     }

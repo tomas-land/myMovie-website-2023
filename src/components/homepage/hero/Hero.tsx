@@ -9,7 +9,7 @@ import Button from '@/components/shared/button/Button';
 const Hero = () => {
   return (
     <section className={s.hero}>
-      <Image className={s.hero_image} src="/hero_blur_edges.png" alt="picture of a movie" width={0} height={0} sizes="100vw" style={{ width: '250%', height: '150%' }} />
+      <Image className={s.hero_image} src="/hero_blur_edges.png" priority={true}  alt="picture of a movie" width={0} height={0} sizes="100vw" style={{ width: '250%', height: '150%' }} />
       <div className={s.hero_overlay}>
         <div className={s.hero_content}>
           <div className={s.hero_title_wrapper}>

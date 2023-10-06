@@ -7,9 +7,12 @@
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  border-radius: 2rem;
   margin-top: 4rem;
   padding: 2rem;
+  @include breakpoint(768){
+    padding: 1rem;
+  }
+
 
   .header {
     margin-bottom: 2rem;

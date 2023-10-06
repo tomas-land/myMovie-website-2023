@@ -1,50 +1,31 @@
 @import 'variables';
 
-
 // media queries   /////////////////////////////////////////////////
 @mixin breakpoint($point) {
-
   @if $point==1400 {
-    @media (max-width:1400px) {
-      @content
+    @media (max-width: 1400px) {
+      @content;
     }
   }
-
-  ;
-
-
 
   @if $point==1024 {
-    @media (max-width:1024px) {
-      @content
+    @media (max-width: 1024px) {
+      @content;
     }
   }
-
-  ;
-
-
-
 
   @if $point==768 {
-    @media (max-width:768px) {
-      @content
+    @media (max-width: 768px) {
+      @content;
     }
   }
 
-  ;
-
-
-
   @if $point==480 {
-    @media (max-width:480px) {
-      @content
+    @media (max-width: 480px) {
+      @content;
     }
   }
 }
-
-;
-
-
 
 //layout   ///////////////////////////////////////////////////////
 @mixin flex-center() {
@@ -52,10 +33,6 @@
   align-items: center;
   justify-content: center;
 }
-
-;
-
-
 
 // ui    /////////////////////////////////////////////////////////
 
@@ -65,5 +42,4 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
 }

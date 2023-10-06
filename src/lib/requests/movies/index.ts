@@ -1,11 +1,6 @@
-import { TMDB_API_KEY, TMDB_BASE_URL } from '@/config.js';
+import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
 import { currentDay, startOFYear } from '@/lib/dayJS';
 import iMovie from '@/lib/interfaces';
-
-// const requests = {
-//   getNowPlayingMovies: `${TMDB_BASE_URL}/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`,
-
-// }
 
 export async function getNowPlayingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
@@ -22,11 +17,9 @@ export async function getUpcomingMovies() {
     const data = await response.json();
     if (!response.ok) {
       throw new Error('Fetching failed');
-    } 
+    }
     return data.results;
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }
 
 export async function getTopRatedMovies() {
@@ -41,5 +34,13 @@ export async function getTopRatedMovies() {
   }
   return allMovies;
 }
-// export default requests;
+
+// export async function getMovieById(id: number) {
+//   const response = await fetch(`${TMDB_BASE_URL}/${id}?api_key=${TMDB_API_KEY}&language=en-US`);
+//   const data = await response.json();
+//   if (!response.ok) {
+//     throw new Error('Fetching movie failed');
+//   }
+//   return data;
+// }
 export default { getNowPlayingMovies, getUpcomingMovies, getTopRatedMovies };
