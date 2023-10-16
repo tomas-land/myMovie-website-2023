@@ -1,6 +1,6 @@
 import s from './backdrop_image.module.scss';
 import Image from 'next/image';
-import iMovie from '@/lib/interfaces';
+import { iMovie } from '@/lib/interfaces';
 
 interface iProps {
   movie: iMovie;

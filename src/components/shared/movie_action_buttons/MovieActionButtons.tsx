@@ -4,7 +4,6 @@ import { useState } from 'react';
 import s from './movie_action_buttons.module.scss';
 import {iMovie} from '@/lib/interfaces';
 import { FiHeart, FiStar, FiBookmark } from 'react-icons/fi';
-import { IoPlayOutline } from 'react-icons/io5';
 
 interface iProps {
   movie: iMovie;
