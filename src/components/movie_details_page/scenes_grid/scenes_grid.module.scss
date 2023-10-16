@@ -1,5 +1,6 @@
 @import '~src/styles/mixins';
 @import '~src/styles/variables';
+
 .scenes_wrapper {
   .scenes_grid {
     position: relative;
@@ -26,6 +27,7 @@
   }
   .show_more_btn {
     width: 100%;
+    padding: 1rem;
     background-color: transparent;
     color: $btn-color;
     cursor: pointer;

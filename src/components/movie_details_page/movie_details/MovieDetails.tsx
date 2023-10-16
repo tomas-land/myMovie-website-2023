@@ -13,9 +13,11 @@ interface iProps {
 }
 
 const MovieDetails = ({ movie, movieImages }: iProps) => {
+
   const show = () => {
     console.log('show');
-  };
+  }
+ 
   console.log(movie);
   return (
     <div className={s.movie_details}>
@@ -33,7 +35,7 @@ const MovieDetails = ({ movie, movieImages }: iProps) => {
             ))}
           </div>
           <div className={s.play_trailer}>
-            <Button label="watch trailer" icon={<IoPlayOutline />} handleClick={show} />
+            <Button label="watch trailer" icon={<IoPlayOutline />} />
           </div>
           <div className={s.extended_info}>
             <div>
@@ -61,7 +63,6 @@ const MovieDetails = ({ movie, movieImages }: iProps) => {
         <p className={s.overview_text}>{movie.overview}</p>
       </div>
       <ScenesGrid movieImages={movieImages} movie={movie} />
-      //cast crew
     </div>
   );
 };

@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   background-color: $card-bg-color;
-  backdrop-filter: blur(10px);
-  transform: translateY(-8rem);
+  backdrop-filter: blur(5px);
+  margin-top: -10rem;
   .header {
     display: flex;
     justify-content: space-between;

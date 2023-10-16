@@ -15,10 +15,9 @@ const MoviePage = async ({ params }: iProps) => {
   console.log(movieImages);
   return (
     <div>
-
       <BackdropImage movie={movie} />
       <MovieDetails movie={movie} movieImages={movieImages} />
-    
+      {/* <TrailerModal />     */}
     </div>
   );
 };
