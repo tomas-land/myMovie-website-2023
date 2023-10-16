@@ -1,0 +1,19 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.image_wrapper {
+  position: relative;
+  top: 6rem;
+  height: 40rem;
+  @include breakpoint(1400) {
+    height: 70vh;
+  }
+  @include breakpoint(768) {
+    top: 4rem;
+  }
+  .backdrop_image {
+    object-fit: cover;
+    filter: opacity(0.2) hue-rotate(195deg) grayscale(1);
+    mask-image: linear-gradient(to bottom, rgba(34, 53, 73, 0.9), rgba(68, 43, 64, 0));
+  }
+}

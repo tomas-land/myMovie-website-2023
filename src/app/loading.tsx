@@ -12,7 +12,7 @@ export default function Loading() {
 
   return (
     <>
-      <div className={s.movies_display}>
+      <div className={s.movies_display} style={{ marginTop: '40rem' }}>
         <div className={s.header}>
           <h1 className={s.title}>
             <Skeleton width={200} {...skeletonAttributes} />

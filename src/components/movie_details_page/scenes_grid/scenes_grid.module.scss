@@ -1,0 +1,38 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+.scenes_wrapper {
+  .scenes_grid {
+    position: relative;
+    height: 13rem;
+    overflow: hidden;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    mask-image: linear-gradient(180deg, rgba(28, 40, 56, 0.9), rgba(28, 40, 56, 0.1));
+
+    .scene {
+      position: relative;
+      height: 10rem;
+
+      .scene_img {
+        object-fit: cover;
+      }
+    }
+  }
+  .expanded_grid {
+    height: auto;
+    mask: none;
+  }
+  .show_more_btn {
+    width: 100%;
+    background-color: transparent;
+    color: $btn-color;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.1rem;
+    &:hover {
+      color: $color-1-light;
+    }
+  }
+}

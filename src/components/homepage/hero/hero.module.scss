@@ -1,18 +1,17 @@
-@import "~src/styles/mixins";
-@import "~src/styles/variables";
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
 
 .hero {
   position: relative;
-  display: flex;
-  justify-content: center;
-  height: 70vh;
-
+  height: 40rem;
+  @include breakpoint(1400) {
+    height: 90vh;
+  }
   .hero_image {
     object-fit: cover;
     filter: opacity(0.2);
-
-    @include breakpoint(768) {
-      transform: translateX(-12rem);
+    @include breakpoint(480) {
+      object-position: 5%;
     }
   }
 
@@ -27,7 +26,6 @@
       align-items: center;
       flex-direction: column;
       padding: 2rem;
-   
 
       .hero_title_wrapper {
         display: flex;
@@ -36,7 +34,6 @@
         @include breakpoint(1024) {
           flex-direction: column;
           gap: 0;
-
         }
 
         .hero_title {
@@ -73,6 +70,8 @@
         margin-top: 3rem;
         height: 2.5rem;
         width: 30rem;
+        display: flex;
+        justify-content: flex-end;
 
         @include breakpoint(480) {
           display: none;

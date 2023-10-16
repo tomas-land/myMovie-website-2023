@@ -5,10 +5,10 @@
   max-width: $main_container;
   min-height: 39rem;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: $card-bg-color;
   backdrop-filter: blur(10px);
-  margin-top: 4rem;
   padding: 2rem;
+  transform: translateY(-5rem);
   @include breakpoint(768){
     padding: 1rem;
   }

@@ -10,11 +10,9 @@
 // @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=Kufam:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-
 //fonts
 $font-montserrat: var(--font-montserrat);
 // $font-raleway: 'Raleway', sans-serif;
-
 
 //colors
 // $color-1: #fce38a;
@@ -25,31 +23,31 @@ $font-montserrat: var(--font-montserrat);
 // $color-3-dark: #081620;
 
 $color-1-light: #3eada6;
-$color-1: #2A7A75;
+$color-1: #2a7a75;
 $color-1-dark: #16423f;
 
-$color-2: #1D2636;
+$color-2: #1d2636;
 
 $color-3-light: #854d6c;
-$color-3: #4E2C3F;
+$color-3: #4e2c3f;
 $color-3-dark: #301b27;
 
 $btn-color: #459c7f;
+$card-bg-color: rgba(0, 0, 0, 0.2);
 
 //container
 $main_container: 1600px;
 //spacing
-$spacing-sm:0.5rem;
-$spacing-md:1rem;
-$spacing-lg:2rem;
-$spacing-2lg:4rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+$spacing-2lg: 4rem;
 
 // misc
-$transition_10s:0.10s ease-in-out;
-$transition_05s:0.5s ease-in-out;
-$transition_02s:0.2s ease-in-out;
+$transition_10s: 0.1s ease-in-out;
+$transition_05s: 0.5s ease-in-out;
+$transition_02s: 0.2s ease-in-out;
 
 $light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 $dark-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
 $main-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-

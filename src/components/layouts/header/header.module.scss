@@ -1,5 +1,5 @@
-@import "~src/styles/mixins";
-@import "~src/styles/variables";
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
 .header {
   width: 100%;
   min-height: 5rem;
@@ -37,7 +37,6 @@
       align-items: center;
       justify-content: flex-end;
 
-
       @include breakpoint(768) {
         display: none;
       }
@@ -63,14 +62,15 @@
             letter-spacing: 0.1rem;
             font-size: 1.2rem;
             font-weight: 500;
-            color: $color-3;
+            color: $color-3-light;
             transition: all 0.2s ease-in-out;
-
+            &:hover {
+              color: $color-1-light;
+            }
             &:focus {
               color: $color-1;
               font-size: 1.4rem;
             }
-
           }
         }
       }
@@ -84,7 +84,6 @@
     height: 100vh;
     z-index: 1100;
     background-color: $color-2;
-
 
     @include breakpoint(768) {
       display: flex;
