@@ -1,7 +1,6 @@
 import s from './movies_display.module.scss';
 import Slider from '@/components/shared/slider/Slider';
 import { iMovie } from '@/lib/interfaces';
-import Skeleton from 'react-loading-skeleton';
 
 interface iProps {
   movies: iMovie[];
