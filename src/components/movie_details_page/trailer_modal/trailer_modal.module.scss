@@ -1,0 +1,79 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.trailer_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  .modal_content {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    @include breakpoint(768) {
+      width: 100%;
+    }
+    .swiper {
+      width: 100%;
+      height: 100%;
+      // --swiper-navigation-color: #2a7a75;
+      // --swiper-pagination-color: #2a7a75;
+
+      .slide {
+        @include flex-center();
+        .video {
+          width: 100%;
+          height: 90%;
+          @include breakpoint(768) {
+            width: 100%;
+            height: 30%;
+          }
+        }
+      }
+    }
+    .custom_pagination {
+      display: flex;
+      justify-content: center;
+      span {
+        width: 8px;
+        height: 8px;
+        background-color: $btn-color;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+    }
+    .custom_navigation {
+      width: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      @include breakpoint(768) {
+        padding: 0 2rem;
+      }
+      .custom_button {
+        @include flex-center();
+        background-color: transparent;
+        width: 3rem;
+        height: 3rem;
+        border: 2px solid $color-1;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+          background-color: $color-1-dark;
+        }
+        svg {
+          fill: $color-1;
+        }
+      }
+    }
+  }
+}

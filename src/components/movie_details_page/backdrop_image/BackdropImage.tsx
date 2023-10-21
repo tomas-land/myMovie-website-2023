@@ -9,7 +9,7 @@ interface iProps {
 const BackdropImage = ({ movie }: iProps) => {
   return (
     <div className={s.image_wrapper}>
-      <Image className={s.backdrop_image} src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.original_title} fill />
+      <Image className={s.backdrop_image} priority src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.original_title} fill />
     </div>
   );
 };

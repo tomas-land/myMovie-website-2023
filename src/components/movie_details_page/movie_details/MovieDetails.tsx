@@ -1,26 +1,26 @@
+'use client';
 import MovieActionButtons from '@/components/shared/movie_action_buttons/MovieActionButtons';
 import s from './movie_details.module.scss';
-import { iMovie, iMovieImages } from '@/lib/interfaces';
+import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces';
 import Image from 'next/image';
 import ScenesGrid from '../scenes_grid/ScenesGrid';
 import { formatNumber } from '@/lib/helpers/formatNumber';
-import { IoPlayOutline } from 'react-icons/io5';
-import Button from '@/components/shared/button/Button';
+import TrailerModal from '../trailer_modal/TrailerModal';
+import { useModalContext } from '@/lib/context/ModalContext';
+import SecondaryButton from '@/components/shared/buttons/secondaty_button/SecondaryButton';
+import { FiPlay } from 'react-icons/fi';
 
 interface iProps {
   movie: iMovie;
-  movieImages: iMovieImages;
+  movieImages: iMovieImage;
+  movieVideo: iMovieVideo[];
 }
 
-const MovieDetails = ({ movie, movieImages }: iProps) => {
-
-  const show = () => {
-    console.log('show');
-  }
- 
-  console.log(movie);
+const MovieDetails = async ({ movie, movieImages, movieVideo }: iProps) => {
+  const { openModal, isModalOpened } = useModalContext();
   return (
     <div className={s.movie_details}>
+      <div className={s.backdrop}></div>
       <div className={s.header}>
         <div className={s.info_wrapper}>
           <div className={s.movie_action_buttons_wrapper}>
@@ -35,8 +35,9 @@ const MovieDetails = ({ movie, movieImages }: iProps) => {
             ))}
           </div>
           <div className={s.play_trailer}>
-            <Button label="watch trailer" icon={<IoPlayOutline />} />
+            <SecondaryButton label="Play Trailer" icon={<FiPlay />} handleClick={openModal}/>
           </div>
+          {isModalOpened ? <TrailerModal movieVideo={movieVideo} /> : ''}
           <div className={s.extended_info}>
             <div>
               <span>Runtime:</span> {movie.runtime} min

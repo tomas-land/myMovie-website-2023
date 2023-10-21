@@ -1,6 +1,6 @@
 'use client';
 
-import s from './button.module.scss';
+import s from './primary_button.module.scss';
 
 interface iButtonProps {
   label: string;
@@ -8,7 +8,7 @@ interface iButtonProps {
   icon?: React.ReactNode;
 }
 
-const Button = ({ label, position, icon}: iButtonProps) => {
+const PrimaryButton = ({ label, position, icon }: iButtonProps) => {
   const style = {
     position: position,
   };
@@ -21,4 +21,4 @@ const Button = ({ label, position, icon}: iButtonProps) => {
   );
 };
 
-export default Button;
+export default PrimaryButton;

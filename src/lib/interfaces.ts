@@ -19,6 +19,19 @@ export interface iMovie {
   vote_count: number;
 }
 
-export interface iMovieImages {
+export interface iMovieImage {
   backdrops: [aspect_ratio: number, height: number, width: number, file_path: any, vote_average: number, vote_count: number];
+}
+
+export interface iMovieVideo {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
 }

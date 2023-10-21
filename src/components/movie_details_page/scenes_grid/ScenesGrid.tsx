@@ -1,11 +1,11 @@
 'use client';
-import { iMovie, iMovieImages } from '@/lib/interfaces';
+import { iMovie, iMovieImage } from '@/lib/interfaces';
 import s from './scenes_grid.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface iProps {
-  movieImages: iMovieImages;
+  movieImages: iMovieImage;
   movie: iMovie;
 }
 
@@ -15,7 +15,6 @@ const ScenesGrid = ({ movieImages, movie }: iProps) => {
   const toggleShowMoreImages = () => {
     setIsGridExpanded((prev) => !prev);
   };
-  console.log(movieImages);
   return (
     <div className={s.scenes_wrapper}>
       <div className={`${s.scenes_grid} ${isGridExpanded ? s.expanded_grid : ''}`}>

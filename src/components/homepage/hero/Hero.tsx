@@ -5,7 +5,7 @@ import HeroImage from '/public/hero_blur_edges.png';
 import s from './hero.module.scss';
 
 import Input from '@/components/shared/input/Input';
-import Button from '@/components/shared/button/Button';
+import Button from '@/components/shared/buttons/primary_button/PrimaryButton';
 
 const Hero = () => {
   return (
