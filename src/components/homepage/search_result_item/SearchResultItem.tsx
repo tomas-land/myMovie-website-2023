@@ -23,7 +23,6 @@ const SearchResultItem = ({ result }: iSearchResultItemProps) => {
   const [actors, setActors] = useState<any[]>([]);
   const [tvSeries, setTvSeries] = useState<any>([]);
   const topactors = actors.slice(0, 3);
-  // console.log(result);
 
   useEffect(() => {
     if (result.media_type === 'movie') {
@@ -43,11 +42,20 @@ const SearchResultItem = ({ result }: iSearchResultItemProps) => {
       fetchTvSeries();
     }
   }, []);
-console.log(tvSeries.number_of_seasons)
+
   switch (result.media_type) {
     case 'movie':
       return (
         <div className={s.item}>
+          <div className={s.poster}>
+            {result.poster_path ? (
+              <Image className={s.image} src={`https://image.tmdb.org/t/p/original/${result.poster_path}`} width={64} height={96} quality={100} alt={result.title} />
+            ) : (
+              <div className={s.frame}>
+                <FaFilm className={s.icon} />
+              </div>
+            )}
+          </div>
           <div className={s.details}>
             <h2 className={s.title}>
               {result.title} <span>movie</span>
@@ -62,20 +70,20 @@ console.log(tvSeries.number_of_seasons)
               ))}
             </div>
           </div>
-          <div className={s.poster}>
-            {result.poster_path ? (
-              <Image className={s.image} src={`https://image.tmdb.org/t/p/original/${result.poster_path}`} width={64} height={96} quality={100} alt={result.title} />
-            ) : (
-              <div className={s.frame}>
-                <FaFilm className={s.icon} />
-              </div>
-            )}
-          </div>
         </div>
       );
     case 'person':
       return (
         <div className={s.item}>
+          <div className={s.poster}>
+            {result.profile_path ? (
+              <Image className={s.image} src={`https://image.tmdb.org/t/p/original/${result.profile_path}`} width={64} height={96} quality={100} alt={result.title} />
+            ) : (
+              <div className={s.frame}>
+                <IoPerson className={s.icon} />
+              </div>
+            )}
+          </div>
           <div className={s.details}>
             <h2 className={s.title}>
               {result.name} <span>person</span>
@@ -88,29 +96,11 @@ console.log(tvSeries.number_of_seasons)
               ))}
             </div>
           </div>
-          <div className={s.poster}>
-            {result.profile_path ? (
-              <Image className={s.image} src={`https://image.tmdb.org/t/p/original/${result.profile_path}`} width={64} height={96} quality={100} alt={result.title} />
-            ) : (
-              <div className={s.frame}>
-                <IoPerson className={s.icon} />
-              </div>
-            )}
-          </div>
         </div>
       );
     case 'tv':
       return (
         <div className={s.item}>
-          <div className={s.details}>
-            <h2 className={s.title}>
-              {result.name} <span>series</span>
-            </h2>
-            <p className={s.release_date}>
-              {dayjs(tvSeries.first_air_date).format('YYYY')} - {dayjs(tvSeries.last_air_date).format('YYYY')}
-            </p>
-            <p className={s.seasons}>{tvSeries.number_of_seasons} {tvSeries.number_of_seasons === 1 ? 'season' : 'seasons'}</p>
-          </div>
           <div className={s.poster}>
             {result.poster_path ? (
               <Image className={s.image} src={`https://image.tmdb.org/t/p/original/${result.poster_path}`} width={64} height={96} quality={100} alt={result.name} />
@@ -120,10 +110,19 @@ console.log(tvSeries.number_of_seasons)
               </div>
             )}
           </div>
+          <div className={s.details}>
+            <h2 className={s.title}>
+              {result.name} <span>series</span>
+            </h2>
+            <p className={s.release_date}>{tvSeries.number_of_seasons === 1 ? dayjs(tvSeries.first_air_date).format('YYYY') : `${dayjs(tvSeries.first_air_date).format('YYYY')} - ${dayjs(tvSeries.last_air_date).format('YYYY')}`}</p>
+            <p className={s.seasons}>
+              {tvSeries.number_of_seasons} {tvSeries.number_of_seasons === 1 ? 'season' : 'seasons'}
+            </p>
+          </div>
         </div>
       );
     default:
-      return null; // Handle other media types or skip if needed
+      return null;
   }
 };
 

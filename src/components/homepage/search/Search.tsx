@@ -1,20 +1,23 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import s from './search.module.scss';
 import ss from '@/components/shared/custom_input/input.module.scss';
+import {BsFillEmojiFrownFill} from 'react-icons/bs';
 import { useState, useEffect, useRef } from 'react';
 import SearchResultItem from '@/components/homepage/search_result_item/SearchResultItem';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
+import { useDebounce } from 'use-debounce';
+
 ////////////
-// NOTE: // debounce
+// suspense
 const Search = () => {
-  const [isSeachFieldExtended, setIsSearchFieldExtended] = useState<boolean>(false);
+  const [isSearchFieldExtended, setIsSearchFieldExtended] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResultsData, setSearchResultsData] = useState<any[]>([]);
   const [isResultsShown, setIsResultsShown] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [query] = useDebounce(searchQuery, 1000);
 
   const handleSearchFieldExtension = () => {
     setIsSearchFieldExtended(true);
@@ -31,50 +34,55 @@ const Search = () => {
       }
     }
   };
-
+  const fetchSearchResults = async () => {
+    try {
+      const res = await fetch(`api/search?query=${query}`);
+      const { data } = await res.json();
+      setSearchResultsData(data.results);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
   useEffect(() => {
     document.addEventListener('mousedown', handleResultsClose);
+
     if (!searchQuery) {
       setIsResultsShown(false);
-      return;
+    } else {
+      setIsResultsShown(true);
+      setIsLoading(true);
+      fetchSearchResults();
     }
-    setIsResultsShown(true);
-    setIsLoading(true);
-    const fetchSearchResults = async () => {
-      try {
-        const res = await fetch(`api/search?query=${searchQuery}`);
-        const { data } = await res.json();
-        setSearchResultsData(data.results);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.log(error);
-      }
-      // const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY_TMDB}query=${searchQuery}&include_adult=false&language=en-US&page=1`);
-      // const data = await res.json();
-      // console.log(data);
-    };
-    // router.push(`/search/${searchQuery}`);
-    fetchSearchResults();
+
     return () => {
       document.removeEventListener('mousedown', handleResultsClose);
     };
-  }, [searchQuery]);
+  }, [query]);
+
+  const renderResults = () => {
+    if (isLoading) {
+      return (
+        <div className={s.loading_wrapper}>
+          <LoadingSpinner />
+        </div>
+      );
+    } else if (searchResultsData.length === 0) {
+      return <div className={s.no_results}>No results found <BsFillEmojiFrownFill/></div>;
+    } else {
+      return searchResultsData.map((result) => <SearchResultItem key={result.id} result={result} />);
+    }
+  };
 
   return (
-    <div className={`${s.search} ${isSeachFieldExtended ? s.input_extended : null}`}>
+    <div className={`${s.search} ${isSearchFieldExtended ? s.input_extended : ''}`}>
       <input className={ss.input} placeholder="Search for a movie, series, actors..." ref={inputRef} value={searchQuery} maxLength={40} onClick={handleSearchFieldExtension} onChange={(e) => setSearchQuery(e.target.value)} />
-      {isResultsShown ? (
+      {isResultsShown && (
         <div className={s.results} ref={resultsRef}>
-          {isLoading ? (
-            <div className={s.loading_wrapper}>
-              <LoadingSpinner />
-            </div>
-          ) : (
-            searchResultsData.map((result) => <SearchResultItem key={result.id} result={result} />)
-          )}
+          {renderResults()}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

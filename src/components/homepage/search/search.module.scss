@@ -22,9 +22,18 @@
     align-items: center;
     z-index: 1200;
     overflow: hidden;
-    .loading_wrapper{
-      padding: 2rem ;
+    .loading_wrapper {
+      padding: 2rem;
     }
+  }
+  .no_results {
+    @include flex_center;
+    width: 100%;
+    height: 6rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: $color-1;
+    gap: 1rem;
   }
 }
 .input_extended {
