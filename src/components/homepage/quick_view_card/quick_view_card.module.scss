@@ -3,7 +3,10 @@
 
 .quick_view {
   border-radius: 0 1rem 1rem 0;
-  width: 25rem;
+  width: 30rem;
+  @include breakpoint(768) {
+    display: none;
+  }
   .quick_view_content {
     display: flex;
     flex-direction: column;
@@ -34,13 +37,13 @@
       gap: 1rem;
       .genre {
         margin-top: 1rem;
-        font-size: 0.8rem;
+        font-size: 1rem;
         letter-spacing: 0.1rem;
         color: $color-3-light;
       }
     }
     .release_date {
-      
+      padding: 1rem 0;
       margin-top: auto;
       font-size: 1rem;
       line-height: 1.5rem;

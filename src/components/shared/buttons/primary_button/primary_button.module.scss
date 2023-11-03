@@ -2,9 +2,9 @@
 @import '~src/styles/variables';
 
 .button {
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 2.5rem;
   padding: 0rem 2rem;
   font-family: inherit;
@@ -24,7 +24,7 @@ justify-content: center;
     height: 1rem;
     margin-right: 0.5rem;
     border-radius: 50%;
-    color: $color-1-light
+    color: $btn-color;
   }
   .text {
     @include text_gradient();

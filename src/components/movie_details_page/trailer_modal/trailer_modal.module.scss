@@ -8,11 +8,10 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  z-index: 1300;
   .modal_content {
     width: 80%;
     height: 80%;
@@ -23,8 +22,6 @@
     .swiper {
       width: 100%;
       height: 100%;
-      // --swiper-navigation-color: #2a7a75;
-      // --swiper-pagination-color: #2a7a75;
 
       .slide {
         @include flex-center();
@@ -33,7 +30,7 @@
           height: 90%;
           @include breakpoint(768) {
             width: 100%;
-            height: 30%;
+            height: 50%;
           }
         }
       }
@@ -52,7 +49,7 @@
     }
     .custom_navigation {
       width: 100%;
-      position: absolute;
+
       display: flex;
       justify-content: space-between;
       margin-top: 10px;

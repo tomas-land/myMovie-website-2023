@@ -1,0 +1,36 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.search {
+  position: relative;
+  margin-top: 3rem;
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 1s ease-in-out;
+
+  @include breakpoint(768) {
+    display: none;
+  }
+  .results {
+    width: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1200;
+    overflow: hidden;
+    .loading_wrapper{
+      padding: 2rem ;
+    }
+  }
+}
+.input_extended {
+  width: 100%;
+  max-width: $main_container;
+}
+.input_shrinked {
+  width: 40rem;
+}

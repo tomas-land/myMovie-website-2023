@@ -18,7 +18,7 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
   };
   useEffect(() => {
     const fetchMovieGenres = async () => {
-      const response = await axios.get('/api/movies/get_movie_by_id', { params: { id: movie.id } });
+      const response = await axios.get('/api/movies/movie_by_id', { params: { id: movie.id } });
       const genres = response.data.data.genres;
       setGenres(genres);
       return genres;
@@ -26,6 +26,7 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
     fetchMovieGenres();
   }, []);
 
+   
   return (
     <motion.div className={s.quick_view} initial={{ x: 150 }} animate={{ x:0 }} transition={{ duration: 0.5 }}>
       <div className={s.quick_view_content}>
@@ -33,7 +34,6 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
           <IoCloseOutline size={30} />
         </button>
         <h1 className={s.title}>{movie.title}</h1>
-        <p className={s.overview}>{movie.overview}</p>
         <div className={s.genres}>
           {genres?.map((genre) => (
             <span className={s.genre} key={genre.id}>
@@ -41,6 +41,7 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
             </span>
           ))}
         </div>
+        <p className={s.overview}>{movie.overview}</p>
         <h4 className={s.release_date}>Release date &nbsp; {movie.release_date}</h4>
       </div>
     </motion.div>

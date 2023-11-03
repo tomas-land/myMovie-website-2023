@@ -3,13 +3,12 @@ import { TMDB_BASE_URL, TMDB_API_KEY } from '@/lib/config';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const page = searchParams.get('page');
-  const endpoint = searchParams.get('endpoint');
+  const tv_series_id = searchParams.get('id');
 
   try {
-    const response = await fetch(`${TMDB_BASE_URL}/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`, { cache: 'no-cache' });
+    const response = await fetch(`${TMDB_BASE_URL}/tv/${tv_series_id}?api_key=${TMDB_API_KEY}&language=en-US`);
     const data = await response.json();
-    return NextResponse.json({ data: data.results });
+    return NextResponse.json({ data });
   } catch (error) {
     console.error(error);
   }

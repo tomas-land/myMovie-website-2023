@@ -64,19 +64,6 @@
           font-size: 1.5rem;
         }
       }
-
-      .search {
-        position: relative;
-        margin-top: 3rem;
-        height: 2.5rem;
-        width: 30rem;
-        display: flex;
-        justify-content: flex-end;
-
-        @include breakpoint(480) {
-          display: none;
-        }
-      }
     }
   }
 }

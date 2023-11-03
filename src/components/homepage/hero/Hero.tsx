@@ -1,11 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import HeroImage from '/public/hero_blur_edges.png';
-
 import s from './hero.module.scss';
-
-import Input from '@/components/shared/input/Input';
-import Button from '@/components/shared/buttons/primary_button/PrimaryButton';
+import Search from '../search/Search';
 
 const Hero = () => {
   return (
@@ -19,10 +16,7 @@ const Hero = () => {
             <h1 className={s.hero_title}>Recall</h1>
           </div>
           <p className={s.hero_subtitle}>Make your movies collection great again</p>
-          <div className={s.search}>
-            <Input placeholder="Search for a movie, series..." maxLength={40} />
-            <Button label="search" position="absolute" />
-          </div>
+          <Search />
         </div>
       </div>
     </section>

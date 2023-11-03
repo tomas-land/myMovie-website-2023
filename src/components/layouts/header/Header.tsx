@@ -6,7 +6,8 @@ import { Squash as Hamburger } from 'hamburger-react';
 
 import s from './header.module.scss';
 import Logo from '@/components/shared/logo/Logo';
-import Button from '@/components/shared/buttons/primary_button/PrimaryButton';
+import PrimaryButton from '@/components/shared/buttons/primary_button/PrimaryButton';
+import { FiUser } from 'react-icons/fi';
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -23,7 +24,7 @@ const Header = () => {
         </Link>
         <div className={s.btns}>
           <Link href="">
-            <Button label="sign in" />
+            <PrimaryButton label="sign-in" icon={<FiUser />} />
           </Link>
         </div>
         <div className={s.hamburger_wrapper}>
@@ -33,32 +34,27 @@ const Header = () => {
           <div className={s.menu_list}>
             <li className={s.menu_item}>
               <Link href="/" className={s.link}>
-                {' '}
-                Home{' '}
+                Home
               </Link>
             </li>
             <li className={s.menu_item}>
               <Link href="/movies" className={s.link}>
-                {' '}
-                Movies{' '}
+                Movies
               </Link>
             </li>
             <li className={s.menu_item}>
               <Link href="/tv-shows" className={s.link}>
-                {' '}
-                TV Shows{' '}
+                TV Shows
               </Link>
             </li>
             <li className={s.menu_item}>
               <Link href="/actors" className={s.link}>
-                {' '}
-                Actors{' '}
+                Actors
               </Link>
             </li>
             <li className={s.menu_item}>
               <Link href="/more" className={s.link}>
-                {' '}
-                More{' '}
+                More
               </Link>
             </li>
           </div>

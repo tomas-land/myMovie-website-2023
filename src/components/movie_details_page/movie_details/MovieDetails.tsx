@@ -13,10 +13,10 @@ import { FiPlay } from 'react-icons/fi';
 interface iProps {
   movie: iMovie;
   movieImages: iMovieImage;
-  movieVideo: iMovieVideo[];
+  movieVideos: iMovieVideo[];
 }
 
-const MovieDetails = async ({ movie, movieImages, movieVideo }: iProps) => {
+const MovieDetails = async ({ movie, movieImages, movieVideos }: iProps) => {
   const { openModal, isModalOpened } = useModalContext();
   return (
     <div className={s.movie_details}>
@@ -35,9 +35,9 @@ const MovieDetails = async ({ movie, movieImages, movieVideo }: iProps) => {
             ))}
           </div>
           <div className={s.play_trailer}>
-            <SecondaryButton label="Play Trailer" icon={<FiPlay />} handleClick={openModal}/>
+            <SecondaryButton label="Play Trailer" icon={<FiPlay />} handleClick={openModal} />
           </div>
-          {isModalOpened ? <TrailerModal movieVideo={movieVideo} /> : ''}
+          {isModalOpened ? <TrailerModal movieVideos={movieVideos} /> : ''}
           <div className={s.extended_info}>
             <div>
               <span>Runtime:</span> {movie.runtime} min

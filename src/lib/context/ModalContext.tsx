@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext,useCallback } from 'react';
 
 interface iModalContextProps {
   isModalOpened: boolean;

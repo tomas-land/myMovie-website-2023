@@ -10,19 +10,20 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
 interface iProps {
-  movieVideo: iMovieVideo[];
+  movieVideos: iMovieVideo[];
 }
 
-const TrailerModal = ({ movieVideo }: iProps) => {
+const TrailerModal = ({ movieVideos }: iProps) => {
   const { closeModal } = useModalContext();
 
-  const handleModalClick = (event: any) => {
-    event.stopPropagation();
+  const handleModalContentClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    // Prevent the modal from closing when clicking on the modal content
+    e.stopPropagation();
   };
 
   return (
     <div className={s.trailer_modal} onClick={closeModal}>
-      <div className={s.modal_content} onClick={handleModalClick}>
+      <div className={s.modal_content} onClick={handleModalContentClick}>
         <Swiper
           className={s.swiper}
           modules={[Pagination, Navigation]}
@@ -38,9 +39,9 @@ const TrailerModal = ({ movieVideo }: iProps) => {
             nextEl: '.custom-next-button',
           }}
         >
-          {movieVideo.map((video) => (
-            <SwiperSlide className={s.slide} key={video.key}>
-              <iframe className={s.video} src={`https://www.youtube.com/embed/${video.key}`} allowFullScreen allow='autoplay'></iframe>
+          {movieVideos.map((video) => (
+            <SwiperSlide className={s.slide} key={video.key} onClick={closeModal}>
+              <iframe className={s.video} src={`https://www.youtube.com/embed/${video.key}`} allowFullScreen allow="autoplay"></iframe>
             </SwiperSlide>
           ))}
         </Swiper>
