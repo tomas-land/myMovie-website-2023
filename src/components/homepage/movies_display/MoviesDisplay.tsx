@@ -1,6 +1,6 @@
 import s from './movies_display.module.scss';
 import Slider from '@/components/homepage/slider/Slider';
-import { iMovie } from '@/lib/interfaces';
+import { iMovie } from '@/lib/interfaces/movie';
 
 interface iProps {
   movies: iMovie[];

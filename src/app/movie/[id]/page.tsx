@@ -1,4 +1,4 @@
-import BackdropImage from '@/components/movie_details_page/backdrop_image/BackdropImage';
+import BackdropImage from '@/components/shared/backdrop_image/BackdropImage';
 import MovieDetails from '@/components/movie_details_page/movie_details/MovieDetails';
 import { getMovieById, getMovieImagesById, getMovieVideosById } from '@/lib/requests/movies';
 

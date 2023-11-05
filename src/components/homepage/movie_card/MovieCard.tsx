@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { iMovie } from '@/lib/interfaces';
+import { iMovie } from '@/lib/interfaces/movie';
 import s from './movie_card.module.scss';
 import QuickViewCard from '../quick_view_card/QuickViewCard';
 import Link from 'next/link';

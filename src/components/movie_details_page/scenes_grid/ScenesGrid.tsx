@@ -1,8 +1,9 @@
 'use client';
-import { iMovie, iMovieImage } from '@/lib/interfaces';
+import { iMovie, iMovieImage } from '@/lib/interfaces/movie';
 import s from './scenes_grid.module.scss';
 import Image from 'next/image';
 import { useState } from 'react';
+import SecondaryButton from '@/components/shared/buttons/secondaty_button/SecondaryButton';
 
 interface iProps {
   movieImages: iMovieImage;
@@ -24,9 +25,7 @@ const ScenesGrid = ({ movieImages, movie }: iProps) => {
           </div>
         ))}
       </div>
-      <button className={s.show_more_btn} onClick={toggleShowMoreImages}>
-        {isGridExpanded ? 'Show less' : 'Show more'}
-      </button>
+      {movieImages.backdrops?.length > 3 ? <SecondaryButton label={isGridExpanded ? 'Show less' : 'Show more'} handleClick={toggleShowMoreImages} /> : null}
     </div>
   );
 };

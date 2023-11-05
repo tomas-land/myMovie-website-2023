@@ -7,8 +7,7 @@ import SearchResultItem from '@/components/homepage/search_result_item/SearchRes
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { useDebounce } from 'use-debounce';
 
-////////////
-// suspense
+
 const Search = () => {
   const [isSearchFieldExtended, setIsSearchFieldExtended] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');

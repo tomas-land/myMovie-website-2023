@@ -1,7 +1,7 @@
 'use client';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { iMovie } from '@/lib/interfaces';
+import { iMovie } from '@/lib/interfaces/movie';
 import MovieCard from '@/components/homepage/movie_card/MovieCard';
 import s from './slider.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';

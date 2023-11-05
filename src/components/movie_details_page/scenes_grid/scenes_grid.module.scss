@@ -2,11 +2,14 @@
 @import '~src/styles/variables';
 
 .scenes_wrapper {
+  button {
+    width: 100%;
+  }
   .scenes_grid {
     position: relative;
     height: 13rem;
     overflow: hidden;
-    margin-top: 3rem;
+    margin: 3rem 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
@@ -24,17 +27,5 @@
   .expanded_grid {
     height: auto;
     mask: none;
-  }
-  .show_more_btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: transparent;
-    color: $btn-color;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 0.1rem;
-    &:hover {
-      color: $color-1-light;
-    }
   }
 }

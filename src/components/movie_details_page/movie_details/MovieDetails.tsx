@@ -1,7 +1,7 @@
 'use client';
 import MovieActionButtons from '@/components/shared/movie_action_buttons/MovieActionButtons';
 import s from './movie_details.module.scss';
-import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces';
+import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces/movie';
 import Image from 'next/image';
 import ScenesGrid from '../scenes_grid/ScenesGrid';
 import { formatNumber } from '@/lib/helpers/formatNumber';
@@ -9,6 +9,8 @@ import TrailerModal from '../trailer_modal/TrailerModal';
 import { useModalContext } from '@/lib/context/ModalContext';
 import SecondaryButton from '@/components/shared/buttons/secondaty_button/SecondaryButton';
 import { FiPlay } from 'react-icons/fi';
+import { FaFilm } from 'react-icons/fa';
+import ImageFrame from '@/components/shared/image_frame/ImageFrame';
 
 interface iProps {
   movie: iMovie;
@@ -16,7 +18,7 @@ interface iProps {
   movieVideos: iMovieVideo[];
 }
 
-const MovieDetails = async ({ movie, movieImages, movieVideos }: iProps) => {
+const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
   const { openModal, isModalOpened } = useModalContext();
   return (
     <div className={s.movie_details}>
@@ -34,9 +36,11 @@ const MovieDetails = async ({ movie, movieImages, movieVideos }: iProps) => {
               </div>
             ))}
           </div>
-          <div className={s.play_trailer}>
-            <SecondaryButton label="Play Trailer" icon={<FiPlay />} handleClick={openModal} />
-          </div>
+          {movieVideos.length > 0 ? (
+            <div className={s.play_trailer}>
+              <SecondaryButton label="Play Trailer" icon={<FiPlay />} handleClick={openModal} />
+            </div>
+          ) : null}
           {isModalOpened ? <TrailerModal movieVideos={movieVideos} /> : ''}
           <div className={s.extended_info}>
             <div>
@@ -45,18 +49,22 @@ const MovieDetails = async ({ movie, movieImages, movieVideos }: iProps) => {
             <div>
               <span>Released:</span> {movie.release_date}
             </div>
-            <div>
-              <span>Budget: </span>
-              {formatNumber(movie.budget)} $
-            </div>
-            <div>
-              <span>Revenue: </span>
-              {formatNumber(movie.revenue)} ${' '}
-            </div>
+            {movie.budget === 0 ? null : (
+              <div>
+                <span>Budget: </span>
+                {formatNumber(movie.budget)} $
+              </div>
+            )}
+            {movie.revenue === 0 ? null : (
+              <div>
+                <span>Revenue: </span>
+                {formatNumber(movie.revenue)} $
+              </div>
+            )}
           </div>
         </div>
         <div className={s.poster_wrapper}>
-          <Image className={s.poster} src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} width={256} height={384} loading="lazy" />
+          <ImageFrame imagePath={movie.poster_path} alt={movie.title} icon={<FaFilm />} width={256} height={384}/>
         </div>
       </div>
       <div className={s.overview}>

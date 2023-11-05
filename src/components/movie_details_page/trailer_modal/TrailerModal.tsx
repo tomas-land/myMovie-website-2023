@@ -1,5 +1,5 @@
 'use client';
-import { iMovieVideo } from '@/lib/interfaces';
+import { iMovieVideo } from '@/lib/interfaces/movie';
 import s from './trailer_modal.module.scss';
 import { useModalContext } from '@/lib/context/ModalContext';
 import { Swiper, SwiperSlide } from 'swiper/react';

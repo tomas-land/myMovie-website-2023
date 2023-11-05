@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import s from './movie_action_buttons.module.scss';
-import {iMovie} from '@/lib/interfaces';
+import {iMovie} from '@/lib/interfaces/movie';
 import { FiHeart, FiStar, FiBookmark } from 'react-icons/fi';
 
 interface iProps {

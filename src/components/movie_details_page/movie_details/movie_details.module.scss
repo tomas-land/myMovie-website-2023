@@ -3,7 +3,6 @@
 
 .movie_details {
   position: relative;
-
   max-width: 60rem;
   margin: auto;
   padding: 2rem;
@@ -11,6 +10,7 @@
   flex-direction: column;
   background-color: $card-bg-color;
   margin-top: -10rem;
+  height: 100%;
   .backdrop {
     position: absolute;
     inset: 0;
@@ -84,16 +84,14 @@
       }
     }
     .poster_wrapper {
-      position: relative;
       display: flex;
       justify-content: flex-end;
+      width: 264px;
+      height: 396px;
+      border-radius: 1rem;
+      overflow: hidden;
       @include breakpoint(768) {
         justify-content: center;
-      }
-      .poster {
-        object-fit: cover;
-
-        border-radius: 1rem;
       }
     }
   }
@@ -111,7 +109,7 @@
       font-size: 1rem;
       font-weight: 500;
       letter-spacing: 0.1rem;
-      color: $color-3-light;
+      color: $color-1;
     }
   }
 }

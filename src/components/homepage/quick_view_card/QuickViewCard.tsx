@@ -1,6 +1,6 @@
 'use client';
 import s from './quick_view_card.module.scss';
-import {iMovie} from '@/lib/interfaces';
+import {iMovie} from '@/lib/interfaces/movie';
 import { IoCloseOutline } from 'react-icons/io5';
 import { motion } from 'framer-motion';
 import axios from 'axios';

@@ -1,4 +1,4 @@
-import { iMovie } from '../../interfaces';
+import { iMovie } from '../../interfaces/movie';
 
 export function sortMoviesByVote(movies: iMovie[]) {
   return movies.sort(function (a, b) {

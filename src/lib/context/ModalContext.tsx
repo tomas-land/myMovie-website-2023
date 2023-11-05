@@ -19,6 +19,8 @@ export const useModalContext = (): iModalContextProps => {
 
 export const ModalContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isTrailerModalLoading, setIsTrailerModalLoading] = useState(false); // Add a separate loading state for the TrailerModal
+
 
   const openModal = () => {
     setIsModalOpened(true);

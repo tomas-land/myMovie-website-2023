@@ -1,6 +1,6 @@
 import { TMDB_API_KEY, TMDB_BASE_URL} from '@/lib/config.js';
 import { currentDay, startOFYear } from '@/lib/dayJS';
-import { iMovie } from '@/lib/interfaces';
+import { iMovie } from '@/lib/interfaces/movie';
 
 export async function getNowPlayingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);

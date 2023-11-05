@@ -1,0 +1,25 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.frame {
+  width: 100%;
+  height: 100%;
+  @include flex-center;
+
+  .image {
+    width: 100%;
+    object-fit: cover;
+  }
+  .no_image {
+    width: 100%;
+    height: 100%;
+    background: rgb(32, 32, 32);
+    @include flex_center;
+    color: rgb(97, 97, 97);
+
+    svg {
+      width: 5rem;
+      height: 2rem;
+    }
+  }
+}
