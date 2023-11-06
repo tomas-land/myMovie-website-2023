@@ -18,7 +18,7 @@ const ScenesGrid = ({ movieImages, movie }: iProps) => {
   };
   return (
     <div className={s.scenes_wrapper}>
-      <div className={`${s.scenes_grid} ${isGridExpanded ? s.expanded_grid : ''}`}>
+      <div className={`${s.scenes_grid} ${isGridExpanded ? s.expanded_grid : ''} ${movieImages.backdrops?.length < 3? s.remove_mask: null}`}>
         {movieImages.backdrops?.map((scene) => (
           <div className={s.scene} key={scene.file_path}>
             <Image className={s.scene_img} src={`https://image.tmdb.org/t/p/w500/${scene.file_path}`} alt={movie.title} fill loading="lazy" />

@@ -25,6 +25,7 @@
     "react-icons": "^4.9.0",
     "react-loader-spinner": "^5.4.5",
     "react-loading-skeleton": "^3.3.1",
+    "react-measure": "^2.5.2",
     "sass": "^1.62.1",
     "swiper": "^10.3.1",
     "typescript": "^5.2.2",

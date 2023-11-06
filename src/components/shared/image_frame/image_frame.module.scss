@@ -6,6 +6,7 @@
   height: 100%;
   @include flex-center;
 
+
   .image {
     width: 100%;
     object-fit: cover;
@@ -13,7 +14,7 @@
   .no_image {
     width: 100%;
     height: 100%;
-    background: rgb(32, 32, 32);
+    background: rgb(22, 22, 22);
     @include flex_center;
     color: rgb(97, 97, 97);
 

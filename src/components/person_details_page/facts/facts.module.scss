@@ -1,0 +1,16 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.facts {
+    padding: 1rem 1rem;
+
+    .fact {
+      display: flex;
+      flex-direction: column;
+      color: $color-3-light;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+      gap: 0.2rem;
+    }
+  }
+

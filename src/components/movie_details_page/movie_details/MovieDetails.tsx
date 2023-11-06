@@ -64,7 +64,7 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
           </div>
         </div>
         <div className={s.poster_wrapper}>
-          <ImageFrame imagePath={movie.poster_path} alt={movie.title} icon={<FaFilm />} width={256} height={384}/>
+          <ImageFrame imagePath={movie.poster_path} alt={movie.title} icon={<FaFilm />} width={256} height={384} />
         </div>
       </div>
       <div className={s.overview}>

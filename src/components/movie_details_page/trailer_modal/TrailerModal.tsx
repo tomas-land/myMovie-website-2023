@@ -20,7 +20,7 @@ const TrailerModal = ({ movieVideos }: iProps) => {
     // Prevent the modal from closing when clicking on the modal content
     e.stopPropagation();
   };
-
+  
   return (
     <div className={s.trailer_modal} onClick={closeModal}>
       <div className={s.modal_content} onClick={handleModalContentClick}>
@@ -62,6 +62,3 @@ const TrailerModal = ({ movieVideos }: iProps) => {
 };
 
 export default TrailerModal;
-{
-  /* <iframe width="1268" height="713" src="https://www.youtube.com/embed/iPGXk-i-VYU" title="Nextjs Full stack course" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */
-}

@@ -1,0 +1,50 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.bio {
+    .name {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+      margin-bottom: 1rem;
+      @include text_gradient();
+    }
+    .bio_text {
+    height: 325px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.1rem;
+      color: $color-1;
+      overflow: hidden;
+      position: relative;
+
+      .mask_overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 30%;
+        // background: linear-gradient(to bottom, transparent, rgba(#1f2131, 0.8));
+        background: linear-gradient(to right, rgba(#252132, 0.7), rgba(#352233, 0.7));
+        mask: linear-gradient(to bottom, transparent, #000 90%);
+      }
+    }
+    .btn_wrapper {
+     margin-top: 1rem;
+      @include flex_center();
+      button {
+        width: 100%;
+      }
+    }
+
+    .bio_text_expanded {
+      height: auto;
+      overflow: visible;
+      .mask_overlay {
+        display: none;
+      }
+      &:after {
+        display: none;
+      }
+    }
+  }

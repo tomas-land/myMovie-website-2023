@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
-    mask-image: linear-gradient(180deg, rgba(28, 40, 56, 0.9), rgba(28, 40, 56, 0.1));
+    mask: linear-gradient(180deg, rgba(28, 40, 56, 0.9), rgba(28, 40, 56, 0.1));
 
     .scene {
       position: relative;
@@ -23,6 +23,9 @@
         object-fit: cover;
       }
     }
+  }
+  .remove_mask {
+    mask: none;
   }
   .expanded_grid {
     height: auto;
