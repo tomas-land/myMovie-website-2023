@@ -90,7 +90,7 @@ const Search = ({ isInputFocused }: iProps) => {
 
   return (
     <div className={`${s.search} ${isSearchFieldExtended ? s.input_extended : ''}`}>
-      <input className={s.input} placeholder="Search for a movie, series, actors..." ref={inputRef} value={searchQuery} maxLength={40} onClick={handleSearchFieldExtension} onChange={(e) => setSearchQuery(e.target.value)} />
+      <input className={s.input} placeholder="Search for a movie, series, actors.." ref={inputRef} value={searchQuery} maxLength={40} onClick={handleSearchFieldExtension} onChange={(e) => setSearchQuery(e.target.value)} />
       {isResultsShown && (
         <div className={s.results} ref={resultsRef}>
           {renderResults()}
