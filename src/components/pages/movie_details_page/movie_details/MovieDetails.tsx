@@ -2,7 +2,6 @@
 import MovieActionButtons from '@/components/shared/movie_action_buttons/MovieActionButtons';
 import s from './movie_details.module.scss';
 import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces/movie';
-import Image from 'next/image';
 import ScenesGrid from '../scenes_grid/ScenesGrid';
 import { formatNumber } from '@/lib/helpers/formatNumber';
 import TrailerModal from '../trailer_modal/TrailerModal';

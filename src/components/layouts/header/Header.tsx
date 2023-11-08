@@ -14,7 +14,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 
 const menuLinks = [
-  { href: '/', label: 'Home' },
   { href: '/movies', label: 'Movies' },
   { href: '/tv-shows', label: 'TV Shows' },
   { href: '/actors', label: 'Actors' },
@@ -46,6 +45,7 @@ const Header = () => {
         <Link href="/">
           <Logo />
         </Link>
+        <MainMenu links={menuLinks} />
         <div className={s.btns_wrapper}>
           <div className={s.mobile_btns}>
             <button className={s.search_btn} onClick={toggleSearch}>
@@ -62,7 +62,7 @@ const Header = () => {
             <Hamburger toggled={isMobileMenuOpen} toggle={setIsMobileMenuOpen} size={25} rounded />
           </div>
         </div>
-        <MainMenu links={menuLinks} />
+       
       </div>
       {isMobileMenuOpen ? <MobileMenu links={menuLinks} closeMobileMenu={closeMobileMenu} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} /> : null}
       <div className={s.search_wrapper} >

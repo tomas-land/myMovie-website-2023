@@ -1,7 +1,7 @@
 import '@/styles/globals.scss';
 import { Suspense } from 'react';
-import Hero from '@/components/homepage/hero/Hero';
-import MoviesDisplay from '@/components/homepage/movies_display/MoviesDisplay';
+import Hero from '@/components/pages/homepage/hero/Hero';
+import MoviesDisplay from '@/components/pages/homepage/movies_display/MoviesDisplay';
 import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib/requests/movies';
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import requests from '@/lib/requests/movies';

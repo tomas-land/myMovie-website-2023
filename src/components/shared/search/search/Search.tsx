@@ -29,6 +29,7 @@ const Search = ({ isInputFocused }: iProps) => {
   useEffect(() => {
     document.addEventListener('mousedown', handleResultsClose);
     
+    
     if (!searchQuery) {
       setIsResultsShown(false);
     } else {
@@ -45,6 +46,7 @@ const Search = ({ isInputFocused }: iProps) => {
   };
 
   const handleResultsClose = (e: MouseEvent) => {
+    setIsSearchFieldExtended(false);
     if (resultsRef.current && e.target instanceof Node) {
       const isClickInsideResults = resultsRef.current.contains(e.target as Node);
       const isClickInsideInput = inputRef.current?.contains(e.target as Node);
@@ -52,7 +54,7 @@ const Search = ({ isInputFocused }: iProps) => {
       if (!isClickInsideResults && !isClickInsideInput) {
         setIsResultsShown(false);
         setSearchQuery('');
-        setIsSearchFieldExtended(false);
+        // setIsSearchFieldExtended(false);
       }
     }
   };

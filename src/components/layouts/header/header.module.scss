@@ -3,23 +3,19 @@
 
 .header {
   width: 100%;
-  min-height: 5rem;
+  height: 5rem;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   position: fixed;
   z-index: 1250;
 
   .container {
-    margin: auto;
-    width: 100%;
     max-width: $main_container;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     padding: 1rem 2rem 0;
-
-    @include breakpoint(768) {
+    @include breakpoint(1024) {
       padding: 1rem 1rem 0;
     }
     .btns_wrapper {

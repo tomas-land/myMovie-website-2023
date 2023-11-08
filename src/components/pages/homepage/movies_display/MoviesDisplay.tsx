@@ -1,5 +1,5 @@
 import s from './movies_display.module.scss';
-import Slider from '@/components/homepage/slider/Slider';
+import Slider from '@/components/pages/homepage/slider/Slider';
 import { iMovie } from '@/lib/interfaces/movie';
 
 interface iProps {

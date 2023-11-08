@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import HeroImage from '/public/hero_blur_edges.png';
 import s from './hero.module.scss';
-import Search from '../../shared/search/search/Search';
+import Search from '@/components/shared/search/search/Search';
 
 const Hero = () => {
   return (

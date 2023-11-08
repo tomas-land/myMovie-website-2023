@@ -2,11 +2,9 @@
 @import '~src/styles/variables';
 
 .link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex_center();
   height: 2.5rem;
-  padding: 0rem 2rem;
+  width: 8rem;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 700;
@@ -14,9 +12,9 @@
   border: 2px solid $btn-color;
   border-radius: 2rem;
   outline: none;
+  background-color: rgba($color: #000000, $alpha: 0.1);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  background-color: rgba($color: #000000, $alpha: 0.1);
 
   .icon {
     @include flex_center();

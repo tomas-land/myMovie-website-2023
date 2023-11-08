@@ -1,4 +1,4 @@
-import s from '@/components/movie_details_page/movie_details/movie_details.module.scss';
+import s from '@/components/pages/movie_details_page/movie_details/movie_details.module.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const loading = () => {

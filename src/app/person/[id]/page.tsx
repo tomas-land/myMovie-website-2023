@@ -1,4 +1,4 @@
-import PersonDetails from '@/components/person_details_page/person_details/PersonDetails';
+import PersonDetails from '@/components/pages/person_details_page/person_details/PersonDetails';
 import BackdropImage from '@/components/shared/backdrop_image/BackdropImage';
 import { sortMovieCreditsByReleaseDate } from '@/lib/helpers/movies/sortMovieCreditsByReleaseDate';
 import { getPersonById, getPersonMovieCreditsById } from '@/lib/requests/persons';
