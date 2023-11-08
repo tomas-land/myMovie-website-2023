@@ -21,7 +21,7 @@
     padding: 0.5rem 1rem;
     height: 100%;
     width: 100%;
-
+    
     .title {
       display: flex;
       align-items: center;
@@ -29,7 +29,6 @@
       font-weight: 700;
       letter-spacing: 0.1rem;
       color: $color-1;
-
       span {
         font-size: 0.8rem;
         font-weight: 400;
@@ -55,11 +54,12 @@
     .release_date {
       color: $color-1-dark;
     }
-
+    
     .seasons,
     .actors,
     .movies {
       display: flex;
+      flex-wrap: wrap;
       color: $color-3-light;
       gap: 0.5rem;
     }

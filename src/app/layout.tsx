@@ -12,10 +12,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={montserrat.variable}>
-        <Header />
-        <main>
-          <ContextProviders>{children}</ContextProviders>
-        </main>
+        <ContextProviders>
+          <Header />
+          <main>{children}</main>
+        </ContextProviders>
       </body>
     </html>
   );

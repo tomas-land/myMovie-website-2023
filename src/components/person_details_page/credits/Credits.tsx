@@ -12,7 +12,7 @@ interface iProps {
   }
 
 const Credits = ({person,personMovieCredits}:iProps) => {
-
+console.log(personMovieCredits)
     const renderMovieCredits = () => {
         return personMovieCredits.map((movie) => {
           return (
@@ -40,12 +40,12 @@ const Credits = ({person,personMovieCredits}:iProps) => {
             <div className={s.movies}>{personMovieCredits.length > 0 ? renderMovieCredits() : null}</div>
           </section>
         ) : null}
-        {person.known_for_department === 'Directing' ? (
+        {/* {person.known_for_department === 'Directing' ? (
           <section className={s.credits}>
             <h2 className={s.title}>Directing</h2>
             <div className={s.movies}>{personMovieCredits.length > 0 ? renderMovieCredits() : null}</div>
           </section>
-        ) : null}
+        ) : null} */}
       </section>
     </div>
   );

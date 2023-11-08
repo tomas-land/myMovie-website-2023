@@ -64,6 +64,14 @@
           font-size: 1.5rem;
         }
       }
+      .search_wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        @include breakpoint(768) {
+          display: none;
+        }
+      }
     }
   }
 }

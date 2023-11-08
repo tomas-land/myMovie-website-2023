@@ -19,6 +19,7 @@ interface iProps {
 }
 
 const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
+  console.log(movie)
   const { openModal, isModalOpened } = useModalContext();
   return (
     <div className={s.movie_details}>
@@ -43,6 +44,9 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
           ) : null}
           {isModalOpened ? <TrailerModal movieVideos={movieVideos} /> : ''}
           <div className={s.extended_info}>
+            <div>
+              <span>Director:</span> {movie.release_date} min
+            </div>
             <div>
               <span>Runtime:</span> {movie.runtime} min
             </div>
