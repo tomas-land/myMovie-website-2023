@@ -7,7 +7,7 @@ import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { useDebounce } from 'use-debounce';
 
 interface iProps {
-  isInputFocused: boolean;
+  isInputFocused?: boolean;
 }
 
 const Search = ({ isInputFocused }: iProps) => {
