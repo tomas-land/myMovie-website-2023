@@ -1,7 +1,7 @@
 import React from 'react';
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import authOptions from '@/lib/auth/authOptions';
 import Dashboard from '@/components/pages/profile/dashboard/Dashboard';
 import s from '@/components/pages/auth/signin/signin_page.module.scss';
 
