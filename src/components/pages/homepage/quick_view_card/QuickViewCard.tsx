@@ -2,7 +2,7 @@
 import s from './quick_view_card.module.scss';
 import {iMovie} from '@/lib/interfaces/movie';
 import { IoCloseOutline } from 'react-icons/io5';
-import { motion } from 'framer-motion';
+import { m, motion } from 'framer-motion';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -24,7 +24,7 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
       return genres;
     };
     fetchMovieGenres();
-  }, []);
+  }, [movie.id]);
 
    
   return (

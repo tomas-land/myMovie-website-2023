@@ -56,10 +56,11 @@ export async function getMovieImagesById(id: string) {
 export async function getMovieVideosById(id: string) {
   const response = await fetch(`${TMDB_BASE_URL}/movie/${id}/videos?api_key=${TMDB_API_KEY}&language=en-US&include_image_language=en&limit=1`);
   const data = await response.json();
+  const results = data.results;
   if (!response.ok) {
     throw new Error('Fetching movie videos failed');
   }
-  return data.results;
+  return results;
 }
 
 export default { getNowPlayingMovies, getUpcomingMovies, getTopRatedMovies, getMovieById, getMovieImagesById, getMovieVideosById };

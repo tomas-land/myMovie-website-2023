@@ -7,11 +7,11 @@ const CredentialsForm = () => {
     <form className={s.cred_form}>
       <div className={s.text_fields}>
         <input className={s.input} type="text" placeholder="username" autoComplete="off" />
-        <input className={s.input} type="password" placeholder="password" />
+        <input className={s.input} type="password" placeholder="password" autoComplete="off" />
       </div>
       <PrimaryButton label="sign in" />
       <span className={s.signup_ref}>
-        Don't have account? <Link href="">Sign up !</Link>
+        Don&apos;t have an account? <Link href="">Sign up !</Link>
       </span>
     </form>
   );
