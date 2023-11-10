@@ -5,7 +5,7 @@ import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces/movie';
 import ScenesGrid from '../scenes_grid/ScenesGrid';
 import { formatNumber } from '@/lib/helpers/formatNumber';
 import TrailerModal from '../trailer_modal/TrailerModal';
-import { useModalContext } from '@/lib/context/ModalContext';
+import { useModalContext } from '@/context/ModalContext';
 import SecondaryButton from '@/components/shared/buttons/secondaty_button/SecondaryButton';
 import { FiPlay } from 'react-icons/fi';
 import { FaFilm } from 'react-icons/fa';

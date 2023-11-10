@@ -1,7 +1,7 @@
 'use client';
 import { iMovieVideo } from '@/lib/interfaces/movie';
 import s from './trailer_modal.module.scss';
-import { useModalContext } from '@/lib/context/ModalContext';
+import { useModalContext } from '@/context/ModalContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { TfiAngleLeft, TfiAngleRight } from 'react-icons/tfi';

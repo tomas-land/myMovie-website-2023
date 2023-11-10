@@ -34,13 +34,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        .search_btn {
-          &:active {
-            .search_wrapper {
-              background: red;
-            }
-          }
-        }
+  
         .search_btn,
         .sign_in_btn {
           display: none;

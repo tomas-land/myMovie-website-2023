@@ -1,7 +1,7 @@
 import '@styles/globals.scss';
 import { montserrat } from '@/lib/fonts';
 import Header from '@/components/layouts/header/Header';
-import { ContextProviders } from '@/lib/context/ContextProviders';
+import { ContextProviders } from '@/context/ContextProviders';
 
 export const metadata = {
   title: 'MyMovie',

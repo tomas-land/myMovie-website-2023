@@ -1,0 +1,21 @@
+@import '~src/styles/mixins';
+@import '~src/styles/variables';
+
+.google_signin_btn{
+    @include flex_center();
+    align-self: center;
+    width: 80%;
+    min-height: 2.2rem;
+    background-color: rgb(218, 218, 218);
+    border-radius: 2rem;
+    color: rgb(119, 119, 119);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+ 
+    svg{
+        @include flex_center();
+        margin-right: 1rem;
+    }
+}
