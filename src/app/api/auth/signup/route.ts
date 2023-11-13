@@ -14,8 +14,7 @@ export async function POST(request: Request) {
       //if credentials are valid, check if user already exists
       where: { email },
     });
-    if (existingUser) {
-      //if user exists, return error
+    if (existingUser) {//if user exists, return error
       return NextResponse.json(
         {
           error: 'A user with that email already exists',
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
         }
       );
     }
-  
+
     const hashedPassword = await hash(password, 10); // if user doesn't exist, hash password and create user
 
     await prisma.user.create({
@@ -36,12 +35,10 @@ export async function POST(request: Request) {
       },
     });
     return NextResponse.json(
-      
-      {message: 'User created successfully'},
+      { message: 'User created successfully' },
       {
-        status: 200
+        status: 200,
       }
-      
     );
   } catch (error) {
     if (error instanceof z.ZodError) {

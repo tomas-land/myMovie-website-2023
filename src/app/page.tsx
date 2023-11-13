@@ -12,7 +12,7 @@ import Loading from './loading';
 export const dynamic = 'force-dynamic';
 
 const Home = async () => {
- 
+
   // const fetchMoviesWithTimeout = async (time: number) => {
   //   const movies = await getNowPlayingMovies();
   //   return new Promise((resolve) => {

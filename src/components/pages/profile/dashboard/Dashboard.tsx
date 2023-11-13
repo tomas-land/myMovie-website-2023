@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton';
 
-
 const Dashboard = () => {
   // const { data: session, status } = useSession({
   //   required: true,
@@ -14,12 +13,13 @@ const Dashboard = () => {
   //   },
   // });
 
-  return <div className={s.dashboard}>Dashboard
-  fe
-  {/* {session && <div>{session.user?.name}</div>} */}
-  <SignOutButton />
-  
-  </div>;
+  return (
+    <div className={s.dashboard}>
+      Dashboard fe
+      {/* {session && <div>{session.user?.name}</div>} */}
+      <SignOutButton />
+    </div>
+  );
 };
 
 export default Dashboard;
