@@ -9,11 +9,12 @@ const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/signin?callbackUrl=/profile');
+    redirect('/signin');
   }
 
   return (
     <div className={s.signin_page}>
+      {session.user?.name}
       <Dashboard />
     </div>
   );

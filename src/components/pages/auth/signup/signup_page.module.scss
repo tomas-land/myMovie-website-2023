@@ -1,7 +1,7 @@
 @import '~src/styles/mixins';
 @import '~src/styles/variables';
 
-.signin_page {
+.signup_page {
   @include flex_center();
   width: 100%;
   min-height: 100vh;
@@ -47,14 +47,6 @@
         &:last-child::after {
           left: 20%;
         }
-      }
-    }
-    .signup_ref{
-      margin-top: 1rem;
-      text-align: center;
-      color: $color-1;
-      a{
-        color: $color-3-light;
       }
     }
   }
