@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.container}>
-        <Link href="/">
+        <Link href="/d">
           <Logo />
         </Link>
         <MainMenu links={menuLinks} />
