@@ -2,6 +2,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/lib/prisma/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import bcrypt from 'bcryptjs';
 
 const authOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -16,13 +17,17 @@ const authOptions = {
         email: { label: 'Username', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials): Promise<any> {
+      async authorize(credentials: any): Promise<any> {
+        console.log(credentials)
         const registeredUser = await prisma.user.findFirst({
           where: {
             email: credentials?.email,
           },
         });
-        if (credentials?.email === registeredUser?.email && credentials?.password === registeredUser?.password) {
+        console.log(registeredUser)
+        const passwordIsValid = await bcrypt.compare(credentials.password, registeredUser?.password ?? '');
+        console.log(passwordIsValid)
+        if (credentials.email === registeredUser?.email && passwordIsValid) {
           return registeredUser;
         } else {
           return null;
@@ -30,7 +35,6 @@ const authOptions = {
       },
     }),
   ],
-
   // pages: {
   //   signIn: '/signin',
   //   signOut: '/signout',

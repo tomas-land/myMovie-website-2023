@@ -6,17 +6,17 @@ import { redirect } from 'next/navigation';
 import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton';
 
 const Dashboard = () => {
-  // const { data: session, status } = useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     redirect('/signin?callbackUrl=/dashboard');
-  //   },
-  // });
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/profile');
+    },
+  });
 
   return (
     <div className={s.dashboard}>
-      Dashboard fe
-      {/* {session && <div>{session.user?.name}</div>} */}
+      Dashboard
+      {session && <div>{session.user?.email}</div>}
       <SignOutButton />
     </div>
   );

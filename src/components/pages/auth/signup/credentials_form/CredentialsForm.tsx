@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { z } from 'zod';
 import { credentialsSchema } from '@/lib/zod/user/signupSchema';
-import { signIn } from 'next-auth/react';
 
 interface Credentials {
   username: string;
@@ -27,16 +26,14 @@ const CredentialsForm = () => {
     const data = new FormData(e.currentTarget);
 
     try {
-      const credentials: Credentials = {
-        // validating form data
+      const credentials: Credentials = {  // validating form data
         username: data.get('username') as string,
         email: data.get('email') as string,
         password: data.get('password') as string,
       };
       credentialsSchema.parse(credentials); // if invalid inputs, throws error
 
-      const response = await fetch('/api/auth/signup', {
-        // if valid inputs, send request to server
+      const response = await fetch('/api/auth/signup', {  // if valid inputs, send request to server
         method: 'POST',
         body: JSON.stringify({
           username: data.get('username'),

@@ -42,8 +42,8 @@ const CredentialsForm = () => {
     <form className={s.cred_form} onSubmit={handleSubmit}>
       <div className={s.error}>{error}</div>
       <div className={s.text_fields}>
-        <input className={s.input} type="text" name="email" placeholder="email@gmail.com" autoComplete="off" />
-        <input className={s.input} type="password" name="password" placeholder="password" autoComplete="off" />
+        <input className={s.input} type="text" name="email" placeholder="email@gmail.com" autoComplete="on" />
+        <input className={s.input} type="text" name="password" placeholder="password" autoComplete="off" />
       </div>
       {/* <PrimaryButton label="sign in" /> */}
       <button type="submit">sign</button>

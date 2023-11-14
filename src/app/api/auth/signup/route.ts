@@ -10,11 +10,12 @@ export async function POST(request: Request) {
     const credentials = { username, email, password };
     credentialsSchema.parse(credentials); // Validate credentials
 
+    // if credentials are valid, check if user already exists
     const existingUser = await prisma.user.findUnique({
-      //if credentials are valid, check if user already exists
       where: { email },
     });
-    if (existingUser) {//if user exists, return error
+    // if user exists, return error
+    if (existingUser) {
       return NextResponse.json(
         {
           error: 'A user with that email already exists',
@@ -24,8 +25,8 @@ export async function POST(request: Request) {
         }
       );
     }
-
-    const hashedPassword = await hash(password, 10); // if user doesn't exist, hash password and create user
+    // if user doesn't exist, hash password and create user
+    const hashedPassword = await hash(password, 10);
 
     await prisma.user.create({
       data: {
@@ -41,11 +42,11 @@ export async function POST(request: Request) {
       }
     );
   } catch (error) {
+    // if credentials are invalid, return error
     if (error instanceof z.ZodError) {
-      // if credentials are invalid, return error
       console.error('Zod validation error:', error);
     } else {
-      console.error('Server error:', error); // if server error, return error
+      console.error('Server error:', error); 
     }
 
     return NextResponse.json(
