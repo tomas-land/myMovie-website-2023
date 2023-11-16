@@ -10,16 +10,25 @@ import SecondaryButton from '@/components/shared/buttons/secondaty_button/Second
 import { FiPlay } from 'react-icons/fi';
 import { FaFilm } from 'react-icons/fa';
 import ImageFrame from '@/components/shared/image_frame/ImageFrame';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 interface iProps {
   movie: iMovie;
-  movieImages: iMovieImage;
+  movieImages: iMovieImage[];
   movieVideos: iMovieVideo[];
 }
 
 const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
-  console.log(movie)
+  const pathname = usePathname();
   const { openModal, isModalOpened } = useModalContext();
+  const { setIsSearchOpen } = useGlobalContext();
+
+  useEffect(() => {
+    if (pathname !== '/') setIsSearchOpen(false);
+  }, [pathname]);
+
   return (
     <div className={s.movie_details}>
       <div className={s.backdrop}></div>

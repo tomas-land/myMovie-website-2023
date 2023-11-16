@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Squash as Hamburger } from 'hamburger-react';
 import s from './header.module.scss';
@@ -13,10 +13,12 @@ import Search from '@/components/shared/search/search/Search';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from "next-auth/react"
 import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton';
+import { useGlobalContext } from '@/context/GlobalContext';
+
+
 
 
 const menuLinks = [
-  { href: '/dashboard', label: 'Profile' },
   { href: '/movies', label: 'Movies' },
   { href: '/tv-shows', label: 'TV Shows' },
   { href: '/actors', label: 'Actors' },
@@ -26,23 +28,19 @@ const menuLinks = [
 const Header = () => {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState(false);
-
+  const { toggleSearch, isSearchOpen, isInputFocused } = useGlobalContext();
 
   const searchVariants = {
     hidden: { y: -10, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
   };
 
-  const toggleSearch = () => {
-    setIsSearchOpen((prev) => !prev);
-    setIsInputFocused(true); // Set the state to focus the input
-  };
+
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
   return (
     <header className={s.header}>
       <div className={s.container}>
@@ -83,7 +81,7 @@ const Header = () => {
               exit="hidden"
               className={s.searchContainer}
             >
-              <Search isInputFocused={isInputFocused} />
+              <Search />
             </motion.div>
           )}
         </AnimatePresence>

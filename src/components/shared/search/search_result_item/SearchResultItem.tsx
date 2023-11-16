@@ -1,6 +1,5 @@
 'use client';
 import s from './search_result_item.module.scss';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { FaFilm } from 'react-icons/fa';
@@ -45,13 +44,14 @@ const SearchResultItem = ({ result }: iSearchResultItemProps) => {
     }
   }, []);
 
+
   switch (result.media_type) {
     case 'movie':
       return (
         <Link href={`/movie/${result.id}`} >
           <div className={s.item}>
             <div className={s.poster}>
-             <ImageFrame imagePath={result.poster_path} alt={result.title} icon={<FaFilm/>} width={100} height={96}/>
+              <ImageFrame imagePath={result.poster_path} alt={result.title} icon={<FaFilm />} width={100} height={96} />
             </div>
             <div className={s.details}>
               <h2 className={s.title}>
@@ -73,9 +73,9 @@ const SearchResultItem = ({ result }: iSearchResultItemProps) => {
     case 'person':
       return (
         <Link href={`/person/${result.id}`} >
-          <div className={s.item}>
+          <div className={s.item} >
             <div className={s.poster}>
-            <ImageFrame imagePath={result.profile_path} alt={result.title} icon={<IoPerson/>} width={100} height={96}/>
+              <ImageFrame imagePath={result.profile_path} alt={result.title} icon={<IoPerson />} width={100} height={96} />
             </div>
             <div className={s.details}>
               <h2 className={s.title}>
@@ -95,9 +95,9 @@ const SearchResultItem = ({ result }: iSearchResultItemProps) => {
     case 'tv':
       return (
         <Link href={`/series/${result.id}`} >
-          <div className={s.item}>
+          <div className={s.item} >
             <div className={s.poster}>
-            <ImageFrame imagePath={result.poster_path} alt={result.title} icon={<FaFilm/>} width={100} height={96}/>
+              <ImageFrame imagePath={result.poster_path} alt={result.title} icon={<FaFilm />} width={100} height={96} />
             </div>
             <div className={s.details}>
               <h2 className={s.title}>

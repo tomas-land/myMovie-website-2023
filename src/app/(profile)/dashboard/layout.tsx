@@ -18,7 +18,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     throw new Error('User email not found in session');
   }
   const user = await getUserByEmail(userEmail);
-  console.log(user,session);
+
   return (
     <div className={s.layout}>
       <UserInfo  user={user} session={session} />

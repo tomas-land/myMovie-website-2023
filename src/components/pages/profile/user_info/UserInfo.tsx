@@ -14,7 +14,7 @@ interface iUserInfo {
 const UserInfo = ({ user, session }: iUserInfo) => {
     const image = user.image ?? session.user?.image  // if no user image, use session image
     const formattedDate = dayjs(user.createdAt).format('MMMM YYYY');
-   
+
     return (
         <div className={s.user_info}>
             <div className={s.container}>

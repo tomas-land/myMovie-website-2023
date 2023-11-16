@@ -5,12 +5,10 @@ import { useState, useEffect, useRef, use } from 'react';
 import SearchResultItem from '@/components/shared/search/search_result_item/SearchResultItem';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { useDebounce } from 'use-debounce';
+import { useGlobalContext } from '@/context/GlobalContext';
+ 
 
-interface iProps {
-  isInputFocused?: boolean;
-}
-
-const Search = ({ isInputFocused }: iProps) => {
+const Search = () => {
   const [isSearchFieldExtended, setIsSearchFieldExtended] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResultsData, setSearchResultsData] = useState<any[]>([]);
@@ -19,17 +17,18 @@ const Search = ({ isInputFocused }: iProps) => {
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [query] = useDebounce(searchQuery, 1000);
+  const { isInputFocused } = useGlobalContext();
 
   useEffect(() => {
     if (isInputFocused && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isInputFocused]);
-  
+
   useEffect(() => {
     document.addEventListener('mousedown', handleResultsClose);
-    
-    
+
+
     if (!searchQuery) {
       setIsResultsShown(false);
     } else {
@@ -54,7 +53,6 @@ const Search = ({ isInputFocused }: iProps) => {
       if (!isClickInsideResults && !isClickInsideInput) {
         setIsResultsShown(false);
         setSearchQuery('');
-        // setIsSearchFieldExtended(false);
       }
     }
   };

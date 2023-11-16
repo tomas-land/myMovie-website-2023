@@ -1,3 +1,4 @@
+'use client'
 import s from './person_details.module.scss';
 import { iPerson, iPersonMovieCredit } from '@/lib/interfaces/person';
 import ImageFrame from '@/components/shared/image_frame/ImageFrame';
@@ -5,6 +6,9 @@ import { IoPerson } from 'react-icons/io5';
 import Facts from '../facts/Facts';
 import Bio from '../bio/Bio';
 import Credits from '../credits/Credits';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 interface iProps {
   person: iPerson;
@@ -12,6 +16,12 @@ interface iProps {
 }
 
 const PersonDetails = ({ person, personMovieCredits }: iProps) => {
+  const { setIsSearchOpen } = useGlobalContext();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname !== '/') setIsSearchOpen(false);
+  }, [pathname]);
   return (
     <div className={s.person_details}>
       <div className={s.backdrop}></div>

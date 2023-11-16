@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import s from '@/components/shared/error/error.module.scss'
 
 export default function Error({
     error,
@@ -15,8 +16,9 @@ export default function Error({
     }, [error])
 
     return (
-        <div>
-            <h2>Something weddndt wrong!</h2>
+        <div className={s.error}>
+            <h2>Something went wrong !</h2>
+            <p>{error.message}</p>
             <button
                 onClick={
                     // Attempt to recover by trying to re-render the segment
