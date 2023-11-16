@@ -16,7 +16,7 @@ import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton'
 
 
 const menuLinks = [
-  { href: '/dashboard', label: 'dash' },
+  { href: '/dashboard', label: 'Profile' },
   { href: '/movies', label: 'Movies' },
   { href: '/tv-shows', label: 'TV Shows' },
   { href: '/actors', label: 'Actors' },

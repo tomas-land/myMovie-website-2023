@@ -2,16 +2,16 @@
 @import "~src/styles/variables";
 
 .dashboard_menu {
-    width: $main_container;
+    width: 100%;
     margin: auto;
     background-color: $card-bg-color;
     height: 3rem;
-    margin-top: 5rem;
+
     .list {
+        height: 100%;
         display: flex;
         justify-content: center;
-        gap: 3rem;
-        height: 100%;
+        gap: 2rem;
         .item {
             @include flex_center();
             color: $color-1;

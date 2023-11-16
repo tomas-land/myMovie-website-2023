@@ -33,7 +33,12 @@ const authOptions = {
         const passwordIsValid = await bcrypt.compare(credentials.password, registeredUser?.password ?? '');
         // if user exists and password is valid, authorize user
         if (credentials.email === registeredUser?.email && passwordIsValid) {
-          return registeredUser
+          return {
+            email: registeredUser?.email,
+            name: registeredUser?.name,
+            image: registeredUser?.image,
+            id: registeredUser?.id,
+          }
         } else {
           return null;
         }

@@ -39,7 +39,7 @@ const DashboardMenu = () => {
         {menuItems.map((item, index) => (
           <li key={index} className={s.item} onMouseOver={() => handleMouseOver(item)}>
             {item.name}
-            {isSubMenuShown && item.subcategories === currentSubcategories && (
+            {isSubMenuShown && item.subcategories === currentSubcategories ? (
               <ul className={s.subcategory_list}>
                 {currentSubcategories.map((subcategory, subIndex) => (
                   <li key={subIndex} className={s.subcategory_item} >
@@ -49,7 +49,7 @@ const DashboardMenu = () => {
                   </li>
                 ))}
               </ul>
-            )}
+            ) : null}
           </li>
         ))}
       </ul>

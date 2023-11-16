@@ -1,0 +1,68 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+
+.user_info {
+    width: 100%;
+    margin-top: 5rem;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    .container {
+        max-width: 60rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 100%;
+        padding: 2rem;
+        gap: 1rem;
+        .image_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+
+            overflow: hidden;
+            .image {
+                border-radius: 50%;
+                border: 1px solid $color-3-light;
+                fill: $color-3-light;
+                object-fit: cover;
+            }
+        }
+        .info {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            .name_email_wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .name {
+                    color: $color-3-light;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                    letter-spacing: 0.1rem;
+                }
+                .email {
+                    color: $color-3-light;
+                    font-size: 0.9rem;
+                    letter-spacing: 0.1rem;
+                    font-weight: 400;
+                }
+            }
+
+            .member {
+                align-self: flex-end;
+                margin-top: 1rem;
+                color: $color-3-light;
+                font-size: 0.9rem;
+                font-weight: 400;
+                color: $color-3-light;
+                letter-spacing: 0.1rem;
+            }
+        }
+    }
+}
