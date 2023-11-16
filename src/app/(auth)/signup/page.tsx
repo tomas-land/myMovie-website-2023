@@ -1,6 +1,6 @@
 import s from '@/components/pages/auth/signup/signup_page.module.scss';
 import GoogleSigninButton from '@/components/pages/auth/google_signin_button/GoogleSigninButton';
-import CredentialsForm from '@/components/pages/auth/signup/credentials_form/CredentialsForm';
+import CredentialsForm from '@/components/pages/auth/signup/signup_form/SignupForm';
 
 const SignUpPage = () => {
   return (

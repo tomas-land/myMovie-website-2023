@@ -6,6 +6,11 @@ import bcrypt from 'bcryptjs';
 
 const authOptions = {
   // adapter: PrismaAdapter(prisma),
+  session: {
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
@@ -14,32 +19,27 @@ const authOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Username', type: 'email' },
-        password: { label: 'Password', type: 'password' },
+        email: { name: 'email', type: 'email', label: 'Email' },
+        password: { name: 'password', type: 'password', label: 'Password' },
       },
       async authorize(credentials: any): Promise<any> {
-        console.log(credentials)
+        // find if user exists with email that user entered
         const registeredUser = await prisma.user.findFirst({
           where: {
             email: credentials?.email,
           },
         });
-        console.log(registeredUser)
+        // compare password that user entered with hashed password in database
         const passwordIsValid = await bcrypt.compare(credentials.password, registeredUser?.password ?? '');
-        console.log(passwordIsValid)
+        // if user exists and password is valid, authorize user
         if (credentials.email === registeredUser?.email && passwordIsValid) {
-          return registeredUser;
+          return registeredUser
         } else {
           return null;
         }
       },
     }),
   ],
-  // pages: {
-  //   signIn: '/signin',
-  //   signOut: '/signout',
-  //   error: '/error', // Error code passed in query string as ?error=
-  // },
 };
 
 export default authOptions;

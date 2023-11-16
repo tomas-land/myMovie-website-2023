@@ -1,20 +1,22 @@
 'use client';
 
-import { useState,useRef } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Squash as Hamburger } from 'hamburger-react';
 import s from './header.module.scss';
 import Logo from '@/components/shared/logo/Logo';
 import { FiSearch, FiUser } from 'react-icons/fi';
-import MainMenu from '@/components/shared/menu/main_menu/MainMenu';
-import MobileMenu from '@/components/shared/menu/mobile_menu/MobileMenu';
+import MainMenu from '@/components/layouts/menu/main_menu/MainMenu';
+import MobileMenu from '@/components/layouts/menu/mobile_menu/MobileMenu';
 import CustomLink from '@/components/shared/custom_links/CustomLink';
 import Search from '@/components/shared/search/search/Search';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSession } from "next-auth/react"
+import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton';
 
 
 const menuLinks = [
-  { href: '/profile', label: 'dash' },
+  { href: '/dashboard', label: 'dash' },
   { href: '/movies', label: 'Movies' },
   { href: '/tv-shows', label: 'TV Shows' },
   { href: '/actors', label: 'Actors' },
@@ -22,6 +24,7 @@ const menuLinks = [
 ];
 
 const Header = () => {
+  const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -43,7 +46,7 @@ const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.container}>
-        <Link href="/d">
+        <Link href="/">
           <Logo />
         </Link>
         <MainMenu links={menuLinks} />
@@ -57,29 +60,33 @@ const Header = () => {
             </Link>
           </div>
           <div className={s.sign_in_wrapper}>
-            <CustomLink label="sign in" href={'/signin'} icon={<FiUser />} />
+            {session ? (
+              <SignOutButton />
+            ) : (
+              <CustomLink label="sign in" href={'/signin'} icon={<FiUser />} />
+            )}
           </div>
           <div className={s.hamburger_wrapper}>
             <Hamburger toggled={isMobileMenuOpen} toggle={setIsMobileMenuOpen} size={25} rounded />
           </div>
         </div>
-       
+
       </div>
       {isMobileMenuOpen ? <MobileMenu links={menuLinks} closeMobileMenu={closeMobileMenu} isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} /> : null}
       <div className={s.search_wrapper} >
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            variants={searchVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className={s.searchContainer}
-          >
-            <Search isInputFocused={isInputFocused} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <AnimatePresence>
+          {isSearchOpen && (
+            <motion.div
+              variants={searchVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className={s.searchContainer}
+            >
+              <Search isInputFocused={isInputFocused} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

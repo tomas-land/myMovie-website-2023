@@ -6,7 +6,7 @@ import s from './google_signin_button.module.scss';
 
 const GoogleSigninButton = () => {
   const handleClick = () => {
-    signIn('google', { callbackUrl: '/profile' });
+    signIn('google', { callbackUrl: '/dashboard' });
   };
   return (
     <button className={s.google_signin_btn} onClick={handleClick}>

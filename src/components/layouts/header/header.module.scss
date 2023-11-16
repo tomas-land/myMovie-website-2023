@@ -11,6 +11,7 @@
 
   .container {
     max-width: $main_container;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,6 +62,7 @@
       }
       .sign_in_wrapper {
         display: block;
+        width: 100%;
         @include breakpoint(768) {
           display: none;
         }

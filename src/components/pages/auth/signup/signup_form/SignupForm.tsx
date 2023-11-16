@@ -1,9 +1,10 @@
 'use client';
-import s from '../../signin/credentials_form/credentials_form.module.scss';
+import s from '../../signin/signin_form/signin_form.module.scss';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { z } from 'zod';
 import { credentialsSchema } from '@/lib/zod/user/signupSchema';
+import PrimaryButton from '@/components/shared/buttons/primary_button/PrimaryButton';
 
 interface Credentials {
   username: string;
@@ -81,8 +82,7 @@ const CredentialsForm = () => {
         <input className={s.input} type="text" name="email" placeholder="email" autoComplete="off" value={formData.email} onChange={handleChange} />
         <input className={s.input} type="password" name="password" placeholder="password" autoComplete="off" value={formData.password} onChange={handleChange} />
       </div>
-      {/* <PrimaryButton label="sign in" /> */}
-      <button type="submit">sign up</button>
+      <PrimaryButton label="sign up" type={'submit'} />
     </form>
   );
 };

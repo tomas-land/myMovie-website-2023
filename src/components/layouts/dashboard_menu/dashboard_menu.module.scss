@@ -1,0 +1,51 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+
+.dashboard_menu {
+    width: $main_container;
+    margin: auto;
+    background-color: $card-bg-color;
+    height: 3rem;
+    margin-top: 5rem;
+    .list {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        height: 100%;
+        .item {
+            @include flex_center();
+            color: $color-1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0 1rem;
+            height: 100%;
+            position: relative;
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                color: $color-1-light;
+            }
+            .subcategory_list {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.3);
+                z-index: 1;
+                .subcategory_item {
+                    text-wrap: nowrap;
+                    padding: 1rem 1rem;
+                    cursor: pointer;
+                    a {
+                        color: $color-1;
+                    }
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                        a {
+                            color: $color-1-light;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

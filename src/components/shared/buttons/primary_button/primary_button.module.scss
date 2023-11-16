@@ -3,11 +3,13 @@
 
 .button {
   @include flex_center();
-  height: 2.5rem;
+  height: 2.2rem;
+  min-width: 8rem;
   padding: 0rem 1rem;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
+  text-wrap: nowrap;
   letter-spacing: 0.1rem;
   border: 2px solid $btn-color;
   border-radius: 2rem;
