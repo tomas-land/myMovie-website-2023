@@ -6,9 +6,9 @@ const Dashboard = async () => {
 
     return (
         <div style={{color:'salmon' , textAlign:'center',marginTop:'5rem'}}>
-            main page
+            {/* main page
             dashboard
-            //favorites render
+            //favorites render */}
 
         </div>
     );
