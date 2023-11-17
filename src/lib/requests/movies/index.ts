@@ -1,4 +1,4 @@
-import { TMDB_API_KEY, TMDB_BASE_URL} from '@/lib/config.js';
+import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
 import { currentDay, startOFYear } from '@/lib/dayJS';
 import { iMovie } from '@/lib/interfaces/movie';
 
@@ -19,7 +19,7 @@ export async function getUpcomingMovies() {
       throw new Error('Fetching failed');
     }
     return data.results;
-  } catch (error) {}
+  } catch (error) { }
 }
 
 export async function getTopRatedMovies() {
@@ -47,10 +47,11 @@ export async function getMovieById(id: string) {
 export async function getMovieImagesById(id: string) {
   const response = await fetch(`${TMDB_BASE_URL}/movie/${id}/images?api_key=${TMDB_API_KEY}&language=en-US&include_image_language=en`);
   const data = await response.json();
+  const images = data.backdrops;
   if (!response.ok) {
     throw new Error('Fetching movie images failed');
   }
-  return data;
+  return images;
 }
 
 export async function getMovieVideosById(id: string) {

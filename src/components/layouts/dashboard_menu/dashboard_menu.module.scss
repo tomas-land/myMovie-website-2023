@@ -6,7 +6,7 @@
     margin: auto;
     background-color: $card-bg-color;
     height: 3rem;
-
+    
     .list {
         height: 100%;
         display: flex;
@@ -29,7 +29,7 @@
                 position: absolute;
                 top: 100%;
                 left: 0;
-                background-color: rgba(0, 0, 0, 0.3);
+                background-color: #1d1926;
                 z-index: 1;
                 .subcategory_item {
                     text-wrap: nowrap;

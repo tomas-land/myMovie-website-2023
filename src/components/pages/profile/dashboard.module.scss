@@ -1,0 +1,57 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+
+.dashboard {
+    max-width: $main_container;
+
+    .stats {
+        margin: auto;
+        width: 90%;
+        display: grid;
+        place-content: center;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+        padding: 0 2rem;
+        @include breakpoint(1024) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include breakpoint(768) {
+            grid-template-columns: 1fr;
+            width: 100%;
+        }
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background-color: $card-bg-color;
+            padding: 1rem;
+            .title {
+                width: 7rem;
+                font-size: 1.5rem;
+                letter-spacing: 0.1rem;
+                font-weight: 700;
+                color: $color-1;
+            }
+            .total {
+                @include flex-center();
+                width: 5rem;
+                height: 5rem;
+                margin-left: 1rem;
+                font-size: 2rem;
+                font-weight: 800;
+                color: $color-3-light;
+                border-radius: 50%;
+                background-image: linear-gradient(
+                    to left bottom,
+                    rgba(78, 44, 63, 0.5),
+                    rgba(69, 43, 64, 0.5),
+                    rgba(59, 42, 64, 0.5),
+                    rgba(34, 52, 72, 0.5),
+                    rgba(30, 58, 76, 0.5)
+                );
+            }
+        }
+    }
+}
