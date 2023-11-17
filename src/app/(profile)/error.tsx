@@ -18,7 +18,6 @@ export default function Error({
     return (
         <div className={s.error}>
             <h2>Something went wrong !</h2>
-            <p>{error.message}</p>
             <button
                 onClick={
                     // Attempt to recover by trying to re-render the segment

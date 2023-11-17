@@ -1,0 +1,30 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+
+.number_counter {
+    @include flex-center();
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    color: $color-3-light;
+    border-radius: 50%;
+    background-image: linear-gradient(
+        to left bottom,
+        rgba(78, 44, 63, 0.5),
+        rgba(69, 43, 64, 0.5),
+        rgba(59, 42, 64, 0.5),
+        rgba(34, 52, 72, 0.5),
+        rgba(30, 58, 76, 0.5)
+    );
+
+    animation: count-up 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes count-up {
+    to {
+        opacity: 1;
+    }
+}
