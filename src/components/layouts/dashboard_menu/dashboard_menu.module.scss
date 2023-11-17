@@ -6,17 +6,19 @@
     margin: auto;
     background-color: $card-bg-color;
     height: 3rem;
-    @include breakpoint(768) {
-        overflow-x: scroll;
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    }
-
+    // @include breakpoint(768) {
+    //     overflow-x: scroll;
+    //     &::-webkit-scrollbar {
+    //         display: none;
+    //     }
+    // }
     .list {
         height: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        max-width: $main_container;
+        margin: auto;
+        padding: 0 1rem;
         gap: 2rem;
         .item {
             @include flex_center();

@@ -1,13 +1,14 @@
 import '@/styles/globals.scss';
 import { Suspense } from 'react';
 import Hero from '@/components/pages/homepage/hero/Hero';
-import MoviesDisplay from '@/components/pages/homepage/movies_display/MoviesDisplay';
+import MoviesDisplay from '@/components/shared/movies_display/MoviesDisplay';
 import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib/requests/movies';
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import requests from '@/lib/requests/movies';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Skeleton from 'react-loading-skeleton';
 import Loading from './loading';
+import Slider from '@/components/pages/homepage/slider/Slider';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,7 +30,7 @@ const Home = async () => {
     <div>
       <Hero />
       {/* //Search */}
-      <MoviesDisplay headerTitle="In Theatres" endpoint="now_playing" movies={nowPlayingMovies} />
+      <MoviesDisplay headerTitle="In Theatres" ><Slider movies={nowPlayingMovies} endpoint='now_playing'/></MoviesDisplay>
       {/* <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" endpoint="upcoming" /> */}
       {/* <MoviesDisplay movies={sortedByVoteTopRatedMovies} headerTitle="Top Rated" endpoint="top_rated" /> */}
     </div>

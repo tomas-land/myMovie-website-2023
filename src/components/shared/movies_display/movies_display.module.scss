@@ -1,5 +1,5 @@
-@import '~src/styles/mixins';
-@import '~src/styles/variables';
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
 
 .movies_display {
   max-width: $main_container;
@@ -9,10 +9,9 @@
   backdrop-filter: blur(10px);
   padding: 2rem;
   transform: translateY(-5rem);
-  @include breakpoint(768){
+  @include breakpoint(768) {
     padding: 1rem;
   }
-
 
   .header {
     margin-bottom: 2rem;

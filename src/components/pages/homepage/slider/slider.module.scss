@@ -1,8 +1,9 @@
-@import '~src/styles/mixins';
-@import '~src/styles/variables';
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
 
 .slider {
   display: flex;
+  mask: linear-gradient(to right, black 90%, transparent);
   .last_slide {
     height: 100%;
     width: 16rem;

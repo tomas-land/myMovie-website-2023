@@ -9,7 +9,7 @@
   }
   .hero_image {
     object-fit: cover;
-    filter: opacity(0.2);
+    filter: opacity(0.25);
     @include breakpoint(480) {
       object-position: 5%;
     }
