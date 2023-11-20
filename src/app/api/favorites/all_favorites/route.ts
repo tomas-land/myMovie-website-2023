@@ -7,7 +7,6 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
     const user_id = session?.user?.id;
-    // console.log(session.user)
 
     try {
         const favorites = await prisma.favorite.findMany({
