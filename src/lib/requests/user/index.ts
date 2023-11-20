@@ -2,6 +2,7 @@ import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
 import { currentDay, startOFYear } from '@/lib/dayJS';
 import { iMovie } from '@/lib/interfaces/movie';
 import { getUserByEmailPrisma } from '@/lib/prisma/user/getUserByEmail';
+import prisma from '@/lib/prisma/prisma';
 
 export async function getUserByEmail(email: string) {
     try {

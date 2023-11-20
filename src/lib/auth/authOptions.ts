@@ -16,6 +16,7 @@ const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
+
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -33,18 +34,25 @@ const authOptions = {
         const passwordIsValid = await bcrypt.compare(credentials.password, registeredUser?.password ?? '');
         // if user exists and password is valid, authorize user
         if (credentials.email === registeredUser?.email && passwordIsValid) {
-          return {
-            email: registeredUser?.email,
-            name: registeredUser?.name,
-            image: registeredUser?.image,
-            id: registeredUser?.id,
-          }
+          return registeredUser;
         } else {
           return null;
         }
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user, isNewUser }: any) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }: any) {
+      session.user.id = token.id;
+      return session;
+    },
+  },
 };
 
 export default authOptions;

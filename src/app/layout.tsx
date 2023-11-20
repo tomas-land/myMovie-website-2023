@@ -6,6 +6,10 @@ import { ContextProviders } from '@/context/ContextProviders';
 export const metadata = {
   title: 'MyMovie',
   description: 'My movies collection',
+  icons: {
+    icon: '/icon.png',
+  },
+  
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
