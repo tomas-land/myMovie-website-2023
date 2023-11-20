@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "deploy": "npm run prisma:generate && next build && npm run prisma:cleanup",
-    "prisma:cleanup": "prisma generate && prisma generate"
+    "prisma:cleanup": "prisma generate && prisma generate",
+    "postinstall": "npm run generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
