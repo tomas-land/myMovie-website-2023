@@ -2,14 +2,17 @@
 import { ModalContextProvider } from './ModalContext';
 import { AuthProvider } from './AuthProvider';
 import { GlobalContextProvider } from './GlobalContext';
+import TanStackProvider from './TanStackContext';
 
 export const ContextProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <AuthProvider>
-      <GlobalContextProvider>
-        <ModalContextProvider>{children}</ModalContextProvider>
-      </GlobalContextProvider>
-    </AuthProvider>
+    <TanStackProvider>
+      <AuthProvider>
+        <GlobalContextProvider>
+          <ModalContextProvider>{children}</ModalContextProvider>
+        </GlobalContextProvider>
+      </AuthProvider>
+    </TanStackProvider>
   );
 };
 

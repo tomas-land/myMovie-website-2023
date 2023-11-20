@@ -24,7 +24,8 @@ const Home = async () => {
   // };
   // const nowPlayingMovies = await fetchMoviesWithTimeout(6000);
   const nowPlayingMovies = await getNowPlayingMovies();
-  const upcomingMovies = await getUpcomingMovies();
+  //slice nowPlayingMovies to 2 movies
+  // const upcomingMovies = await getUpcomingMovies();
   // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
   return (
     <div>

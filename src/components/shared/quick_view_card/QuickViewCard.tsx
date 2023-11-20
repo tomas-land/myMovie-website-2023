@@ -1,34 +1,24 @@
 'use client';
 import s from './quick_view_card.module.scss';
-import {iMovie} from '@/lib/interfaces/movie';
+import { iMovie } from '@/lib/interfaces/movie';
 import { IoCloseOutline } from 'react-icons/io5';
-import { m, motion } from 'framer-motion';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface iProps {
   movie: iMovie;
   setIsQuickViewOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  genres: [{ id: string; name: string }] | undefined;
 }
 
-const QuickViewCard = ({ movie, setIsQuickViewOpened }: iProps) => {
-  const [genres, setGenres] = useState<[{ id: string; name: string }]>();
+const QuickViewCard = ({ movie, setIsQuickViewOpened, genres }: iProps) => {
+
   const closeQuickView = () => {
     setIsQuickViewOpened(false);
   };
-  useEffect(() => {
-    const fetchMovieGenres = async () => {
-      const response = await axios.get('/api/movies/movie_by_id', { params: { id: movie.id } });
-      const genres = response.data.data.genres;
-      setGenres(genres);
-      return genres;
-    };
-    fetchMovieGenres();
-  }, [movie.id]);
 
-   
   return (
-    <motion.div className={s.quick_view} initial={{ x: 150 }} animate={{ x:0 }} transition={{ duration: 0.5 }}>
+    <motion.div className={s.quick_view} initial={{ x: 150 }} animate={{ x: 0 }} transition={{ duration: 0.5 }}>
       <div className={s.quick_view_content}>
         <button className={s.close_btn} onClick={closeQuickView}>
           <IoCloseOutline size={30} />
