@@ -5,14 +5,12 @@ export async function saveFavoritePrisma(userId: string, contentId: string) {
         const newFavorite = await prisma.favorite.create({
             data: {
                 contentId: contentId,
-                user: {
-                    connect: { id: userId }
-                }
+                userId: userId // Connect the favorite to the user by userId
             }
         });
-        return newFavorite; 
+        return newFavorite;
     } catch (error) {
         console.error('Error saving favorite item:', error);
-        throw new Error('Failed to save favorite item'); // Throw a new error to indicate the failure
+        throw new Error('Failed to save favorite item');
     }
 }

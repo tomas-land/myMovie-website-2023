@@ -51,7 +51,7 @@ const MovieActionButtons = ({ movie }: iProps) => {
       queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
     },
   });
-
+//////////////////////////////////////
   // Effect to set the initial state of isFavorite based on userFavorites
   useEffect(() => {
     if (userFavorites) {
