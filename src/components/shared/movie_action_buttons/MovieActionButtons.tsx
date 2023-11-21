@@ -41,17 +41,33 @@ const MovieActionButtons = ({ movie }: iProps) => {
     mutationFn: async () => {
       const favorite = userFavorites?.find((favorite: iFavorite) => favorite.contentId === movieId);
       if (favorite) {
+        setIsFavorite(false);
         await axios.delete(`/api/favorites/delete_favorite?id=${favorite.id}`);
       } else {
+        setIsFavorite(true);
         await axios.post(`/api/favorites/save_favorite`, { movie_id: movieId });
       }
     },
-    onSuccess: (updatedFavorites) => {
-      setIsFavorite(!isFavorite);
+    // optimistic update
+    // onMutate: async () => { 
+    //   await queryClient.cancelQueries({ queryKey: ['userFavorites'] });
+    //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
+    //   const newFavorite = {
+    //     id: movieId,
+    //     contentId: movieId,
+    //     createdAt: new Date(),
+    //   };
+    //   queryClient.setQueryData(['userFavorites'], (old: iFavorite[] | undefined) => [...(old || []), newFavorite]);
+    //   return { previousFavorites };
+    // },
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
     },
+    onError: () => {
+      setIsFavorite(false);
+    },
   });
-//////////////////////////////////////
+
   // Effect to set the initial state of isFavorite based on userFavorites
   useEffect(() => {
     if (userFavorites) {
@@ -59,7 +75,6 @@ const MovieActionButtons = ({ movie }: iProps) => {
       setIsFavorite(!!isFavorite);
     }
   }, [userFavorites, session]);
-
 
   const toggleWatchlist = () => {
     setIsInWatchlist((prevState) => !prevState);
