@@ -1,32 +1,31 @@
-@import '~src/styles/mixins';
-@import '~src/styles/variables';
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
 
 .movie_card {
   display: flex;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
-  overflow: hidden;
-
+ 
   .movie_card_wrapper {
     display: flex;
     flex-direction: column;
     width: 16rem;
-    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
 
     .poster_wrapper {
-      width: 100%;
+      border-radius: 1rem 1rem 0 0;
+      background-color: rgba(0, 0, 0, 0.3);
       overflow: hidden;
-      position: relative;
 
       .poster {
         opacity: 1;
         display: block;
         width: 100%;
         height: auto;
-        transition: 0.5s ease;
-        z-index: 999;
+        border-radius: 1rem 1rem 0 0;
         cursor: pointer;
+        transition: transform 0.5s ease;
       }
 
       .btns {
@@ -81,7 +80,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding:1rem 1rem 0;
+      padding: 1rem 1rem 0;
 
       .title {
         line-height: 1.2rem;

@@ -4,17 +4,6 @@ import prisma from '@/lib/prisma/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
 
-interface User {
-  id: string;
-  name: string | null;
-  username: string | null;
-  password: string | null;
-  email: string | null;
-  emailVerified: Date | null;
-  image: string | null;
-  createdAt: Date;
-  updatedAt: Date | null;
-}
 
 const authOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -54,7 +43,8 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }: any) {  // sign up with google
+    // sign up with google
+    async signIn({ user, account, profile, email, credentials }: any) {
       const registeredUser = await prisma.user.findFirst({
         where: {
           email: user.email,
@@ -72,18 +62,6 @@ const authOptions = {
         });
         return true;
       }
-
-      //   //   } else {
-      //   //     const newUser = await prisma.user.create({
-      //   //       data: {
-      //   //         email: user.user.email,
-      //   //         name: user.user.name,
-      //   //         image: user.user.image,
-      //   //       },
-      //   //     });
-      //   //     return true;
-      //   //   }
-      //   // }
     },
     async jwt({ token, user }: any) {
       if (user) {
