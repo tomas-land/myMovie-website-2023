@@ -2,21 +2,23 @@
 @import "~src/styles/variables";
 
 .movie_card {
+  position: relative;
   display: flex;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
- 
+  
   .movie_card_wrapper {
     display: flex;
     flex-direction: column;
     width: 16rem;
-    border-radius: 1rem;
+    border-radius: 1rem;;
 
     .poster_wrapper {
       border-radius: 1rem 1rem 0 0;
       background-color: rgba(0, 0, 0, 0.3);
       overflow: hidden;
+      position: relative;
 
       .poster {
         opacity: 1;
@@ -27,7 +29,6 @@
         cursor: pointer;
         transition: transform 0.5s ease;
       }
-
       .btns {
         display: none;
         justify-content: flex-start;
@@ -35,9 +36,7 @@
         flex-direction: column;
         gap: 2rem;
         position: absolute;
-        width: 100%;
-        height: 100%;
-        inset: 2rem 0 0 0;
+        inset: 10% 0 0 0;
 
         .btn {
           background-color: transparent;
@@ -55,10 +54,10 @@
           }
         }
       }
-
       &:hover {
         .btns {
           display: flex;
+          width: 100%;
           @include breakpoint(768) {
             display: none;
           }
@@ -80,13 +79,13 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1rem 1rem 0;
 
       .title {
         line-height: 1.2rem;
         font-weight: 700;
         letter-spacing: 0.1rem;
         color: $color-1-light;
+        padding: 0.8rem;
       }
     }
   }

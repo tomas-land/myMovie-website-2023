@@ -1,0 +1,64 @@
+@import "~src/styles/mixins";
+@import "~src/styles/variables";
+
+.action_btns {
+
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.2rem 1rem 0;
+  
+  .ratings_container {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8rem;
+    .average_rating {
+      @include flex_center();
+      width: 3rem;
+      height: 3rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: $color-1;
+      border: 3px solid $color-1;
+      border-radius: 50%;
+    }
+    .user_rating {
+      @include flex_center();
+      width: 2.2rem;
+      height: 2.2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: $color-1-light;
+      border: 3px solid $color-1;
+      border-radius: 50%;
+      background-color: $color-1-dark;
+    }
+    span {
+      color: $color-1;
+    }
+  }
+  .btns_wrapper {
+    display: flex;
+
+    .btn {
+      background-color: transparent;
+      padding: 0.5rem;
+      color: $color-1-dark;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+
+      &:hover {
+        color: $color-1;
+        scale: 1.1;
+      }
+    }
+
+    .fill_icon {
+      svg {
+        fill: $color-1-dark;
+        color: $color-1;
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import s from './movie_card.module.scss';
 import QuickViewCard from '../quick_view_card/QuickViewCard';
 import Link from 'next/link';
 import axios from 'axios';
-import MovieActionButtons from '@/components/shared/movie_action_buttons/MovieActionButtons';
+import MovieActionButtons from '@/components/shared/action_buttons/ActionButtons';
 
 interface iProps {
   movie: iMovie;

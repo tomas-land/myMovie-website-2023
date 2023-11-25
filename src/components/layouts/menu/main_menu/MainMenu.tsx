@@ -12,7 +12,7 @@ interface iMenuLinkProps {
 
 const MenuItem = ({ href, label }: iMenuLinkProps) => (
   <li className={s.menu_item}>
-    <Link href={href} className={s.link}>
+    <Link href={href} className={s.link} scroll={false}>
       {label}
     </Link>
   </li>

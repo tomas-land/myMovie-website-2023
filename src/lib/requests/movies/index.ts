@@ -5,21 +5,21 @@ import { iMovie } from '@/lib/interfaces/movie';
 export async function getNowPlayingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
   const data = await response.json();
+  const slicedData = data.results.slice(0, 10);
   if (!response.ok) {
     throw new Error('Fetching failed');
   }
-  return data.results;
+  return slicedData;
 }
 
 export async function getUpcomingMovies() {
-  try {
     const response = await fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
     const data = await response.json();
+    const slicedData = data.results.slice(0, 10);
     if (!response.ok) {
       throw new Error('Fetching failed');
     }
-    return data.results;
-  } catch (error) { }
+    return slicedData;
 }
 
 export async function getTopRatedMovies() {

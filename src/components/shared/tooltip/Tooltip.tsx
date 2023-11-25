@@ -1,7 +1,6 @@
 'use client';
 import s from './tooltip.module.scss';
 import { useState } from 'react';
-import { useSession } from 'next-auth/react';
 
 interface iProps {
     children: React.ReactNode;
@@ -9,20 +8,30 @@ interface iProps {
 }
 
 const Tooltip = ({ children, tooltipText }: iProps) => {
-    const { data: session } = useSession();
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const handleMouseEnter = () => !session ? setShowTooltip(true) : null;
+    // let timeoutId: NodeJS.Timeout;
+    // useEffect(() => {
+    //     return () => {
+    //         clearTimeout(timeoutId);
+    //     };
+    // }, []);
+    // show tooltip after 1s, when mouse leaves - clear timeout using specific identifier 'timeoutId'
+    // const handleMouseEnter = () => timeoutId = setTimeout(() => setShowTooltip(true), 1000);
+    // const handleMouseLeave = () => {
+    //     clearTimeout(timeoutId);
+    //     setShowTooltip(false);
+    // };
+    const handleMouseEnter = () => setShowTooltip(true);
     const handleMouseLeave = () => setShowTooltip(false);
 
-    return (
-        <div className={s.tooltip_wrapper}
-            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-            {children}
 
+    return (
+        <div className={s.tooltip_wrapper} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+            {children}
             {showTooltip ? (
                 <div className={s.tooltip}>
-                    <span>{tooltipText}</span>
+                    <p>{tooltipText}</p>
                     <span className={s.arrow}></span>
                 </div>
             ) : null}
