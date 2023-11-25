@@ -1,5 +1,5 @@
 'use client';
-import MovieActionButtons from '@/components/shared/movie_action_buttons/MovieActionButtons';
+import MovieActionButtons from '@/components/shared/action_buttons/ActionButtons';
 import s from './movie_details.module.scss';
 import { iMovie, iMovieImage, iMovieVideo } from '@/lib/interfaces/movie';
 import ScenesGrid from '../scenes_grid/ScenesGrid';
