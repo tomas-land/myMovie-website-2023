@@ -1,7 +1,7 @@
 @import "~src/styles/mixins";
 @import "~src/styles/variables";
 
-.movies_display {
+.content_display {
   max-width: $main_container;
   min-height: 39rem;
   margin: 0 auto;
@@ -22,6 +22,20 @@
       letter-spacing: 0.1rem;
       margin-bottom: 1rem;
       @include text_gradient();
+      @include breakpoint(768) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .content {
+    display: grid;
+    // grid-template-columns: auto auto auto auto auto ;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+    @include breakpoint(768) {
+      // flex-direction: row;
+      // flex-wrap: wrap;
+      // justify-content: space-between;
     }
   }
 }

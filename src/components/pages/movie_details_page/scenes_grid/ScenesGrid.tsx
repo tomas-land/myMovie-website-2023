@@ -12,7 +12,6 @@ interface iProps {
 
 const ScenesGrid = ({ movieImages, movie }: iProps) => {
   const [isGridExpanded, setIsGridExpanded] = useState(false);
-console.log(movieImages)
   const toggleShowMoreImages = () => {
     setIsGridExpanded((prev) => !prev);
   };

@@ -12,10 +12,11 @@ export async function getPersonById(id: string) {
 export async function getPersonMovieCreditsById(id: string) {
   const response = await fetch(`${TMDB_BASE_URL}/person/${id}/movie_credits?api_key=${TMDB_API_KEY}&sort_by=release_date.desc`);
   const data = await response.json();
+  const cast = data.cast;
   if (!response.ok) {
     throw new Error('Fetching person movie credits failed');
   }
-  return data.cast;
+  return cast;
 }
 
 export default { getPersonById };

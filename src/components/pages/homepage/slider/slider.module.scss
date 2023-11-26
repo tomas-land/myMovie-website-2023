@@ -4,7 +4,13 @@
 .slider {
   display: flex;
   mask: linear-gradient(to right, black 90%, transparent);
+  overflow-x: hidden;
+  .slide {
+    display: flex;
+    width: 46;
+  }
   .last_slide {
+    display: flex;
     height: 100%;
     width: 16rem;
     display: flex;
@@ -12,14 +18,16 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
-    .button_more {
+    .btn_more,
+    .link {
       background-color: transparent;
       color: $color-1;
-      padding: 1rem 3rem;
+      padding: 0.5rem 2rem;
       border: 2px solid $color-1;
       border-radius: 2rem;
       cursor: pointer;
-      font-weight: 800;
+      font-size: 0.8rem;
+      font-weight: 700;
       letter-spacing: 0.1rem;
       color: $color-1-light;
       transition: all 0.3s ease-in-out;

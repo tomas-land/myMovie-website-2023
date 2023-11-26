@@ -6,7 +6,7 @@
     place-content: center;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    margin:2rem 0 7rem;
+    margin: 2rem 0 7rem;
     padding: 0;
     @include breakpoint(1024) {
         grid-template-columns: repeat(2, 1fr);

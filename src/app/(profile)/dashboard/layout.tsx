@@ -1,12 +1,9 @@
-import s from '@/components/layouts/dashboard/layout.module.scss'
 import DashboardMenu from '@/components/layouts/dashboard_menu/DashboardMenu'
 import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import authOptions from '@/lib/auth/authOptions';
 import UserInfo from '@/components/pages/profile/user_info/UserInfo';
-import { get } from 'http';
 import { getUserByEmail } from '@/lib/requests/user';
-import { use } from 'react';
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -22,10 +19,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const user = await getUserByEmail(userEmail);
 
   return (
-    <div className={s.layout}>
+    <div>
       <UserInfo user={user} session={session} />
       <DashboardMenu />
-      <div  >
+      <div>
         {children}
       </div>
     </div>

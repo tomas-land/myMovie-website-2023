@@ -1,24 +1,22 @@
 'use client'
 import { useState } from 'react';
 import s from './dashboard_menu.module.scss';
-import SecondaryButton from '@/components/shared/buttons/secondaty_button/SecondaryButton';
 import Link from 'next/link';
+import menuItemsData from '@/lib/constants/menuItemsData';
 
-const menuItems = [
-  { name: 'Favorites', subcategories: ['Movies', 'TV Series'], href: '/favorites' },
-  { name: 'Watchlist', subcategories: ['Movies', 'TV Series'], href: '/watchlist' },
-  { name: 'Rated', subcategories: ['Movies', 'TV Series'], href: '/rated' },
-  { name: 'Lists', subcategories: ['Movies', 'test'], href: '/lists' },
-  { name: 'Reviews', href: '/reviews' },
-  { name: 'Settings', subcategories: ['Movies', 'TV Series'], href: '/settings' },
-];
-
+interface iMenuItem {
+  name: string;
+  subcategories?: { name: string; href: string }[];
+  href?: string;
+}
 
 const DashboardMenu = () => {
-  const [isSubMenuShown, setIsSubMenuShown] = useState(false);
-  const [currentSubcategories, setCurrentSubcategories] = useState<string[]>([]);
+  const [menuItems, setMenuItems] = useState<iMenuItem[]>(menuItemsData);
+  const [isSubMenuShown, setIsSubMenuShown] = useState<boolean>(false);
+  const [currentSubcategories, setCurrentSubcategories] = useState<{ name: string; href: string }[]>([]);
 
-  const handleMouseOver = (item: { name: string; subcategories?: string[] }) => {
+  // on mouse over, if the item has subcategories, show them ,else hide menu
+  const handleMouseOver = (item: iMenuItem) => {
     if (item.subcategories) {
       setCurrentSubcategories(item.subcategories);
       setIsSubMenuShown(true);
@@ -27,7 +25,7 @@ const DashboardMenu = () => {
       setIsSubMenuShown(false);
     }
   };
-
+  // on mouse out, hide menu
   const handleMouseOut = () => {
     setCurrentSubcategories([]);
     setIsSubMenuShown(false);
@@ -36,15 +34,17 @@ const DashboardMenu = () => {
   return (
     <div className={s.dashboard_menu}>
       <ul className={s.list} onMouseOut={handleMouseOut}>
+        {/* // map through menu items and show them */}
         {menuItems.map((item, index) => (
           <li key={index} className={s.item} onMouseOver={() => handleMouseOver(item)}>
             {item.name}
+            {/* // if the hovered item has subcategories, show them */}
             {isSubMenuShown && item.subcategories === currentSubcategories ? (
               <ul className={s.subcategory_list}>
                 {currentSubcategories.map((subcategory, subIndex) => (
-                  <li key={subIndex} className={s.subcategory_item} >
-                    <Link href={item.href}>
-                      {subcategory}
+                  <li key={subIndex} className={s.subcategory_item}>
+                    <Link href={subcategory.href}>
+                      {subcategory.name}
                     </Link>
                   </li>
                 ))}

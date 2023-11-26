@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import s from '@/components/shared/movies_display/movies_display.module.scss';
+import s from '@/components/shared/content_display/content_display.module.scss';
 
 export default function Loading() {
   const skeletonAttributes = {

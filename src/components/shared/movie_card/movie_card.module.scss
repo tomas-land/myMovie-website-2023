@@ -7,12 +7,12 @@
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
-  
+
   .movie_card_wrapper {
     display: flex;
     flex-direction: column;
     width: 16rem;
-    border-radius: 1rem;;
+    border-radius: 1rem;
 
     .poster_wrapper {
       border-radius: 1rem 1rem 0 0;
@@ -41,11 +41,11 @@
         .btn {
           background-color: transparent;
           color: $color-1;
-          padding: 1rem 3rem;
+          padding: 0.5rem 2rem;
           border: 2px solid $color-1;
           border-radius: 2rem;
           cursor: pointer;
-          font-weight: 800;
+          font-weight: 700;
           letter-spacing: 0.1rem;
           color: $color-1-light;
           transition: all 0.3s ease-in-out;
@@ -88,5 +88,8 @@
         padding: 0.8rem;
       }
     }
+  }
+  .movie_card_wrapper_full_width {
+    width: 100%;
   }
 }

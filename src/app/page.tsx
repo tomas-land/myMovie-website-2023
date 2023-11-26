@@ -1,7 +1,6 @@
 import '@/styles/globals.scss';
-import { Suspense } from 'react';
 import Hero from '@/components/pages/homepage/hero/Hero';
-import MoviesDisplay from '@/components/shared/movies_display/MoviesDisplay';
+import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib/requests/movies';
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import requests from '@/lib/requests/movies';
@@ -31,7 +30,9 @@ const Home = async () => {
     <div>
       <Hero />
       {/* //Search */}
-      <MoviesDisplay headerTitle="In Theatres" ><Slider movies={nowPlayingMovies} endpoint='now_playing'/></MoviesDisplay>
+      <ContentDisplay headerTitle="In Theatres" >
+        <Slider movies={nowPlayingMovies} endpoint='now_playing' />
+      </ContentDisplay>
       {/* <MoviesDisplay movies={upcomingMovies} headerTitle="Upcoming" endpoint="upcoming" /> */}
       {/* <MoviesDisplay movies={sortedByVoteTopRatedMovies} headerTitle="Top Rated" endpoint="top_rated" /> */}
     </div>

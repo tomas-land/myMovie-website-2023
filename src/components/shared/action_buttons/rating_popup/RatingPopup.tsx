@@ -6,7 +6,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { toastError, toastSuccess } from '@/lib/toasts';
 import SecondaryButton from '../../buttons/secondaty_button/SecondaryButton';
-import { set } from 'zod';
 
 
 interface iProps {
@@ -16,8 +15,7 @@ interface iProps {
     setIsRated: (value: boolean) => void;
 }
 
-const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated
-}: iProps) => {
+const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: iProps) => {
     const [selectedRating, setSelectedRating] = useState<string | null>(null);
     const queryClient = useQueryClient();
 
@@ -30,13 +28,9 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated
     const handleStarClick = (rating: string) => {
         setSelectedRating(rating);
     }
-    // save rating to db
+    // save rating to db, or update if already rated 
     const { mutate: rateMovie } = useMutation({
-        mutationFn: async () => {
-                  
-                await axios.post(`/api/ratings/save_rating`, { movie_id: movieId, rating: selectedRating });
-            
-        },
+        mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { movie_id: movieId, rating: selectedRating }),
         onSuccess: () => {
             const message = isRated ? 'Rating updated' : 'Thank you for your rating';
             toastSuccess(message);
@@ -48,18 +42,13 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated
             handleSetIsRatingOpened(false);
         },
     });
-
+    // delete rating from db and mutate cache
     const { mutate: deleteRating } = useMutation({
-        mutationFn: async () => {
-            await axios.delete(`/api/ratings/delete_rating?movie_id=${movieId}`);
-        },
+        mutationFn: async () => await axios.delete(`/api/ratings/delete_rating?movie_id=${movieId}`),
         onMutate: async () => {
             queryClient.cancelQueries({ queryKey: ['ratings'] });
             const previousRatings = queryClient.getQueryData(['ratings']);
-            console.log('Previous Ratings:', previousRatings);
-
             queryClient.setQueryData(['ratings'], (old: any) => [...old, { contentId: movieId }]);
-            console.log('Updated Ratings:', queryClient.getQueryData(['ratings']));
             return { previousRatings };
         },
         onSuccess: () => {

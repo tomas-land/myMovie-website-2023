@@ -10,7 +10,7 @@ import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingP
 import Tooltip from '@/components/shared/tooltip/Tooltip';
 import 'react-toastify/dist/ReactToastify.css';
 import s from './action_buttons.module.scss';
-import { toastError, toastSuccess, toastInfo, toastWarning } from '@/lib/toasts';
+import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
 
@@ -36,7 +36,6 @@ const ActionButtons = ({ movie }: iProps) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/ratings/all_ratings`);
-        console.log(data.ratings)
         return data.ratings as iRating[];
       } catch (error) {
         console.error('Error fetching user ratings:', error);
@@ -99,7 +98,7 @@ const ActionButtons = ({ movie }: iProps) => {
         setIsRated(false);
       }
     }
-  }, [isAuthenticated, userFavorites, userRatings,isRated]);
+  }, [isAuthenticated, userFavorites, userRatings, isRated]);
 
   const toggleWatchlist = () => {
     setIsInWatchlist((prevState) => !prevState);
@@ -136,7 +135,7 @@ const ActionButtons = ({ movie }: iProps) => {
             <FiHeart size={25} />
           </button>
         </Tooltip>
-        <Tooltip tooltipText={isAuthenticated ? "Add or remove from watchlist" : "You must sign-in in to add to watchlist"}>
+        <Tooltip tooltipText={isAuthenticated ? "Add or remove from watchlist (in development mode)" : "You must sign-in in to add to watchlist(in development mode)"}>
           <button className={`${s.btn} ${isInWatchlist ? s.fill_icon : ''}`} disabled={!isAuthenticated}>
             <FiBookmark size={25} onClick={toggleWatchlist} />
           </button>

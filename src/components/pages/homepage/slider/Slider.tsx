@@ -7,16 +7,21 @@ import s from './slider.module.scss';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'
 
 interface iProps {
   movies: iMovie[];
-  endpoint: string;
+  endpoint?: string;
+  profile?: boolean;
+  path?: string;
 }
 
-const Slider = ({ movies, endpoint }: iProps) => {
+const Slider = ({ movies, endpoint, profile, path }: iProps) => {
   const [initialMovies, setInitialMovies] = useState<iMovie[]>(movies);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const handleShowMoreMovies = async () => {
     setPageToShow(pageToShow + 1);
@@ -45,7 +50,7 @@ const Slider = ({ movies, endpoint }: iProps) => {
     >
       {initialMovies?.map((movie) => (
         <SplideSlide key={movie.id} className={s.slide}>
-          <MovieCard movie={movie} />
+          <MovieCard movie={movie} isQuickView={true} />
         </SplideSlide>
       ))}
       {endpoint === 'top_rated' || !movies ? null : (
@@ -54,9 +59,13 @@ const Slider = ({ movies, endpoint }: iProps) => {
             {isLoading ? (
               <LoadingSpinner />
             ) : (
-              <button className={s.button_more} onClick={handleShowMoreMovies}>
-                Show more ..
-              </button>
+              profile ? (
+                <Link href={`${pathname}/favorites/${path}`} className={s.link}>Show all</Link>
+              ) : (
+                <button className={s.btn_more} onClick={handleShowMoreMovies}>
+                  Show more ..
+                </button>
+              )
             )}
           </div>
         </SplideSlide>
