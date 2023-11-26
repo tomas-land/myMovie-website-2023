@@ -12,11 +12,11 @@ const FavoriteMoviesPage = async () => {
 
     return (
         <div className={s.favorite_movies}>
-            <ContentDisplay headerTitle='My favorite movies'>
+            <ContentDisplay headerTitle="My favorite movies">
                 {favoriteMovies?.length > 0 ?
                     favoriteMovies?.map((movie) => (
                         <MovieCard key={movie.id} movie={movie} isQuickView={false} />
-                    )) : <h1>You don't have any favorite movies yet</h1>}
+                    )) : <h1>You don&apos;t have any favorite movies yet.</h1>}
             </ContentDisplay>
         </div>
     )
