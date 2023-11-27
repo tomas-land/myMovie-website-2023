@@ -2,6 +2,7 @@ import '@styles/globals.scss';
 import { montserrat } from '@/lib/fonts';
 import Header from '@/components/layouts/header/Header';
 import { ContextProviders } from '@/context/ContextProviders';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
   title: 'MyMovie',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={montserrat.variable}>
         <ContextProviders>
           <Header />
+          <ToastContainer />
           <main>{children}</main>
         </ContextProviders>
       </body>

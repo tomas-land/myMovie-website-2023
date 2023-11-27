@@ -1,25 +1,36 @@
 import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
 import { currentDay, startOFYear } from '@/lib/dayJS';
 import { iMovie } from '@/lib/interfaces/movie';
+import getBase64 from '@/lib/helpers/getLocalBase64';
+
 
 export async function getNowPlayingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error('Fetching failed');
+  }
+  const slicedData = data.results.slice(0, 10);
+  // Fetch and blur images for each movie
+  const blurredMovies = await Promise.all(
+    slicedData.map(async (movie: iMovie) => {
+      const imageUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+      const blurDataURL = await getBase64(imageUrl);
+      return { ...movie, blurDataURL };
+    })
+  );
+
+  return blurredMovies;
+}
+
+export async function getUpcomingMovies() {
+  const response = await fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
   const data = await response.json();
   const slicedData = data.results.slice(0, 10);
   if (!response.ok) {
     throw new Error('Fetching failed');
   }
   return slicedData;
-}
-
-export async function getUpcomingMovies() {
-    const response = await fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
-    const data = await response.json();
-    const slicedData = data.results.slice(0, 10);
-    if (!response.ok) {
-      throw new Error('Fetching failed');
-    }
-    return slicedData;
 }
 
 export async function getTopRatedMovies() {

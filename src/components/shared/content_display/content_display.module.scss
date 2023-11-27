@@ -28,14 +28,11 @@
     }
   }
   .content {
-    display: grid;
-    // grid-template-columns: auto auto auto auto auto ;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 1rem;
-    @include breakpoint(768) {
-      // flex-direction: row;
-      // flex-wrap: wrap;
-      // justify-content: space-between;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1rem;
+      color: $color-3-light;
     }
   }
 }

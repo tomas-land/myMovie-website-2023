@@ -4,4 +4,22 @@
 .favorite_movies{
     min-height: 100vh;
     margin-top: 7rem;  
+    .list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+        @include breakpoint(1400){
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @include breakpoint(1024){
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include breakpoint(768){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include breakpoint(480){
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
 }

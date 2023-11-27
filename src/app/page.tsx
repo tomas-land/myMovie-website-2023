@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton';
 import Loading from './loading';
 import Slider from '@/components/pages/homepage/slider/Slider';
 
+
 export const dynamic = 'force-dynamic';
 
 const Home = async () => {
@@ -23,13 +24,11 @@ const Home = async () => {
   // };
   // const nowPlayingMovies = await fetchMoviesWithTimeout(6000);
   const nowPlayingMovies = await getNowPlayingMovies();
-  //slice nowPlayingMovies to 2 movies
   // const upcomingMovies = await getUpcomingMovies();
   // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
   return (
     <div>
       <Hero />
-      {/* //Search */}
       <ContentDisplay headerTitle="In Theatres" >
         <Slider movies={nowPlayingMovies} endpoint='now_playing' />
       </ContentDisplay>

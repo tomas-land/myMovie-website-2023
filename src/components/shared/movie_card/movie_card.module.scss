@@ -6,7 +6,6 @@
   display: flex;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
-  height: 100%;
 
   .movie_card_wrapper {
     display: flex;
@@ -22,7 +21,6 @@
 
       .poster {
         opacity: 1;
-        display: block;
         width: 100%;
         height: auto;
         border-radius: 1rem 1rem 0 0;
@@ -70,6 +68,9 @@
             opacity: 1;
             transform: scale(1);
           }
+        }
+        .opacity_set {
+          opacity: 1;
         }
       }
     }

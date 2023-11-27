@@ -76,7 +76,7 @@ const ActionButtons = ({ movie }: iProps) => {
       return { previousFavorites };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
+      queryClient.refetchQueries({ queryKey: ['userFavorites'] });
     },
     onError: () => {
       setIsFavorite(false);
