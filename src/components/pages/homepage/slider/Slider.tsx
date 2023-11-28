@@ -27,7 +27,8 @@ const Slider = ({ movies, endpoint, profile, path }: iProps) => {
     setPageToShow(pageToShow + 1);
     try {
       setIsLoading(true);
-      const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: pageToShow, endpoint: endpoint } });
+      const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: 5, endpoint: endpoint } });
+      console.log(moreMovies.data.data)
       setInitialMovies(() => [...initialMovies, ...moreMovies.data.data]);
       setIsLoading(false);
     } catch (error) {
@@ -53,7 +54,7 @@ const Slider = ({ movies, endpoint, profile, path }: iProps) => {
           <MovieCard movie={movie} isQuickView={true} />
         </SplideSlide>
       ))}
-      {endpoint === 'top_rated' || !movies ? null : (
+      {endpoint !== 'top_rated' && movies.length > 0 ? (
         <SplideSlide className={s.slide}>
           <div className={s.last_slide}>
             {isLoading ? (
@@ -69,7 +70,7 @@ const Slider = ({ movies, endpoint, profile, path }: iProps) => {
             )}
           </div>
         </SplideSlide>
-      )}
+      ) : null}
     </Splide>
   );
 };

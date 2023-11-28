@@ -15,7 +15,9 @@ const Dashboard = async () => {
         <div className={s.dashboard}>
             <Stats />
             <ContentDisplay headerTitle='Recent favorite movies'>
-                <Slider movies={favoriteMovies} profile={true} path='movies' />
+                {favoriteMovies?.length > 0 ?
+                    <Slider movies={favoriteMovies} profile={true} /> :
+                    <h1>No recent activities.</h1>}
             </ContentDisplay>
         </div>
     );
