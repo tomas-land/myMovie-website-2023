@@ -1,8 +1,10 @@
-import s from '@/components/pages/movie_details_page/movie_details/movie_details.module.scss';
-import 'react-loading-skeleton/dist/skeleton.css';
+import s from '@/components/shared/loading_spinner/loading.module.scss';
+import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 
-const loading = () => {
-  return <div className={s.movie_details} style={{ marginTop: '27rem', height: '30rem' }}></div>;
-};
-
-export default loading;
+export default function Loading() {
+  return (
+    <div className={s.loading}>
+      <LoadingSpinner />
+    </div>
+  );
+}

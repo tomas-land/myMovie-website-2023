@@ -1,11 +1,10 @@
-"use client"
 import s from '@/components/pages/profile/favorites/favorite_movies_page.module.scss'
 import { getFavoriteMovies } from '@/lib/requests/user'
 import { iMovie } from '@/lib/interfaces/movie';
 import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 import MovieCard from '@/components/shared/movie_card/MovieCard';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 const FavoriteMoviesPage = async () => {
 

@@ -11,9 +11,9 @@ export async function GET(request: Request) {
   try {
     const response = await fetch(`${TMDB_BASE_URL}/movie/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`, { next: { revalidate: 60 } });
     const data = await response.json();
-
-    const moviesWithBlurredImages = await getBlurredEntitiesUrl<iMovie>(data.results);
-    return NextResponse.json({ data: moviesWithBlurredImages });
+    // add blurdataUrl to each movie
+    const movies = await getBlurredEntitiesUrl<iMovie>(data.results);
+    return NextResponse.json({ data: movies });
   } catch (error) {
     console.error(error);
   }

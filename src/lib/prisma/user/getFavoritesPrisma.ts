@@ -1,6 +1,6 @@
+import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth/authOptions";
 import prisma from "../prisma";
-import { getServerSession } from "next-auth";
 
 export async function getFavoritesPrisma() {
     const session = await getServerSession(authOptions);

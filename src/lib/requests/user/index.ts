@@ -18,7 +18,7 @@ export async function getUserByEmail(email: string) {
     }
 }
 
-export async function getFavoriteMovies():Promise<any> {
+export async function getFavoriteMovies() {
     try {
         const favorites = await getFavoritesPrisma();
 
@@ -26,7 +26,6 @@ export async function getFavoriteMovies():Promise<any> {
             const response = await fetch(`${TMDB_BASE_URL}/movie/${favorite.contentId}?api_key=${TMDB_API_KEY}`);
             return response.json();
         });
-        revalidatePath('/')
         return Promise.all(promises);
 
     } catch (error) {
