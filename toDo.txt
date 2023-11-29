@@ -1,1 +1,4 @@
 - remove from favorites in profile
+- likes watchlist  and rated counter in dashboard
+- scrolable menu in profile for mobile
+- sign out in mobile menu, if signed in small foto
