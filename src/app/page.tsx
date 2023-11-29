@@ -13,6 +13,7 @@ const Home = async () => {
   const nowPlayingMovies = await getNowPlayingMovies();
   const upcomingMovies = await getUpcomingMovies();
   const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
+  
   return (
     <div>
       <Hero />

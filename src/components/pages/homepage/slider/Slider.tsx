@@ -14,10 +14,10 @@ interface iProps {
   movies: iMovie[];
   endpoint?: string;
   profile?: boolean;
-  path?: string;
+  redirectTo?: string;
 }
 
-const Slider = ({ movies, endpoint, profile, path }: iProps) => {
+const Slider = ({ movies, endpoint, profile, redirectTo }: iProps) => {
   const [initialMovies, setInitialMovies] = useState<iMovie[]>(movies);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,7 +28,6 @@ const Slider = ({ movies, endpoint, profile, path }: iProps) => {
     try {
       setIsLoading(true);
       const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: 5, endpoint: endpoint } });
-      console.log(moreMovies.data.data)
       setInitialMovies(() => [...initialMovies, ...moreMovies.data.data]);
       setIsLoading(false);
     } catch (error) {
@@ -61,7 +60,7 @@ const Slider = ({ movies, endpoint, profile, path }: iProps) => {
               <LoadingSpinner />
             ) : (
               profile ? (
-                <Link href={`${pathname}/favorites/${path}`} className={s.link}>Show all</Link>
+                <Link href={`${pathname}/${redirectTo}`} className={s.link}>Show all</Link>
               ) : (
                 <button className={s.btn_more} onClick={handleShowMoreMovies}>
                   Show more ..

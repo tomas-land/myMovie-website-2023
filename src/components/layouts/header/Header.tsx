@@ -20,9 +20,8 @@ import { useGlobalContext } from '@/context/GlobalContext';
 
 const menuLinks = [
   { href: '/movies', label: 'Movies' },
-  { href: '/tv-shows', label: 'TV Shows' },
+  { href: '/tvshows', label: 'TV Shows' },
   { href: '/actors', label: 'Actors' },
-  { href: '/more', label: 'More' },
 ];
 
 const Header = () => {

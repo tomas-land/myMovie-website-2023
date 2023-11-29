@@ -53,9 +53,6 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
           {isModalOpened ? <TrailerModal movieVideos={movieVideos} /> : ''}
           <div className={s.extended_info}>
             <div>
-              <span>Director:</span> {movie.release_date} min
-            </div>
-            <div>
               <span>Runtime:</span> {movie.runtime} min
             </div>
             <div>

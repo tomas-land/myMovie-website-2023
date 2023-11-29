@@ -3,17 +3,25 @@
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import s from './google_signin_button.module.scss';
+import { useState } from 'react';
 
 const GoogleSigninButton = () => {
-  const handleClick = () => {
-    signIn('google', { callbackUrl: '/dashboard' });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      setIsLoading(true);
+      await signIn('google', { callbackUrl: '/dashboard' });
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <button className={s.google_signin_btn} onClick={handleClick}>
       <span>
         <FcGoogle />
       </span>
-      Sign in with Google
+      {isLoading ? 'Signing in...' : 'Sign in with Google'}
     </button>
   );
 };

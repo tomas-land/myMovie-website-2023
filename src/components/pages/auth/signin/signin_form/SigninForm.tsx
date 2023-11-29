@@ -10,9 +10,11 @@ import PrimaryButton from '@/components/shared/buttons/primary_button/PrimaryBut
 const CredentialsForm = () => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const data = new FormData(e.currentTarget);
     try {
       const credentials = {
@@ -20,7 +22,7 @@ const CredentialsForm = () => {
         password: data.get('password') as string,
       };
       credentialsSchema.parse(credentials);
-      
+
       const signInResponse = await signIn('credentials', {
         email: data.get('email'),
         password: data.get('password'),
@@ -37,6 +39,8 @@ const CredentialsForm = () => {
       } else {
         console.log(error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -47,7 +51,7 @@ const CredentialsForm = () => {
         <input className={s.input} type="text" name="email" placeholder="email@gmail.com" autoComplete="on" />
         <input className={s.input} type="password" name="password" placeholder="password" autoComplete="off" />
       </div>
-      <PrimaryButton label="sign in" type={'submit'} />
+      <PrimaryButton label="sign in" type={'submit'} spinner={loading} />
     </form>
   );
 };

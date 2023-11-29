@@ -1,6 +1,3 @@
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import s from '@/components/shared/loading_spinner/loading.module.scss';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 
 export default function Loading() {
@@ -12,7 +9,7 @@ export default function Loading() {
   // };
 
   return (
-    <div className={s.loading}>
+    <div>
       <LoadingSpinner />
     </div>
   );

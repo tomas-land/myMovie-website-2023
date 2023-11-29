@@ -11,7 +11,6 @@ interface Credentials {
   email: string;
   password: string;
 }
-//tosasitfy
 
 const CredentialsForm = () => {
   const router = useRouter();
@@ -21,9 +20,11 @@ const CredentialsForm = () => {
     password: '',
   });
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const data = new FormData(e.currentTarget);
 
     try {
@@ -54,8 +55,11 @@ const CredentialsForm = () => {
       } else {
         console.log(error);
       }
+    } finally {
+      setLoading(false);
+      handleResetForm();
     }
-    handleResetForm();
+
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +86,7 @@ const CredentialsForm = () => {
         <input className={s.input} type="text" name="email" placeholder="email" autoComplete="off" value={formData.email} onChange={handleChange} />
         <input className={s.input} type="password" name="password" placeholder="password" autoComplete="off" value={formData.password} onChange={handleChange} />
       </div>
-      <PrimaryButton label="sign up" type={'submit'} />
+      <PrimaryButton label="sign up" type={'submit'} spinner={loading} />
     </form>
   );
 };
