@@ -10,18 +10,6 @@ interface iProps {
 const Tooltip = ({ children, tooltipText }: iProps) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
-    // let timeoutId: NodeJS.Timeout;
-    // useEffect(() => {
-    //     return () => {
-    //         clearTimeout(timeoutId);
-    //     };
-    // }, []);
-    // show tooltip after 1s, when mouse leaves - clear timeout using specific identifier 'timeoutId'
-    // const handleMouseEnter = () => timeoutId = setTimeout(() => setShowTooltip(true), 1000);
-    // const handleMouseLeave = () => {
-    //     clearTimeout(timeoutId);
-    //     setShowTooltip(false);
-    // };
     const handleMouseEnter = () => setShowTooltip(true);
     const handleMouseLeave = () => setShowTooltip(false);
 

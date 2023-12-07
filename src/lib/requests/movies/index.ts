@@ -14,11 +14,6 @@ export async function getNowPlayingMovies() {
   // add blurdataUrl to each movie
   const movies = await getBlurredEntitiesUrl<iMovie>(slicedData);
   return movies
-
-
-
-
-
 }
 
 export async function getUpcomingMovies() {

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import s from './mobile_menu.module.scss';
 import { Squash as Hamburger } from 'hamburger-react';
 import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+
 
 interface iMobileMenuProps {
   links: { href: string; label: string }[];
@@ -28,6 +30,9 @@ const MobileMenuLink = ({ href, label, closeMobileMenu }: iMobileMenuLinkProps) 
 const MobileMenu = ({ links, closeMobileMenu, isMobileMenuOpen, setIsMobileMenuOpen }: iMobileMenuProps) => {
   const { data: session } = useSession();
 
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
   return (
     <div className={`${s.mobile_menu} ${s.open}`}>
       <div className={s.hamburger_wrapper}>
@@ -38,6 +43,10 @@ const MobileMenu = ({ links, closeMobileMenu, isMobileMenuOpen, setIsMobileMenuO
         {links.map((link) => (
           <MobileMenuLink href={link.href} label={link.label} key={link.href} closeMobileMenu={closeMobileMenu} />
         ))}
+        {session ?
+          <button className={s.auth_button} onClick={handleSignOut}>Sign Out</button> :
+          <Link href={'/signin'} className={s.auth_button} onClick={closeMobileMenu}>Sign In</Link>
+        }
       </div>
     </div>
   );

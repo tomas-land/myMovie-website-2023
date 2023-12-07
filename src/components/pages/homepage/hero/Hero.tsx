@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import HeroImage from '/public/hero_blur_edges.png';
 import s from './hero.module.scss';
-import Search from '@/components/shared/search/search/Search';
 
 const Hero = () => {
   return (
@@ -16,9 +15,6 @@ const Hero = () => {
             <h1 className={s.hero_title}>Recall</h1>
           </div>
           <p className={s.hero_subtitle}>Make your movies collection great again</p>
-          <div className={s.search_wrapper}>
-            <Search />
-          </div>
         </div>
       </div>
     </section>
