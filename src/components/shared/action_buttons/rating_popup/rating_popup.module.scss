@@ -5,18 +5,20 @@
     position: absolute;
     background-color: #0d2028;
     width: 16rem;
-    height: 24rem;
-    top: 0;
-    border-radius: 1rem 1rem 0 0;
+    height: 12rem;
+    top: -12.5rem;
+    left: -8.1rem;
+    border-radius: 0.8rem;
+    z-index: 3000;
     .rating_popup_wrapper {
         display: flex;
         flex-direction: column;
+        padding: 0.5rem 0;
 
         .rating_popup_header {
             text-align: center;
-            padding: 1rem 0;
             .title {
-                font-size: 1rem;
+                font-size: 0.7rem;
                 font-weight: 700;
                 letter-spacing: 0.1rem;
                 color: $color-1-light;
@@ -32,7 +34,8 @@
 
             .rating_popup_stars {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                place-content: center;
+                grid-template-columns: repeat(5, 1fr);
                 width: 100%;
                 gap: 1rem;
                 .star_wrapper {
@@ -54,5 +57,14 @@
                 }
             }
         }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 99%;
+        left: 56%;
+        border: solid 0.5rem;
+        border-color: #0d2028 transparent transparent transparent;
     }
 }

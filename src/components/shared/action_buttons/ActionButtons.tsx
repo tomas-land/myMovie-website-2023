@@ -110,7 +110,6 @@ const ActionButtons = ({ movie }: iProps) => {
 
   return (
     <div className={s.action_btns}>
-      {isAuthenticated && isRatingOpened ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
       <div className={s.ratings_container}>
         <Tooltip tooltipText="Average score">
           <div className={s.average_rating}>
@@ -126,6 +125,7 @@ const ActionButtons = ({ movie }: iProps) => {
       </div>
       <div className={s.btns_wrapper}>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
+          {isAuthenticated && isRatingOpened ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
           <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={toggleRatingContainer} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>

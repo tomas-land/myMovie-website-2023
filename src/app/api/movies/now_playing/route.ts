@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const endpoint = searchParams.get('endpoint');
 
   try {
-    const response = await fetch(`${TMDB_BASE_URL}/movie/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${TMDB_BASE_URL}/movie/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`);
     const data = await response.json();
     // add blurdataUrl to each movie
     const movies = await getBlurredEntitiesUrl<iMovie>(data.results);

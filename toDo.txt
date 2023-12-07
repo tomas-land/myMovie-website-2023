@@ -2,3 +2,4 @@
 - likes watchlist  and rated counter in dashboard
 - scrolable menu in profile for mobile
 - sign out in mobile menu, if signed in small foto
+- finish promise all blur images
