@@ -1,6 +1,9 @@
 export interface iFavorite {
     id: string;
+    title: string;
+    poster_path: string;
+    vote_average: number;
     userId: string;
-    contentId: string;
+    movieId: string;
     createdAt: Date;
   }

@@ -23,7 +23,7 @@ const MainMenu = ({ links }: iMenuProps) => {
   return (
     <div className={s.menu}>
       <div className={s.menu_list}>
-        {session? <MenuItem href="/dashboard" label="Profile" /> : null}
+        {session ? <MenuItem href="/dashboard" label="Profile" /> : null}
         {links.map((link) => (
           <MenuItem href={link.href} label={link.label} key={link.href} />
         ))}

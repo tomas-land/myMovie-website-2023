@@ -2,9 +2,11 @@ import prisma from "../prisma";
 
 export async function getAllFavoritesPrisma(user_id: string | null) {
     try {
-        const favorites = await prisma.favorite.findMany({
+        const favorites = await prisma.favoriteMovie.findMany({
             where: {
                 userId: user_id as string,
+                isDeleted: false, // Include only non-deleted favorites
+
             },
         });
         return favorites;

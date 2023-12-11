@@ -58,18 +58,19 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
             <div>
               <span>Released:</span> {movie.release_date}
             </div>
-            {movie.budget === 0 ? null : (
+            {movie.budget != null && movie.budget !== 0 && (
               <div>
                 <span>Budget: </span>
                 {formatNumber(movie.budget)} $
               </div>
             )}
-            {movie.revenue === 0 ? null : (
+            {movie.revenue != null && movie.revenue !== 0 && (
               <div>
                 <span>Revenue: </span>
                 {formatNumber(movie.revenue)} $
               </div>
             )}
+
           </div>
         </div>
         <div className={s.poster_wrapper}>

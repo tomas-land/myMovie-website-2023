@@ -1,11 +1,14 @@
 import prisma from "../prisma";
 
-export async function saveFavoritePrisma(userId: string, contentId: string) {
+export async function saveFavoritePrisma(user_id: string, movie_id: string, title: string, poster_path: string, vote_average: number) {
     try {
-        const newFavorite = await prisma.favorite.create({
+        const newFavorite = await prisma.favoriteMovie.create({
             data: {
-                contentId: contentId,
-                userId: userId // Connect the favorite to the user by userId
+                movieId: movie_id,
+                title: title,
+                poster_path: poster_path,
+                vote_average: vote_average,
+                userId: user_id // Connect the favorite movie to the user by userId
             }
         });
         return newFavorite;

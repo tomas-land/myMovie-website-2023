@@ -1,22 +1,23 @@
 export interface iMovie {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
+  adult?: boolean;
+  backdrop_path?: string;
+  genre_ids?: number[];
   genres?: [{ id: number; name: string }] | undefined;
-  id: number;
-  budget: number;
-  runtime: number;
-  revenue: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
+  id?: string;
+  movieId?: string;
+  budget?: number;
+  runtime?: number;
+  revenue?: number;
+  original_language?: string;
+  original_title?: string;
+  overview?: string;
+  popularity?: number;
   poster_path: string;
-  release_date: string;
+  release_date?: string;
   title: string;
-  video: boolean;
+  video?: boolean;
   vote_average?: number;
-  vote_count: number;
+  vote_count?: number;
   blurDataURL?: string;
 }
 

@@ -35,9 +35,10 @@
                 z-index: 1;
                 .subcategory_item {
                     text-wrap: nowrap;
-                    padding: 1rem 1rem;
                     cursor: pointer;
                     a {
+                        display: block;
+                        padding: 1rem;
                         color: $color-1;
                     }
                     &:hover {

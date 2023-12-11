@@ -10,7 +10,7 @@ import SecondaryButton from '../../buttons/secondaty_button/SecondaryButton';
 
 interface iProps {
     handleSetIsRatingOpened: (value: boolean) => void;
-    movieId: string;
+    movieId: string | undefined;
     isRated: boolean;
     setIsRated: (value: boolean) => void;
 }

@@ -5,15 +5,15 @@ import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import Slider from '@/components/pages/homepage/slider/Slider';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 
 const Home = async () => {
 
   const nowPlayingMovies = await getNowPlayingMovies();
   const upcomingMovies = await getUpcomingMovies();
-  const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
-  
+  // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
+
   return (
     <div>
       <Hero />
@@ -23,9 +23,9 @@ const Home = async () => {
       <ContentDisplay headerTitle="Upcoming">
         <Slider movies={upcomingMovies} endpoint='upcoming' />
       </ContentDisplay>
-      <ContentDisplay headerTitle="Top Rated">
+      {/* <ContentDisplay headerTitle="Top Rated">
         <Slider movies={sortedByVoteTopRatedMovies} endpoint='top_rated' />
-      </ContentDisplay>
+      </ContentDisplay> */}
     </div>
   );
 };

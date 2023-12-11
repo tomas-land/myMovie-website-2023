@@ -14,6 +14,7 @@ import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
 
+
 interface iProps {
   movie: iMovie;
 }
@@ -28,7 +29,8 @@ const ActionButtons = ({ movie }: iProps) => {
   const queryClient = useQueryClient();
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
-  const movieId = movie.id.toString()
+  const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
+ 
   // fetch user ratings and cache them
   const { data: userRatings } = useQuery({
     queryKey: ['ratings'],
@@ -42,6 +44,7 @@ const ActionButtons = ({ movie }: iProps) => {
       }
     },
   });
+
   // fetch user favorites and cache them
   const { data: userFavorites } = useQuery({
     queryKey: ['userFavorites'],
@@ -55,28 +58,29 @@ const ActionButtons = ({ movie }: iProps) => {
       }
     }
   });
+
   // Mutation to add or remove a movie from favorites
-  const { mutate: toggleFavorite } = useMutation({
+  const { mutate: toggleFavorite, isPending, submittedAt, variables } = useMutation({
     mutationFn: async () => {
-      const favorite = userFavorites?.find((favorite: iFavorite) => favorite.contentId === movieId);
+      const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
       if (favorite) {
         toastSuccess('Removed from favorites');
         await axios.delete(`/api/favorites/delete_favorite?id=${favorite.id}`);
       } else {
         toastSuccess('Added to favorites');
-        await axios.post(`/api/favorites/save_favorite`, { movie_id: movieId });
+        await axios.post(`/api/favorites/save_favorite`, { movie_id: movieId, title: movie.title, poster_path: movie.poster_path, vote_average: movie.vote_average });
       }
     },
-    onMutate: () => {
-      queryClient.cancelQueries({ queryKey: ['userFavorites'] });
-      const previousFavorites = queryClient.getQueryData(['userFavorites']);
-      queryClient.setQueryData(['userFavorites'], (old: any) => {
-        return [...old, { contentId: movieId }];
-      });
-      return { previousFavorites };
-    },
+    // onMutate: () => {
+    //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
+    //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
+    //   queryClient.setQueryData(['userFavorites'], (old: any) => {
+    //     return [...old, { movieId: movieId }];
+    //   });
+    //   return { previousFavorites };
+    // },
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['userFavorites'] });
+      queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
     },
     onError: () => {
       setIsFavorite(false);
@@ -86,7 +90,7 @@ const ActionButtons = ({ movie }: iProps) => {
 
   useEffect(() => {
     if (isAuthenticated && userFavorites && userRatings) {
-      const favorite = userFavorites.find((favorite: iFavorite) => favorite.contentId === movieId);
+      const favorite = userFavorites.find((favorite: iFavorite) => favorite.movieId === movieId);
       setIsFavorite(!!favorite);
 
       const rated = userRatings.find((rating: iRating) => rating.contentId === movieId);

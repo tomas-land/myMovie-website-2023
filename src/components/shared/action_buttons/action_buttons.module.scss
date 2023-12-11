@@ -5,12 +5,11 @@
 
   display: flex;
   justify-content: space-between;
-  padding: 0 0.2rem 1rem 0;
+  padding: 0 0 1rem;
   
   .ratings_container {
     display: flex;
     align-items: center;
-    margin-left: 0.8rem;
     .average_rating {
       @include flex_center();
       width: 3rem;

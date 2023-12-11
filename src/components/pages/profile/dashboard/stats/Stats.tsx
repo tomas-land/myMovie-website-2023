@@ -6,7 +6,6 @@ import NumberCounter from '@/components/pages/profile/dashboard/number_counter/N
 const Stats = async () => {
     const stats = await getFavoriteMovies()
     const favoritesCount = stats.length
-    console.log(stats.length)
 
     return (
         <div className={s.stats}>

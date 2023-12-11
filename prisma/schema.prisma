@@ -58,11 +58,16 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Favorite {
-  id        String   @id @default(cuid())
-  contentId String // Represents the ID of the favorite content, can be person id, or movie id or, series id
-  createdAt DateTime @default(now())
-  userId    String
+model FavoriteMovie {
+  id           String   @id @default(cuid())
+  title        String
+  poster_path  String
+  vote_average Float
+  movieId      String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime? @updatedAt
+  userId       String
+  isDeleted    Boolean  @default(false) // for soft deletion, to show recent favorite movies even they are removed from favorites
 }
 
 model Rating {

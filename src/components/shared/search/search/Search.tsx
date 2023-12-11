@@ -60,7 +60,7 @@ const Search = () => {
   const fetchSearchResults = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch(`api/search?query=${query}`);
+      const res = await fetch(`/api/search?query=${query}`);
       const { data } = await res.json();
       setSearchResultsData(data.results);
       setIsLoading(false);

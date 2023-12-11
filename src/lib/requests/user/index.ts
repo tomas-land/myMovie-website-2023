@@ -1,7 +1,8 @@
 
 import { getUserByEmailPrisma } from '@/lib/prisma/user/getUserByEmailPrisma';
 import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config';
-import { getFavoritesPrisma } from '@/lib/prisma/user/getFavoritesPrisma';
+import { getRecentFavoriteMoviesPrisma } from '@/lib/prisma/user/getRecentFavoriteMoviesPrisma';
+import { getFavoriteMoviesPrisma } from '@/lib/prisma/user/getFavoriteMoviesPrisma';
 
 
 
@@ -18,12 +19,12 @@ export async function getUserByEmail(email: string) {
     }
 }
 
-export async function getFavoriteMovies() {
+export async function getRecentFavoriteMovies() {
     try {
-        const favorites = await getFavoritesPrisma();
+        const favorites = await getRecentFavoriteMoviesPrisma();
 
         const promises = favorites.map(async favorite => {
-            const response = await fetch(`${TMDB_BASE_URL}/movie/${favorite.contentId}?api_key=${TMDB_API_KEY}`, {cache: 'no-store'});
+            const response = await fetch(`${TMDB_BASE_URL}/movie/${favorite.movieId}?api_key=${TMDB_API_KEY}`, { cache: 'no-store' });
             return response.json();
         });
         return Promise.all(promises);
@@ -32,4 +33,10 @@ export async function getFavoriteMovies() {
         console.error(error);
         throw error;
     }
+}
+
+export async function getFavoriteMovies() {
+    const favoriteMovies = await getFavoriteMoviesPrisma();
+    if (!favoriteMovies) throw new Error('Favorite movies not found')
+    return favoriteMovies
 }
