@@ -5,7 +5,7 @@ import authOptions from '@/lib/auth/authOptions';
 import UserInfo from '@/components/pages/profile/user_info/UserInfo';
 import { getUserByEmail } from '@/lib/requests/user';
 
-
+ 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
@@ -16,7 +16,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (!userEmail) {
     throw new Error('User email not found in session');
   }
-
+  
   const user = await getUserByEmail(userEmail);
 
   return (

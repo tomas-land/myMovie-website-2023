@@ -5,8 +5,6 @@ import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import Slider from '@/components/pages/homepage/slider/Slider';
 
-export const revalidate = 60;
-
 
 const Home = async () => {
 

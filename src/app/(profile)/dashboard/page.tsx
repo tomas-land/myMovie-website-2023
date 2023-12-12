@@ -5,11 +5,9 @@ import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 import { getRecentFavoriteMovies } from '@/lib/requests/user';
 import { iMovie } from '@/lib/interfaces/movie';
 import Slider from '@/components/pages/homepage/slider/Slider';
-export const revalidate = 0 // revalidate the data at most every hour
 
 
 const Dashboard = async () => {
-
     const recentFavoriteMovies: iMovie[] = await getRecentFavoriteMovies()
 
     return (

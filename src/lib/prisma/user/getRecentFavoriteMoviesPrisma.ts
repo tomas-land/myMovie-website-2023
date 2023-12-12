@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth/authOptions";
 import prisma from "../prisma";
+import { revalidatePath } from 'next/cache'
+
 
 
 export async function getRecentFavoriteMoviesPrisma() {
@@ -18,6 +20,8 @@ export async function getRecentFavoriteMoviesPrisma() {
             },
             take: 8,
         });
+        revalidatePath('/')
+
         return data;
     } catch (error) {
         console.log(error)

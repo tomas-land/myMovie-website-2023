@@ -13,6 +13,7 @@ import s from './action_buttons.module.scss';
 import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
+import { useRouter } from 'next/navigation'
 
 
 interface iProps {
@@ -27,6 +28,7 @@ const ActionButtons = ({ movie }: iProps) => {
   const [isRatingOpened, setIsRatingOpened] = useState(false);
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
+  const router = useRouter()
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
@@ -81,6 +83,7 @@ const ActionButtons = ({ movie }: iProps) => {
     // },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
+      // router.refresh()
     },
     onError: () => {
       setIsFavorite(false);

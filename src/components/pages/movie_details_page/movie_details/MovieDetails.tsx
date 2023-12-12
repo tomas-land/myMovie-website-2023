@@ -70,7 +70,6 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
                 {formatNumber(movie.revenue)} $
               </div>
             )}
-
           </div>
         </div>
         <div className={s.poster_wrapper}>
