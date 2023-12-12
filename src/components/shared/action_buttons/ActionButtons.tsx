@@ -32,7 +32,7 @@ const ActionButtons = ({ movie }: iProps) => {
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
- 
+
   // fetch user ratings and cache them
   const { data: userRatings } = useQuery({
     queryKey: ['ratings'],
@@ -83,7 +83,7 @@ const ActionButtons = ({ movie }: iProps) => {
     // },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
-      // router.refresh()
+      setIsFavorite(true);
     },
     onError: () => {
       setIsFavorite(false);

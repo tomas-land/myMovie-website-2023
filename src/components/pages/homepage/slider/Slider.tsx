@@ -35,7 +35,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo }: iProps) => {
     setPageToShow(pageToShow + 1);
     try {
       setIsLoading(true);
-      const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: 5, endpoint: endpoint } });
+      const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: pageToShow, endpoint: endpoint } });
       setInitialMovies(() => [...initialMovies, ...moreMovies.data.data]);
       setIsLoading(false);
     } catch (error) {

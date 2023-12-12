@@ -7,23 +7,25 @@ import getBlurredEntitiesUrl from '@/lib/helpers/getBlurredEntitiesUrl';
 export async function getNowPlayingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
   const data = await response.json();
+  const results = data.results;
+
   if (!response.ok) {
     throw new Error('Fetching failed');
   }
-  const slicedData = data.results.slice(0, 10);
   // add blurdataUrl to each movie
-  const movies = await getBlurredEntitiesUrl<iMovie>(slicedData);
+  const movies = await getBlurredEntitiesUrl<iMovie>(results);
   return movies
 }
 
 export async function getUpcomingMovies() {
   const response = await fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
   const data = await response.json();
-  const slicedData = data.results.slice(0, 10);
+  const results = data.results;
+
   if (!response.ok) {
     throw new Error('Fetching failed');
   }
-  return slicedData;
+  return results;
 }
 
 export async function getTopRatedMovies() {

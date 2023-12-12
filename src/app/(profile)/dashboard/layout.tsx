@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation';
 import authOptions from '@/lib/auth/authOptions';
 import UserInfo from '@/components/pages/profile/user_info/UserInfo';
 import { getUserByEmail } from '@/lib/requests/user';
+export const revalidate = 0;
+export const dynamic = 'force-dynamic'
 
  
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
