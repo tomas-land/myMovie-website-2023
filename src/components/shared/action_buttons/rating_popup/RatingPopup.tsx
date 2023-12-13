@@ -25,9 +25,8 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: 
         }
     }, [selectedRating]);
 
-    const handleStarClick = (rating: string) => {
-        setSelectedRating(rating);
-    }
+    const handleStarClick = (rating: string) => setSelectedRating(rating);
+    
     // save rating to db, or update if already rated 
     const { mutate: rateMovie } = useMutation({
         mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { movie_id: movieId, rating: selectedRating }),

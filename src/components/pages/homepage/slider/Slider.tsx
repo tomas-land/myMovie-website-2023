@@ -8,10 +8,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
-import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface iProps {
   movies: iMovie[];
@@ -25,11 +22,6 @@ const Slider = ({ movies, endpoint, profile, redirectTo }: iProps) => {
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const pathname = usePathname();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (pathname !== '/dashboard') router.refresh();
-  }, [pathname]);
 
   const handleShowMoreMovies = async () => {
     setPageToShow(pageToShow + 1);

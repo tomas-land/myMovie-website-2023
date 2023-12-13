@@ -9,9 +9,8 @@ import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 
 
 const MoviesList = () => {
-
     const { data: userFavorites } = useQuery({
-        queryKey: ['userFavorites'],
+        queryKey: ['favorites'],
         queryFn: async () => {
             try {
                 const { data } = await axios.get(`/api/favorites/all_favorites`);

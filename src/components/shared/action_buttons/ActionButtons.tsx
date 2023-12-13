@@ -2,18 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Tooltip from '@/components/shared/tooltip/Tooltip';
+import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingPopup';
 import { iMovie } from '@/lib/interfaces/movie';
 import { FiHeart, FiStar, FiBookmark } from 'react-icons/fi';
 import { useSession } from 'next-auth/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingPopup';
-import Tooltip from '@/components/shared/tooltip/Tooltip';
-import 'react-toastify/dist/ReactToastify.css';
-import s from './action_buttons.module.scss';
 import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
-import { useRouter } from 'next/navigation'
+import 'react-toastify/dist/ReactToastify.css';
+import s from './action_buttons.module.scss';
 
 
 interface iProps {
@@ -28,7 +27,6 @@ const ActionButtons = ({ movie }: iProps) => {
   const [isRatingOpened, setIsRatingOpened] = useState(false);
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
-  const router = useRouter()
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
@@ -49,21 +47,20 @@ const ActionButtons = ({ movie }: iProps) => {
 
   // fetch user favorites and cache them
   const { data: userFavorites } = useQuery({
-    queryKey: ['userFavorites'],
+    queryKey: ['favorites'],
     enabled: !!isAuthenticated,
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/favorites/all_favorites`);
-        console.log(data)
         return data.favorites as iFavorite[];
       } catch (error) {
         console.error('Error fetching user favorites:', error);
       }
     }
   });
-
+  
   // Mutation to add or remove a movie from favorites
-  const { mutate: toggleFavorite, isPending, submittedAt, variables } = useMutation({
+  const { mutate: toggleFavorite, isPending } = useMutation({
     mutationFn: async () => {
       const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
       if (favorite) {
@@ -73,19 +70,19 @@ const ActionButtons = ({ movie }: iProps) => {
       }
     },
     // onMutate: () => {
-    //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
-    //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
-    //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
-    //   return { previousFavorites };
-    // },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
-      if (isFavorite) {
-        toastSuccess('Removed from favorites');
-        setIsFavorite(false)
-      } else {
-        toastSuccess('Added to favorites');
-        setIsFavorite(true)
+      //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
+      //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
+      //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
+      //   return { previousFavorites };
+      // },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['favorites'] });
+        if (isFavorite) {
+          toastSuccess('Removed from favorites');
+          setIsFavorite(false)
+        } else {
+          toastSuccess('Added to favorites');
+          setIsFavorite(true)
       }
     },
     onError: () => {
@@ -93,21 +90,20 @@ const ActionButtons = ({ movie }: iProps) => {
       toastError('Something went wrong');
     },
   });
-
+  
   useEffect(() => {
-    if (isAuthenticated && userFavorites && userRatings) {
-      const favorite = userFavorites.find((favorite: iFavorite) => favorite.movieId === movieId);
-      setIsFavorite(!!favorite);
-
-      const rated = userRatings.find((rating: iRating) => rating.contentId === movieId);
-      if (rated) {
-        setRating(rated.rating);
-        setIsRated(true);
-      } else {
-        setRating(null);
-        setIsRated(false);
-      }
+    const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
+    setIsFavorite(!!favorite);
+    
+    const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId);
+    if (rated) {
+      setRating(rated.rating);
+      setIsRated(true);
+    } else {
+      setRating(null);
+      setIsRated(false);
     }
+    
   }, [isAuthenticated, userFavorites, userRatings, isRated]);
 
   const toggleWatchlist = () => {

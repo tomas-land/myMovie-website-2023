@@ -7,7 +7,6 @@ import Slider from '@/components/pages/homepage/slider/Slider';
 
 
 const Home = async () => {
-
   const nowPlayingMovies = await getNowPlayingMovies();
   const upcomingMovies = await getUpcomingMovies();
   // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
