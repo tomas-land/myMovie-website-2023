@@ -54,6 +54,7 @@ const ActionButtons = ({ movie }: iProps) => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(`/api/favorites/all_favorites`);
+        console.log(data)
         return data.favorites as iFavorite[];
       } catch (error) {
         console.error('Error fetching user favorites:', error);
@@ -66,24 +67,26 @@ const ActionButtons = ({ movie }: iProps) => {
     mutationFn: async () => {
       const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
       if (favorite) {
-        toastSuccess('Removed from favorites');
         await axios.delete(`/api/favorites/delete_favorite?id=${favorite.id}`);
       } else {
-        toastSuccess('Added to favorites');
         await axios.post(`/api/favorites/save_favorite`, { movie_id: movieId, title: movie.title, poster_path: movie.poster_path, vote_average: movie.vote_average });
       }
     },
     // onMutate: () => {
     //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
     //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
-    //   queryClient.setQueryData(['userFavorites'], (old: any) => {
-    //     return [...old, { movieId: movieId }];
-    //   });
+    //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
     //   return { previousFavorites };
     // },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userFavorites'] });
-      setIsFavorite(true);
+      if (isFavorite) {
+        toastSuccess('Removed from favorites');
+        setIsFavorite(false)
+      } else {
+        toastSuccess('Added to favorites');
+        setIsFavorite(true)
+      }
     },
     onError: () => {
       setIsFavorite(false);
@@ -138,9 +141,10 @@ const ActionButtons = ({ movie }: iProps) => {
           </button>
         </Tooltip>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove from favorites" : "You must sign-in in to add to favorites"}>
-          <button className={`${s.btn} ${isFavorite ? s.fill_icon : ''}`} onClick={() => toggleFavorite()} disabled={!isAuthenticated}>
-            <FiHeart size={25} />
-          </button>
+          {isPending ? <button className={`${s.btn} ${s.fill_icon}`}><FiHeart size={25} /></button> :
+            <button className={`${s.btn} ${isFavorite ? s.fill_icon : ''}`} onClick={() => toggleFavorite()} disabled={!isAuthenticated}>
+              <FiHeart size={25} />
+            </button>}
         </Tooltip>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove from watchlist (in development mode)" : "You must sign-in in to add to watchlist(in development mode)"}>
           <button className={`${s.btn} ${isInWatchlist ? s.fill_icon : ''}`} disabled={!isAuthenticated}>
