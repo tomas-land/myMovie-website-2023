@@ -1,14 +1,15 @@
 'use client'
-
 import MovieCard from '@/components/shared/movie_card/MovieCard'
 import s from './movies_list.module.scss'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
+import Filter from '@/components/shared/filter/Filter';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { iFavorite } from '@/lib/interfaces/favorite';
-import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
-
+import { useState } from 'react';
 
 const MoviesList = () => {
+    const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
     const { data: userFavorites } = useQuery({
         queryKey: ['favorites'],
         queryFn: async () => {
@@ -21,14 +22,23 @@ const MoviesList = () => {
         }
     });
 
+    const handleResultChange = (result: iFavorite[]) => {
+        setFilteredData(result);
+    }
+
+    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavorites;
+
     return (
-        <ContentDisplay headerTitle='My favorite movies' >
-            <div className={s.list}>
-                {userFavorites?.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
-        </ContentDisplay>
+        <>
+            <Filter userFavorites={userFavorites} onResultChange={handleResultChange} />
+            <ContentDisplay headerTitle='My favorite movies' >
+                <div className={s.list}>
+                    {moviesToDisplay?.map((movie) => (
+                        <MovieCard key={movie.id} movie={movie} />
+                    ))}
+                </div>
+            </ContentDisplay>
+        </>
     )
 }
 
