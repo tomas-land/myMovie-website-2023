@@ -1,0 +1,8 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.homepage {
+    .content_displays_wrapper {
+        transform: translateY(-5rem);
+    }
+}

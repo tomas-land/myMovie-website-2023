@@ -19,7 +19,7 @@ const Stats = async () => {
                 <NumberCounter finalValue={65} />
             </div>
             <div className={s.stat}>
-                <h2 className={s.title}>Watchlist</h2>
+                <h2 className={s.title}>Watch list</h2>
                 <NumberCounter finalValue={12} />
             </div>
             <div className={s.stat}>

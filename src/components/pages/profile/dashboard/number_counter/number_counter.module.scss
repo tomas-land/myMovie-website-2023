@@ -21,6 +21,12 @@
 
     animation: count-up 1s ease-in-out forwards;
     opacity: 0;
+    @include breakpoint(480) {
+        margin: 0;
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.5rem;
+    }
 }
 
 @keyframes count-up {

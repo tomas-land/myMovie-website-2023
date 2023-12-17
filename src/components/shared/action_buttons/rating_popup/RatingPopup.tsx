@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FiStar } from 'react-icons/fi';
 import s from './rating_popup.module.scss';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -20,13 +20,11 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: 
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        if (selectedRating !== null) {
-            rateMovie();
-        }
+        if (selectedRating !== null) rateMovie();
     }, [selectedRating]);
 
     const handleStarClick = (rating: string) => setSelectedRating(rating);
-    
+
     // save rating to db, or update if already rated 
     const { mutate: rateMovie } = useMutation({
         mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { movie_id: movieId, rating: selectedRating }),

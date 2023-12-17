@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import axios from 'axios';
 import Tooltip from '@/components/shared/tooltip/Tooltip';
 import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingPopup';
@@ -13,6 +13,8 @@ import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
 import 'react-toastify/dist/ReactToastify.css';
 import s from './action_buttons.module.scss';
+import { useGlobalContext } from '@/context/GlobalContext';
+import  useUserData  from '@/hooks/reactQuery/useUserData';
 
 
 interface iProps {
@@ -25,6 +27,7 @@ const ActionButtons = ({ movie }: iProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [isRatingOpened, setIsRatingOpened] = useState(false);
+  const { currentRatingPopupId, setCurrentRatingPopupId } = useGlobalContext();
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
 
@@ -32,33 +35,11 @@ const ActionButtons = ({ movie }: iProps) => {
   const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
 
   // fetch user ratings and cache them
-  const { data: userRatings } = useQuery({
-    queryKey: ['ratings'],
-    enabled: !!isAuthenticated,
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/ratings/all_ratings`);
-        return data.ratings as iRating[];
-      } catch (error) {
-        console.error('Error fetching user ratings:', error);
-      }
-    },
-  });
+  const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings', isAuthenticated);
 
   // fetch user favorites and cache them
-  const { data: userFavorites } = useQuery({
-    queryKey: ['favorites'],
-    enabled: !!isAuthenticated,
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`/api/favorites/all_favorites`);
-        return data.favorites as iFavorite[];
-      } catch (error) {
-        console.error('Error fetching user favorites:', error);
-      }
-    }
-  });
-  
+  const { data: userFavorites } = useUserData('/api/favorites/all_favorites', 'favorites', isAuthenticated);
+
   // Mutation to add or remove a movie from favorites
   const { mutate: toggleFavorite, isPending } = useMutation({
     mutationFn: async () => {
@@ -70,19 +51,19 @@ const ActionButtons = ({ movie }: iProps) => {
       }
     },
     // onMutate: () => {
-      //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
-      //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
-      //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
-      //   return { previousFavorites };
-      // },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['favorites'] });
-        if (isFavorite) {
-          toastSuccess('Removed from favorites');
-          setIsFavorite(false)
-        } else {
-          toastSuccess('Added to favorites');
-          setIsFavorite(true)
+    //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
+    //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
+    //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
+    //   return { previousFavorites };
+    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['favorites'] });
+      if (isFavorite) {
+        toastSuccess('Removed from favorites');
+        setIsFavorite(false)
+      } else {
+        toastSuccess('Added to favorites');
+        setIsFavorite(true)
       }
     },
     onError: () => {
@@ -90,11 +71,11 @@ const ActionButtons = ({ movie }: iProps) => {
       toastError('Something went wrong');
     },
   });
-  
+
   useEffect(() => {
     const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
     setIsFavorite(!!favorite);
-    
+
     const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId);
     if (rated) {
       setRating(rated.rating);
@@ -103,15 +84,20 @@ const ActionButtons = ({ movie }: iProps) => {
       setRating(null);
       setIsRated(false);
     }
-    
+
   }, [isAuthenticated, userFavorites, userRatings, isRated]);
 
   const toggleWatchlist = () => {
     setIsInWatchlist((prevState) => !prevState);
   };
 
-  const toggleRatingContainer = () => {
-    setIsRatingOpened((prevState) => !prevState);
+  const toggleRatingContainer = (movieId: string | undefined) => {
+    if (movieId === currentRatingPopupId) {  // if clicked on the same movie, toggle rating popup
+      setIsRatingOpened((prev) => !prev);
+    } else {                                  // if clicked on another movie first time, set current rating popup id(currentRatingPopupId) and open rating popup 
+      setCurrentRatingPopupId(movieId);
+      setIsRatingOpened(true);
+    }
   }
 
   return (
@@ -131,8 +117,9 @@ const ActionButtons = ({ movie }: iProps) => {
       </div>
       <div className={s.btns_wrapper}>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
-          {isAuthenticated && isRatingOpened ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
-          <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={toggleRatingContainer} disabled={!isAuthenticated}>
+          {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup*/}
+          {isAuthenticated && isRatingOpened && currentRatingPopupId === movieId? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
+          <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(movieId)} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>
         </Tooltip>

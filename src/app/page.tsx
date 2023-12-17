@@ -4,6 +4,7 @@ import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 import { getNowPlayingMovies, getTopRatedMovies, getUpcomingMovies } from '@/lib/requests/movies';
 import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import Slider from '@/components/pages/homepage/slider/Slider';
+import s from '@/components/pages/homepage/homepage.module.scss'
 
 
 const Home = async () => {
@@ -12,17 +13,19 @@ const Home = async () => {
   // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
 
   return (
-    <div>
+    <div className={s.homepage}>
       <Hero />
-      <ContentDisplay headerTitle="In Theatres" >
-        <Slider movies={nowPlayingMovies} endpoint='now_playing' />
-      </ContentDisplay>
-      <ContentDisplay headerTitle="Upcoming">
-        <Slider movies={upcomingMovies} endpoint='upcoming' />
-      </ContentDisplay>
-      {/* <ContentDisplay headerTitle="Top Rated">
+      <div className={s.content_displays_wrapper}>
+        <ContentDisplay headerTitle="In Theatres" >
+          <Slider movies={nowPlayingMovies} endpoint='now_playing' />
+        </ContentDisplay>
+        <ContentDisplay headerTitle="Upcoming">
+          <Slider movies={upcomingMovies} endpoint='upcoming' />
+        </ContentDisplay>
+        {/* <ContentDisplay headerTitle="Top Rated">
         <Slider movies={sortedByVoteTopRatedMovies} endpoint='top_rated' />
       </ContentDisplay> */}
+      </div>
     </div>
   );
 };

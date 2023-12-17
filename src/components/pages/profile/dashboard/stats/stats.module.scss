@@ -6,28 +6,36 @@
     place-content: center;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
-    margin: 2rem 0 7rem;
+    margin: 2rem 0;
     padding: 0;
     @include breakpoint(1024) {
         grid-template-columns: repeat(2, 1fr);
     }
-    @include breakpoint(768) {
-        grid-template-columns: 1fr;
-        width: 100%;
+    @include breakpoint(480) {
+        grid-template-columns: repeat(2, 1fr);
     }
     .stat {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         background-color: $card-bg-color;
         padding: 1rem;
+        @include breakpoint(480) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
         .title {
             width: 7rem;
             font-size: 1.5rem;
             letter-spacing: 0.1rem;
             font-weight: 700;
             color: $color-1;
+            @include breakpoint(480) {
+                text-align: center;
+                font-size: 1.2rem;
+            }
         }
     }
 }

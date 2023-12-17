@@ -8,6 +8,9 @@ export async function getAllFavoritesPrisma(user_id: string | null) {
                 isDeleted: false, // Include only non-deleted favorites
 
             },
+            orderBy: {
+                createdAt: 'desc'
+            },
         });
         return favorites;
     } catch (error) {

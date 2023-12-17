@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 const MoviesList = () => {
     const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
+
     const { data: userFavorites } = useQuery({
         queryKey: ['favorites'],
         queryFn: async () => {
@@ -18,12 +19,13 @@ const MoviesList = () => {
                 return data.favorites as iFavorite[];
             } catch (error) {
                 console.error('Error fetching user favorites:', error);
+                throw error; 
             }
-        }
+        },
     });
 
     const handleResultChange = (result: iFavorite[]) => {
-        setFilteredData(result);
+        setFilteredData([...result]);  //destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
     }
 
     const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavorites;

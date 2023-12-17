@@ -9,7 +9,7 @@
         max-width: $main-container;
         margin: auto;
         display: flex;
-        padding: 2rem;
+        padding: 2rem 1rem;
         gap: 1rem;
         @include breakpoint(768) {
             flex-direction: column;

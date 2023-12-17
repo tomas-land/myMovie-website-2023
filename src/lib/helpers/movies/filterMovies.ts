@@ -2,19 +2,15 @@ import dayjs from 'dayjs';
 import { iFavorite } from '../../interfaces/favorite';
 import { last30days } from '../../dayJS';
 
-export default function filterMovies(data: iFavorite[] | undefined, value: string) {
+export default function filterMovies(data: iFavorite[] | undefined, value: string, sortOrder?: string) {
     switch (value) {
         case 'recent':
-            return data?.filter((movie) => {
-                return dayjs(movie.createdAt).isAfter(last30days);
-            });
-            case 'less_than_5':
-            return data?.filter((movie) => {
-                return movie.vote_average < 5;
-            });
-        case 'all':
-            return data;
+            const recentMovies = data?.filter((movie) => dayjs(movie.createdAt).isAfter(last30days)) || [];
+            return recentMovies.sort((a, b) => (sortOrder === 'desc' ? dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix() : dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix()));
+        case 'popular':
+            const popularMovies = data?.filter((movie) => movie.vote_average > 7) || [];
+            return popularMovies.sort((a, b) => (sortOrder === 'desc' ? a.vote_average - b.vote_average : b.vote_average - a.vote_average));
         default:
-            return data;
+            return data
     }
 };
