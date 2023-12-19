@@ -2,7 +2,6 @@ import { getFavoriteMovies } from '@/lib/requests/user'
 import s from './stats.module.scss'
 import NumberCounter from '@/components/pages/profile/dashboard/number_counter/NumberCounter'
 
-
 const Stats = async () => {
     const stats = await getFavoriteMovies()
     const favoritesCount = stats.length

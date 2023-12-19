@@ -3,6 +3,7 @@ import { useState } from 'react';
 import s from './dashboard_menu.module.scss';
 import Link from 'next/link';
 import menuItemsData from '@/lib/constants/menuItemsData';
+import SwipeIcon from './SwipeIcon';
 
 interface iMenuItem {
   name: string;
@@ -53,6 +54,9 @@ const DashboardMenu = () => {
           </li>
         ))}
       </ul>
+      <div className={s.swipe_icon_wrapper}>
+        <SwipeIcon />
+      </div>
     </div>
   );
 };

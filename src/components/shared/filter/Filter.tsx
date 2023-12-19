@@ -54,8 +54,8 @@ const Filter = ({ userFavorites, onResultChange }: iProps) => {
                     <label className={s.label}>Filter by:</label>
                     <select className={s.select} name="filterSelect" onChange={handleFilterSortChange} value={filterSelect}>
                         <option defaultValue={'select'} disabled>select</option>
-                        <option value="recent">recent</option> {/* recent (date added less than 1 month) */}
-                        <option value="popular">popular</option> {/* popular (popularity more than 7) */}
+                        <option value="recent">recent (30 days)</option> {/* recent (date added less than 1 month) */}
+                        <option value="popular">popular (higher than 7)</option> {/* popular (popularity more than 7) */}
                     </select>
                 </div>
                 <div className={s.select_wrapper}>

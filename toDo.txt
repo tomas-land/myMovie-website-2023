@@ -2,14 +2,13 @@
 - likes watchlist  and rated counter in dashboard
 - scrolable menu in profile for mobile
 - sign out in mobile menu, if signed in small foto
-- finish promise all blur images
+- mobile dashboard menu sliding, on navigation close menu + bg color menu item change
 
 
 
 prisma on local dev
 npx prisma migrate dev
 ? npx prisma generate 
-
 
 prisma on production
  npx prisma db push 

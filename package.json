@@ -26,6 +26,7 @@
     "eslint-config-next": "13.4.3",
     "framer-motion": "^10.16.4",
     "hamburger-react": "^2.5.0",
+    "lottie-web": "^5.12.2",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "plaiceholder": "^3.0.0",

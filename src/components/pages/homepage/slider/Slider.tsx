@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import React, { use, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { iMovie } from '@/lib/interfaces/movie';
 import MovieCard from '@/components/shared/movie_card/MovieCard';
 import s from './slider.module.scss';
@@ -9,6 +9,7 @@ import '@splidejs/react-splide/css/core';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 
 interface iProps {
   movies: iMovie[];

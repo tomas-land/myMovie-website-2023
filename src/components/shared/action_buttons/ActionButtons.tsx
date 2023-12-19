@@ -14,7 +14,8 @@ import { iFavorite } from '@/lib/interfaces/favorite';
 import 'react-toastify/dist/ReactToastify.css';
 import s from './action_buttons.module.scss';
 import { useGlobalContext } from '@/context/GlobalContext';
-import  useUserData  from '@/hooks/reactQuery/useUserData';
+import useUserData from '@/hooks/reactQuery/useUserData';
+import { useRouter } from 'next/navigation';
 
 
 interface iProps {
@@ -28,8 +29,9 @@ const ActionButtons = ({ movie }: iProps) => {
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [isRatingOpened, setIsRatingOpened] = useState(false);
   const { currentRatingPopupId, setCurrentRatingPopupId } = useGlobalContext();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
@@ -64,6 +66,7 @@ const ActionButtons = ({ movie }: iProps) => {
       } else {
         toastSuccess('Added to favorites');
         setIsFavorite(true)
+        router.refresh();
       }
     },
     onError: () => {
@@ -71,11 +74,11 @@ const ActionButtons = ({ movie }: iProps) => {
       toastError('Something went wrong');
     },
   });
-
+  
   useEffect(() => {
     const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
     setIsFavorite(!!favorite);
-
+    
     const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId);
     if (rated) {
       setRating(rated.rating);
@@ -84,7 +87,6 @@ const ActionButtons = ({ movie }: iProps) => {
       setRating(null);
       setIsRated(false);
     }
-
   }, [isAuthenticated, userFavorites, userRatings, isRated]);
 
   const toggleWatchlist = () => {
@@ -117,8 +119,8 @@ const ActionButtons = ({ movie }: iProps) => {
       </div>
       <div className={s.btns_wrapper}>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
-          {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup*/}
-          {isAuthenticated && isRatingOpened && currentRatingPopupId === movieId? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
+          {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup (global context nescesary)*/}
+          {isAuthenticated && isRatingOpened && currentRatingPopupId === movieId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
           <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(movieId)} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>

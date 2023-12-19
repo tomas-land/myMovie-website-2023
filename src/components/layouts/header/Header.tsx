@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import Link from 'next/link';
 import { Squash as Hamburger } from 'hamburger-react';
 import s from './header.module.scss';
@@ -26,7 +26,7 @@ const menuLinks = [
 const Header = () => {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { toggleSearch, isSearchOpen, isInputFocused } = useGlobalContext();
+  const { toggleSearch, isSearchOpen } = useGlobalContext();
 
   const searchVariants = {
     hidden: { y: -10, opacity: 0 },
