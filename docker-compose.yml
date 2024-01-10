@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    container_name: mymovie2023container
+    image: mymovie2023image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    env_file:
+      - .env
+  db:
+    image: mysql
+   
+
