@@ -1,6 +1,6 @@
-import prisma from "../prisma";
+import prisma from "../../prisma";
 
-export async function deleteFavoritePrisma(favoriteId: string | null) {
+export async function deleteFavoriteMoviePrisma(favoriteId: string | null) {
     try {
         await prisma.favoriteMovie.update({
             where: {

@@ -29,7 +29,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo }: iProps) => {
     try {
       setIsLoading(true);
       const moreMovies = await axios.get(`/api/movies/${endpoint}`, { params: { page: pageToShow, endpoint: endpoint } });
-      setInitialMovies(() => [...initialMovies, ...moreMovies.data.data]);
+      setInitialMovies(() => [...initialMovies, ...moreMovies.data]);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching more movies:', error);
@@ -54,7 +54,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo }: iProps) => {
           <MovieCard movie={movie} isQuickView={true} />
         </SplideSlide>
       ))}
-      {endpoint !== 'top_rated' && movies.length > 0 ? (
+      {endpoint !== 'top_rated' && movies.length > 0 ? (  // top_rated movies will not have a show more button on the last slide
         <SplideSlide className={s.slide}>
           <div className={s.last_slide}>
             {isLoading ? (

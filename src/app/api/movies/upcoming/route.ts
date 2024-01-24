@@ -10,7 +10,8 @@ export async function GET(request: Request) {
   try {
     const response = await fetch(`${TMDB_BASE_URL}/movie/${endpoint}?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`, { cache: 'no-cache' });
     const data = await response.json();
-    return NextResponse.json({ data: data.results });
+    const results = data.results;
+    return NextResponse.json(results);
   } catch (error) {
     console.error(error);
   }

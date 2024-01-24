@@ -1,6 +1,6 @@
-import prisma from "../prisma";
+import prisma from "../../prisma";
 
-export async function getAllFavoritesPrisma(user_id: string | null) {
+export async function getAllFavoriteMoviesPrisma(user_id: string | null) {
     try {
         const favorites = await prisma.favoriteMovie.findMany({
             where: {

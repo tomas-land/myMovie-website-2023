@@ -31,7 +31,8 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
     };
 
     // rating popup =====================================================================================================
-    const [currentRatingPopupId, setCurrentRatingPopupId] = useState<string | null | undefined>(null); 
+    const [currentRatingPopupId, setCurrentRatingPopupId] = useState<string | null | undefined>(null);
+
 
     const contextValue: iGlobalContextProps = {
         isSearchOpen,

@@ -3,12 +3,22 @@
 - scrolable menu in profile for mobile
 - sign out in mobile menu, if signed in small foto
 - mobile dashboard menu sliding, on navigation close menu + bg color menu item change
+- close quickcard when other opens 
 
 
+
+
+
+
+
+
+
+INSTRUCTIONS
 
 prisma on local dev
 npx prisma migrate dev
 ? npx prisma generate 
+to check with prisma studio: npx prisma studio
 
-prisma on production
- npx prisma db push 
+prisma on production (push to remote db if shcema was modified)
+ npx prisma db push (if not permited warning, close other terminals)

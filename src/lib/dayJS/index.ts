@@ -9,12 +9,13 @@ const startOFYear = dayjs().startOf('year').format('YYYY-MM');
 const endOFYear = dayjs().endOf('year').format('YYYY-MM');
 const currentYear = dayjs().format('YYYY');
 const currentMonth = dayjs().format('YYYY-MM');
-const currentDay = dayjs().format('YYYY-MM-DD');
+const currentDate = dayjs().format('YYYY-MM-DD');
 const last30days = dayjs().subtract(30, 'day').format('YYYY-MM-DD');
+const TwoMonthsBeforeDate = dayjs().subtract(2, 'month').format('YYYY-MM-DD');
 
 const formateDate = (date: string) => {
   const formatedDate = dayjs(date).format('YYYY MM-DD');
   return formatedDate;
 };
 
-export { currentDay, currentYear, last30days, startOFYear, startOFYearISO, endOFYear, currentMonth, formateDate, startOFMonth, startOFPreviousMonthISO, endOFPreviousMonthISO };
+export { last30days, currentDate, currentYear, TwoMonthsBeforeDate, startOFYear, startOFYearISO, endOFYear, currentMonth, formateDate, startOFMonth, startOFPreviousMonthISO, endOFPreviousMonthISO };

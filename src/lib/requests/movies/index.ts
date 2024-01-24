@@ -1,26 +1,25 @@
 import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
-import { currentDay, startOFYear } from '@/lib/dayJS';
+import { currentDate, startOFYear, TwoMonthsBeforeDate } from '@/lib/dayJS';
 import { iMovie } from '@/lib/interfaces/movie';
-import getBlurredEntitiesUrl from '@/lib/helpers/getBlurredEntitiesUrl';
+import filterOutMoviesWithPosters from '@/lib/helpers/filterOutMoviesWithPosters';
+import filterOutMoviesWithAverageAboveZero from '@/lib/helpers/filterOutMoviesWithAverageAboveZero';
 
 
-export async function getNowPlayingMovies() {
-  const response = await fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
+export async function getLatestMovies() {
+  const response = await fetch(`${TMDB_BASE_URL}/discover/movie/?api_key=${TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${TwoMonthsBeforeDate}&release_date.lte=${currentDate}`);
   const data = await response.json();
-  const results = data.results;
+  const results = filterOutMoviesWithPosters(data.results);
 
   if (!response.ok) {
     throw new Error('Fetching failed');
   }
-  // add blurdataUrl to each movie
-  const movies = await getBlurredEntitiesUrl<iMovie>(results);
-  return movies
+  return results;
 }
 
 export async function getUpcomingMovies() {
-  const response = await fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1`);
+  const response = await fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.gte=${currentDate}&sort_by=popularity.desc`);
   const data = await response.json();
-  const results = data.results;
+  const results = filterOutMoviesWithPosters(data.results);
 
   if (!response.ok) {
     throw new Error('Fetching failed');
@@ -31,12 +30,14 @@ export async function getUpcomingMovies() {
 export async function getTopRatedMovies() {
   const allMovies: iMovie[] = [];
   for (let i = 1; i <= 3; i++) {
-    const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&primary_release_date.gte=${startOFYear}&primary_release_date.lte=${currentDay}&sort_by=popularity.desc&page=${i}`);
+    const response = await fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&primary_release_date.gte=${startOFYear}&primary_release_date.lte=${currentDate}&sort_by=popularity.desc&page=${i}`);
     const data = await response.json();
+    const results = filterOutMoviesWithPosters(filterOutMoviesWithAverageAboveZero(data.results));
     if (!response.ok) {
       throw new Error('Fetching failed');
     }
-    allMovies.push(...data.results);
+
+    allMovies.push(...results);
   }
   return allMovies;
 }
@@ -70,4 +71,4 @@ export async function getMovieVideosById(id: string) {
   return results;
 }
 
-export default { getNowPlayingMovies, getUpcomingMovies, getTopRatedMovies, getMovieById, getMovieImagesById, getMovieVideosById };
+export default { getMovieById, getUpcomingMovies, getLatestMovies, getMovieImagesById, getMovieVideosById, getTopRatedMovies };

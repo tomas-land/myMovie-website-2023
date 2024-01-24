@@ -12,8 +12,8 @@ interface iProps {
   }
 
 const Credits = ({person,personMovieCredits}:iProps) => {
-console.log(personMovieCredits)
-    const renderMovieCredits = () => {
+
+  const renderMovieCredits = () => {
         return personMovieCredits.map((movie) => {
           return (
             <Link href={`/movie/${movie.id}`} key={movie.id}>
@@ -31,6 +31,7 @@ console.log(personMovieCredits)
           );
         });
       };
+      
   return (
     <div>
       <section className={s.credits_wrapper}>
