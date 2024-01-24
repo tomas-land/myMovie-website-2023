@@ -4,36 +4,37 @@ import s from './content_display.module.scss';
 import Slider from '@/components/pages/homepage/slider/Slider';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 
 
 interface iProps {
   headerTitle: string;
-  endpoint: string;
+  endpoint?: string;
   movies: iMovie[];
   tvSeries: iTvSeries[];
   profile?: boolean;
   redirectTo?: string;
+  isQuickView?: boolean;
 }
 
-const ContentDisplay = ({ headerTitle, endpoint, movies, tvSeries, profile, redirectTo }: iProps) => {
+const ContentDisplay = ({ headerTitle, endpoint, movies, tvSeries, profile, redirectTo, isQuickView }: iProps) => {
   const [mediaType, setMediaType] = useState<string>('movies')
-  const [selectedMediaType, setSelectedMediaType] = useState<boolean>(false)
 
   const selectMediaType = (category: string) => {
     setMediaType(category)
   }
 
   return (
-    <div className={s.content_display}>
+    < div className={s.content_display} >
       <div className={s.header}>
         <div className={s.title}>{headerTitle}</div>
-        <MediaSlider selectMediaType={selectMediaType} />
+        <MediaSlider selectMediaType={selectMediaType} selectedMediaType={mediaType} />
       </div>
       <div className={s.content}>
-        <Slider movies={movies} tvSeries={tvSeries} endpoint={endpoint} mediaType={mediaType} profile={profile} redirectTo={redirectTo} />
+        <Slider movies={movies} tvSeries={tvSeries} endpoint={endpoint} profile={profile} redirectTo={redirectTo} mediaType={mediaType} isQuickView={isQuickView} />
       </div>
-    </div>
+    </div >
   );
 };
 

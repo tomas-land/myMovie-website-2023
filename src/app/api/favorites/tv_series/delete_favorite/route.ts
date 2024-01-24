@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { type NextRequest } from 'next/server'
 
-import { deleteFavoriteMoviePrisma } from '@/lib/prisma/favorite/movie/deleteFavoriteMoviePrisma';
+import { deleteFavoriteTvSeriesPrisma } from '@/lib/prisma/favorite/tv_series/deleteFavoriteTvSeriesPrisma';
 import { getServerSession } from "next-auth";
 import authOptions from '@/lib/auth/authOptions';
 
@@ -12,7 +12,7 @@ export async function DELETE(request: NextRequest) {
     const favoriteID = searchParams.get('id')
 
     try {
-        await deleteFavoriteMoviePrisma(favoriteID);
+        await deleteFavoriteTvSeriesPrisma(favoriteID);
         return NextResponse.json({ message: 'success' }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: 'Error saving favorite' }, { status: 500 });

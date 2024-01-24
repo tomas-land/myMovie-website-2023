@@ -18,13 +18,13 @@
             letter-spacing: 0.1rem;
             cursor: pointer;
             transform: skewX(-7deg);
-            &:hover{
+            &:hover {
                 background-color: rgba(0, 0, 0, 0.3);
             }
-            &:focus{
-                background-color: rgba(0, 0, 0, 0.4);
-                color: $color-1-light;
-            }
+        }
+        .active {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: $color-1-light;
         }
     }
 }

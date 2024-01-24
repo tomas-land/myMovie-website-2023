@@ -19,8 +19,8 @@ const Home = async () => {
     <div className={s.homepage}>
       <Hero />
       <div className={s.content_displays_wrapper}>
-        <ContentDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' />
-        <ContentDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' />
+        <ContentDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} />
+        <ContentDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} />
         {/* <ContentDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={latestTvSeries} endpoint='top_rated' /> */}
       </div>
     </div>

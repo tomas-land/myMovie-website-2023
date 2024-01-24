@@ -17,16 +17,16 @@ interface iProps {
   endpoint?: string;
   profile?: boolean;
   redirectTo?: string;
-  tvSeries: iTvSeries[]
-  mediaType: string
+  tvSeries: iTvSeries[];
+  mediaType: string;
+  isQuickView?: boolean;
 }
 
-const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType }: iProps) => {
+const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, isQuickView }: iProps) => {
   const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[]>([]);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const pathname = usePathname();
-  console.log(movies)
 
   const handleShowMoreSlides = async () => {
     try {
@@ -63,12 +63,13 @@ const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType }: 
         autoHeight: true,
       }}
     >
+      {initialSlides.length === 0 ? <div className={s.no_content}>No recent activity</div> : null}
       {initialSlides.map((item) => (
         <SplideSlide key={item.id} className={s.slide}>
           {mediaType === 'movies' ? (
-            <MovieCard movie={item as iMovie} isQuickView={true} mediaType={mediaType} />
+            <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} />
           ) : (
-            <MovieCard tvSeries={item as iTvSeries} isQuickView={true} mediaType={mediaType} />
+            <MovieCard tvSeries={item as iTvSeries} mediaType={mediaType} isQuickView={isQuickView} />
           )}
         </SplideSlide>
       ))}

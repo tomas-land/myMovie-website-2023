@@ -5,6 +5,15 @@
   display: flex;
   mask: linear-gradient(to right, black 90%, transparent);
   overflow-x: hidden;
+  height: 33rem;
+
+  .no_content {
+    padding: 1rem;
+    color: $color-1;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
   .slide {
     display: flex;
   }
@@ -12,9 +21,7 @@
     display: flex;
     height: 33rem;
     width: 16rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center();
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
     overflow: hidden;

@@ -39,6 +39,7 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
   const tvSeriesId = (tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
+  const currentSlideId = movieId ?? tvSeriesId;
   const title = movie?.title ?? tvSeries?.name;
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
@@ -47,9 +48,9 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings', isAuthenticated);
 
   // fetch user favorite movies or cache them
-    const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies', isAuthenticated);
-    const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries', isAuthenticated);
-  
+  const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies', isAuthenticated);
+  const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries', isAuthenticated);
+
   // Mutation to add or remove a movie or tv series from favorites
   const { mutate: toggleFavorite, isPending } = useMutation({
     mutationFn: async () => {
@@ -63,7 +64,8 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       } else {
         const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId); // if tv series is already in favorites, delete it, else add it to favorites
         if (favoriteTvSeries) {
-          await axios.delete(`/api/favorites/tv_series/delete_favorite?id=${favoriteTvSeries.id}`);
+          const res = await axios.delete(`/api/favorites/tv_series/delete_favorite?id=${favoriteTvSeries.id}`);
+          console.log(res)
         } else {
           await axios.post(`/api/favorites/tv_series/save_favorite`, { tv_series_id: tvSeriesId, title: title, poster_path: posterPath, vote_average: voteAverage });
         }
@@ -81,7 +83,7 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       else queryClient.invalidateQueries({ queryKey: ['favoriteTvSeries'] });
 
       if (isFavorite) {
-        toastSuccess(`Removed from favorite ${mediaType}`) 
+        toastSuccess(`Removed from favorite ${mediaType}`)
         setIsFavorite(false)
       } else {
         toastSuccess(`Added to favorite ${mediaType.split('_').join(' ')}`)
@@ -99,8 +101,9 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
     const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId);
     const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId);
     setIsFavorite(!!favoriteMovie || !!favoriteTvSeries);
-
-    const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId);
+    console.log(userRatings)
+    const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId || rating.contentId === tvSeriesId);
+    console.log(rated)
     if (rated) {
       setRating(rated.rating);
       setIsRated(true);
@@ -108,17 +111,18 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       setRating(null);
       setIsRated(false);
     }
-  }, [isAuthenticated, userFavoriteMovies,userFavoriteTvSeries, userRatings, isRated]);
+  }, [isAuthenticated, userFavoriteMovies, userFavoriteTvSeries, userRatings, isRated]);
 
   const toggleWatchlist = () => {
     setIsInWatchlist((prevState) => !prevState);
   };
 
-  const toggleRatingContainer = (movieId: string | undefined) => {
-    if (movieId === currentRatingPopupId) {  // if clicked on the same movie, toggle rating popup
+  const toggleRatingContainer = (id: string | undefined) => {
+    console.log(id)
+    if (id === currentRatingPopupId) {  // if clicked on the same movie slide, toggle rating popup
       setIsRatingOpened((prev) => !prev);
     } else {                                  // if clicked on another movie first time, set current rating popup id(currentRatingPopupId) and open rating popup 
-      setCurrentRatingPopupId(movieId);
+      setCurrentRatingPopupId(currentSlideId);
       setIsRatingOpened(true);
     }
   }
@@ -141,8 +145,8 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       <div className={s.btns_wrapper}>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
           {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup (global context nescesary)*/}
-          {isAuthenticated && isRatingOpened && currentRatingPopupId === movieId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
-          <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(movieId)} disabled={!isAuthenticated}>
+          {isAuthenticated && isRatingOpened && currentRatingPopupId === currentSlideId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
+          <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(currentSlideId)} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>
         </Tooltip>

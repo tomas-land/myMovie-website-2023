@@ -12,7 +12,7 @@ const MoviesList = () => {
     const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
 
     const { data: userFavorites } = useQuery({
-        queryKey: ['favorites'],
+        queryKey: ['favoriteMovies'],
         queryFn: async () => {
             try {
                 const { data } = await axios.get(`/api/favorites/all_favorites`);
@@ -23,7 +23,7 @@ const MoviesList = () => {
             }
         },
     });
-
+// console.log(userFavorites)
     // const handleResultChange = (result: iFavorite[]) => {
     //     setFilteredData([...result]);  //destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
     // }

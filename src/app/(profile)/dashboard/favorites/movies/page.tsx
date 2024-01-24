@@ -7,6 +7,7 @@ const FavoriteMoviesPage = async () => {
     return (
         <div className={s.favorite_movies}>
             <MoviesList  />
+            
         </div>
     )
 }

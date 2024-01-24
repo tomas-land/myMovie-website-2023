@@ -22,7 +22,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType }: iProps) => {
   const blurredImage: string | undefined = movie?.blurDataURL;
   const movieId = (movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
   const tvSeriesId = (tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
-  const title = movie?.title ?? tvSeries?.name;
+  const title = movie?.title ?? tvSeries?.name ?? tvSeries?.title;  // if no movie title use tv series name(name comes from TMDB api) or title(title comes from db)
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const releaseDate = movie?.release_date ?? tvSeries?.first_air_date;
   const overview = movie?.overview ?? tvSeries?.overview;
@@ -79,10 +79,10 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType }: iProps) => {
         </div>
         <div className={s.content}>
           <h3 className={s.title}>{title}</h3>
-          <MovieActionButtons movie={movie} tvSeries={tvSeries} mediaType={mediaType}/>
+          <MovieActionButtons movie={movie} tvSeries={tvSeries} mediaType={mediaType} />
         </div>
       </div>
-      {isQuickView && isQuickViewOpened ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened} additionalInfo={additionalInfo} mediaType={mediaType}/> : null}
+      {isQuickView && isQuickViewOpened ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened} additionalInfo={additionalInfo} mediaType={mediaType} /> : null}
     </div>
   );
 };

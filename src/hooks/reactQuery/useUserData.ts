@@ -9,7 +9,7 @@ const useUserData = (apiEndpoint: string, queryKey: string, isAuthenticated: boo
         queryFn: async () => {
             try {
                 const data = await axios.get(apiEndpoint);
-                return data.data.favorites
+                return data.data[queryKey]
             } catch (error) {
                 console.error(`Error fetching user ${queryKey}:`, error);
             }

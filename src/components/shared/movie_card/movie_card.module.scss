@@ -21,11 +21,11 @@
 
       .poster {
         opacity: 1;
-        width: 100%;
-        height: auto;
         border-radius: 1rem 1rem 0 0;
         cursor: pointer;
         transition: transform 0.5s ease;
+        width: 100%;
+        height: 100%;
       }
       .btns {
         display: none;
@@ -91,7 +91,7 @@
       }
     }
   }
-  .movie_card_wrapper_full_width {
-    width: 100%;
-  }
+  // .movie_card_wrapper_full_width {
+  //   width: 100%;
+  // }
 }
