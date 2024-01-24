@@ -1,5 +1,5 @@
-@import 'src/styles/mixins';
-@import 'src/styles/variables';
+@import "src/styles/mixins";
+@import "src/styles/variables";
 
 .quick_view {
   border-radius: 0 1rem 1rem 0;
@@ -11,10 +11,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 1.5rem;
+    padding: 0 1.4rem 1rem;
     .close_btn {
       align-self: flex-end;
-      padding: 0 1rem;
+      padding: 0.5rem;
       background-color: transparent;
       color: $color-1;
       cursor: pointer;
@@ -27,28 +27,36 @@
     }
     .overview {
       margin-top: 1rem;
-      font-size: 1rem;
-      line-height: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.2rem;
       letter-spacing: 0.1rem;
       color: $color-1-light;
+      height: 18rem;
     }
     .genres {
       display: flex;
-      gap: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
       .genre {
-        margin-top: 1rem;
         font-size: 1rem;
         letter-spacing: 0.1rem;
         color: $color-3-light;
       }
     }
-    .release_date {
-      padding: 1rem 0;
+    .additional_info {
       margin-top: auto;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      letter-spacing: 0.1rem;
-      color: $color-3-light;
+      align-self: flex-end;
+      text-align: right;
+      .release_date,
+      .last_air_date,
+      .season_numbers {
+        padding: 0.5rem 0 0;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+        color: $color-3-light;
+      }
     }
   }
 }

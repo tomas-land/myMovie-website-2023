@@ -24,6 +24,7 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
   const pathname = usePathname();
   const { openModal, isModalOpened } = useModalContext();
   const { setIsSearchOpen } = useGlobalContext();
+  const mediaType = 'movies';
 
   useEffect(() => {
     if (pathname !== '/') setIsSearchOpen(false);
@@ -35,7 +36,7 @@ const MovieDetails = ({ movie, movieImages, movieVideos }: iProps) => {
       <div className={s.header}>
         <div className={s.info_wrapper}>
           <div className={s.movie_action_buttons_wrapper}>
-            <MovieActionButtons movie={movie} />
+            <MovieActionButtons movie={movie} mediaType={mediaType} />
           </div>
           <h1 className={s.title}>{movie.title}</h1>
           <div className={s.genres}>

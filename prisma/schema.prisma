@@ -59,15 +59,27 @@ model VerificationToken {
 }
 
 model FavoriteMovie {
-  id           String   @id @default(cuid())
+  id           String   @id @default(cuid())  // this is the id of the favorite movie
   title        String
   poster_path  String
   vote_average Float
-  movieId      String
+  movieId      String    // this is the id of the TMDB movie
   createdAt    DateTime @default(now())
   updatedAt    DateTime? @updatedAt
   userId       String
   isDeleted    Boolean  @default(false) // for soft deletion, to show recent favorite movies even they are removed from favorites
+}
+
+model FavoriteTvSeries {
+  id           String   @id @default(cuid())
+  title        String
+  poster_path  String
+  vote_average Float
+  seriesId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime? @updatedAt
+  userId       String
+  isDeleted    Boolean  @default(false) // for soft deletion, to show recent favorite series even they are removed from favorites
 }
 
 model Rating {

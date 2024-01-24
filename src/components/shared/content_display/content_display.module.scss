@@ -13,13 +13,14 @@
   }
 
   .header {
-    margin-bottom: 2rem;
-
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
     .title {
-      width: fit-content;
       font-weight: 800;
+      font-size: 2.3rem;
       letter-spacing: 0.1rem;
-      margin-bottom: 1rem;
       @include text_gradient();
       @include breakpoint(768) {
         font-size: 1.5rem;
@@ -27,6 +28,9 @@
     }
   }
   .content {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    padding: 1rem;
     h1 {
       font-size: 1.5rem;
       font-weight: 600;

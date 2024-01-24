@@ -7,7 +7,7 @@ import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingP
 import { iMovie } from '@/lib/interfaces/movie';
 import { FiHeart, FiStar, FiBookmark } from 'react-icons/fi';
 import { useSession } from 'next-auth/react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
@@ -16,13 +16,16 @@ import s from './action_buttons.module.scss';
 import { useGlobalContext } from '@/context/GlobalContext';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useRouter } from 'next/navigation';
+import { iTvSeries } from '@/lib/interfaces/tv_series';
 
 
 interface iProps {
-  movie: iMovie;
+  movie?: iMovie;
+  tvSeries?: iTvSeries
+  mediaType: string
 }
 
-const ActionButtons = ({ movie }: iProps) => {
+const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const [isRated, setIsRated] = useState<boolean>(false);
   const [rating, setRating] = useState<string | null | undefined>(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -34,24 +37,39 @@ const ActionButtons = ({ movie }: iProps) => {
   const router = useRouter();
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
-  const movieId = (movie.movieId ?? movie.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
+  const movieId = (movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
+  const tvSeriesId = (tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
+  const title = movie?.title ?? tvSeries?.name;
+  const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
+  const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
 
   // fetch user ratings and cache them
   const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings', isAuthenticated);
 
-  // fetch user favorites and cache them
-  const { data: userFavorites } = useUserData('/api/favorites/all_favorites', 'favorites', isAuthenticated);
-
-  // Mutation to add or remove a movie from favorites
+  // fetch user favorite movies or cache them
+    const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies', isAuthenticated);
+    const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries', isAuthenticated);
+  
+  // Mutation to add or remove a movie or tv series from favorites
   const { mutate: toggleFavorite, isPending } = useMutation({
     mutationFn: async () => {
-      const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
-      if (favorite) {
-        await axios.delete(`/api/favorites/delete_favorite?id=${favorite.id}`);
+      if (mediaType === 'movies') {
+        const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId); // if movie is already in favorites, delete it, else add it to favorites
+        if (favoriteMovie) {
+          await axios.delete(`/api/favorites/movies/delete_favorite?id=${favoriteMovie.id}`);
+        } else {
+          await axios.post(`/api/favorites/movies/save_favorite`, { movie_id: movieId, title: title, poster_path: posterPath, vote_average: voteAverage });
+        }
       } else {
-        await axios.post(`/api/favorites/save_favorite`, { movie_id: movieId, title: movie.title, poster_path: movie.poster_path, vote_average: movie.vote_average });
+        const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId); // if tv series is already in favorites, delete it, else add it to favorites
+        if (favoriteTvSeries) {
+          await axios.delete(`/api/favorites/tv_series/delete_favorite?id=${favoriteTvSeries.id}`);
+        } else {
+          await axios.post(`/api/favorites/tv_series/save_favorite`, { tv_series_id: tvSeriesId, title: title, poster_path: posterPath, vote_average: voteAverage });
+        }
       }
-    },
+    }
+    ,
     // onMutate: () => {
     //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
     //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
@@ -59,12 +77,14 @@ const ActionButtons = ({ movie }: iProps) => {
     //   return { previousFavorites };
     // },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['favorites'] });
+      if (mediaType === 'movies') queryClient.invalidateQueries({ queryKey: ['favoriteMovies'] });
+      else queryClient.invalidateQueries({ queryKey: ['favoriteTvSeries'] });
+
       if (isFavorite) {
-        toastSuccess('Removed from favorites');
+        toastSuccess(`Removed from favorite ${mediaType}`) 
         setIsFavorite(false)
       } else {
-        toastSuccess('Added to favorites');
+        toastSuccess(`Added to favorite ${mediaType.split('_').join(' ')}`)
         setIsFavorite(true)
         router.refresh();
       }
@@ -74,11 +94,12 @@ const ActionButtons = ({ movie }: iProps) => {
       toastError('Something went wrong');
     },
   });
-  
+
   useEffect(() => {
-    const favorite = userFavorites?.find((favorite: iFavorite) => favorite.movieId === movieId);
-    setIsFavorite(!!favorite);
-    
+    const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId);
+    const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId);
+    setIsFavorite(!!favoriteMovie || !!favoriteTvSeries);
+
     const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId);
     if (rated) {
       setRating(rated.rating);
@@ -87,7 +108,7 @@ const ActionButtons = ({ movie }: iProps) => {
       setRating(null);
       setIsRated(false);
     }
-  }, [isAuthenticated, userFavorites, userRatings, isRated]);
+  }, [isAuthenticated, userFavoriteMovies,userFavoriteTvSeries, userRatings, isRated]);
 
   const toggleWatchlist = () => {
     setIsInWatchlist((prevState) => !prevState);
@@ -107,7 +128,7 @@ const ActionButtons = ({ movie }: iProps) => {
       <div className={s.ratings_container}>
         <Tooltip tooltipText="Average score">
           <div className={s.average_rating}>
-            <span>{movie.vote_average?.toFixed(1)}</span>
+            <span>{voteAverage?.toFixed(1)}</span>
           </div>
         </Tooltip>
         {isAuthenticated && rating ?

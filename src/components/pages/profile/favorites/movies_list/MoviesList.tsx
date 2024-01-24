@@ -19,27 +19,23 @@ const MoviesList = () => {
                 return data.favorites as iFavorite[];
             } catch (error) {
                 console.error('Error fetching user favorites:', error);
-                throw error; 
+                throw error;
             }
         },
     });
 
-    const handleResultChange = (result: iFavorite[]) => {
-        setFilteredData([...result]);  //destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
-    }
+    // const handleResultChange = (result: iFavorite[]) => {
+    //     setFilteredData([...result]);  //destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
+    // }
 
     const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavorites;
 
     return (
         <>
-            <Filter userFavorites={userFavorites} onResultChange={handleResultChange} />
-            <ContentDisplay headerTitle='My favorite movies' >
-                <div className={s.list}>
-                    {moviesToDisplay?.map((movie) => (
-                        <MovieCard key={movie.id} movie={movie} />
-                    ))}
-                </div>
-            </ContentDisplay>
+            {/* <Filter userFavorites={userFavorites} onResultChange={handleResultChange} /> */}
+            <div className={s.list}>
+                {/* <ContentDisplay headerTitle="Favorites" movies={moviesToDisplay} /> */}
+            </div>
         </>
     )
 }

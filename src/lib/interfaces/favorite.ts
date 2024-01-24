@@ -5,5 +5,6 @@ export interface iFavorite {
     vote_average: number;
     userId: string;
     movieId: string;
+    seriesId: string;
     createdAt: Date;
   }

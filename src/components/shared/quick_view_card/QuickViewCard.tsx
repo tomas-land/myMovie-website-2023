@@ -1,17 +1,20 @@
 'use client';
 import s from './quick_view_card.module.scss';
-import { iMovie } from '@/lib/interfaces/movie';
 import { IoCloseOutline } from 'react-icons/io5';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+
 
 interface iProps {
-  movie: iMovie;
   setIsQuickViewOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  genres: [{ id: string; name: string }] | undefined;
+  genres?: [{ id: string; name: string }];
+  title?: string;
+  releaseDate?: string;
+  overview?: string;
+  additionalInfo?: [{ genres: [{ id: string; name: string }]; last_air_date?: string; season_numbers?: number }];
+  mediaType: string;
 }
 
-const QuickViewCard = ({ movie, setIsQuickViewOpened, genres }: iProps) => {
+const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, additionalInfo, mediaType }: iProps) => {
 
   const closeQuickView = () => {
     setIsQuickViewOpened(false);
@@ -23,16 +26,20 @@ const QuickViewCard = ({ movie, setIsQuickViewOpened, genres }: iProps) => {
         <button className={s.close_btn} onClick={closeQuickView}>
           <IoCloseOutline size={30} />
         </button>
-        <h1 className={s.title}>{movie.title}</h1>
+        <h1 className={s.title}>{title}</h1>
         <div className={s.genres}>
-          {genres?.map((genre) => (
-            <span className={s.genre} key={genre.id}>
-              {genre.name}
-            </span>
+          {additionalInfo?.[0]?.genres.map((genre) => (
+            <span className={s.genre} key={genre.id}>{genre.name}</span>
           ))}
         </div>
-        <p className={s.overview}>{movie.overview}</p>
-        <h4 className={s.release_date}>Release date &nbsp; {movie.release_date}</h4>
+        <p className={s.overview}>{overview}</p>
+        <div className={s.additional_info}>
+          {mediaType === 'tv_series' ? (
+            <>
+              <h4 className={s.season_numbers}>Seasons &nbsp; {additionalInfo?.[0]?.season_numbers}</h4>
+              <h4 className={s.last_air_date}>Last air date &nbsp; {additionalInfo?.[0]?.last_air_date}</h4>
+            </>) : (<h4 className={s.release_date}>Release date &nbsp; {releaseDate}</h4>)}
+        </div>
       </div>
     </motion.div>
   );

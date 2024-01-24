@@ -1,0 +1,30 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.media_slider {
+    display: flex;
+    .wrapper {
+        border-radius: 3.5rem;
+        overflow: hidden;
+        display: flex;
+        gap: 0.1rem;
+        .btn {
+            width: 9rem;
+            padding: 0.6rem;
+            color: $color-1;
+            background-color: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.1rem;
+            cursor: pointer;
+            transform: skewX(-7deg);
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+            &:focus{
+                background-color: rgba(0, 0, 0, 0.4);
+                color: $color-1-light;
+            }
+        }
+    }
+}
