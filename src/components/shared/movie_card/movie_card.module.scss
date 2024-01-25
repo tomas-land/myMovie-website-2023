@@ -6,19 +6,23 @@
   display: flex;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
-
+  // max-width: 16rem;
+  @include breakpoint(768) {
+    width: 100%;
+  }
+  
   .movie_card_wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    width: 16rem;
     border-radius: 1rem;
-
+    
     .poster_wrapper {
       border-radius: 1rem 1rem 0 0;
       background-color: rgba(0, 0, 0, 0.3);
       overflow: hidden;
       position: relative;
-
+      
       .poster {
         opacity: 1;
         border-radius: 1rem 1rem 0 0;

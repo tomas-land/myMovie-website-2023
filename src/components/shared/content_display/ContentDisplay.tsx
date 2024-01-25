@@ -11,8 +11,8 @@ import { useState, useEffect } from 'react';
 interface iProps {
   headerTitle: string;
   endpoint?: string;
-  movies: iMovie[];
-  tvSeries: iTvSeries[];
+  movies?: iMovie[];
+  tvSeries?: iTvSeries[];
   profile?: boolean;
   redirectTo?: string;
   isQuickView?: boolean;

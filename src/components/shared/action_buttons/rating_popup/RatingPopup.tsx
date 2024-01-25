@@ -10,12 +10,12 @@ import SecondaryButton from '../../buttons/secondaty_button/SecondaryButton';
 
 interface iProps {
     handleSetIsRatingOpened: (value: boolean) => void;
-    movieId: string | undefined;
+    currentSlideId: string | undefined;
     isRated: boolean;
     setIsRated: (value: boolean) => void;
 }
 
-const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: iProps) => {
+const RatingPopup = ({ handleSetIsRatingOpened, currentSlideId, isRated, setIsRated }: iProps) => {
     const [selectedRating, setSelectedRating] = useState<string | null>(null);
     const queryClient = useQueryClient();
 
@@ -27,7 +27,7 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: 
 
     // save rating to db, or update if already rated 
     const { mutate: rateMovie } = useMutation({
-        mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { movie_id: movieId, rating: selectedRating }),
+        mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { current_slide_id: currentSlideId, rating: selectedRating }),
         onSuccess: () => {
             const message = isRated ? 'Rating updated' : 'Thank you for your rating';
             toastSuccess(message);
@@ -41,11 +41,11 @@ const RatingPopup = ({ handleSetIsRatingOpened, movieId, isRated, setIsRated }: 
     });
     // delete rating from db and mutate cache
     const { mutate: deleteRating } = useMutation({
-        mutationFn: async () => await axios.delete(`/api/ratings/delete_rating?movie_id=${movieId}`),
+        mutationFn: async () => await axios.delete(`/api/ratings/delete_rating?current_slide_id=${currentSlideId}`),
         onMutate: async () => {
             queryClient.cancelQueries({ queryKey: ['ratings'] });
             const previousRatings = queryClient.getQueryData(['ratings']);
-            queryClient.setQueryData(['ratings'], (old: any) => [...old, { contentId: movieId }]);
+            queryClient.setQueryData(['ratings'], (old: any) => [...old, { current_slide_id: currentSlideId }]);
             return { previousRatings };
         },
         onSuccess: () => {

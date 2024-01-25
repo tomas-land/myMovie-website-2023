@@ -9,8 +9,8 @@ export async function GET(request: Request) {
     const user_id = session?.user?.id;
 
     try {
-        const favorites =await getAllFavoriteTvSeriesPrisma(user_id);
-        return NextResponse.json({ favorites }, { status: 200 });
+        const favoriteTvSeries =await getAllFavoriteTvSeriesPrisma(user_id);
+        return NextResponse.json({ favoriteTvSeries }, { status: 200 });
     } catch (error) {
         console.log(error)
         return NextResponse.json({ message: 'Error getting favorites' }, { status: 500 });

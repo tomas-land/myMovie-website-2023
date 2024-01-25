@@ -1,40 +1,35 @@
 'use client'
 import MovieCard from '@/components/shared/movie_card/MovieCard'
 import s from './movies_list.module.scss'
-import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
 import Filter from '@/components/shared/filter/Filter';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { iFavorite } from '@/lib/interfaces/favorite';
 import { useState } from 'react';
+import useUserData from '@/hooks/reactQuery/useUserData';
 
 const MoviesList = () => {
     const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
 
-    const { data: userFavorites } = useQuery({
-        queryKey: ['favoriteMovies'],
-        queryFn: async () => {
-            try {
-                const { data } = await axios.get(`/api/favorites/all_favorites`);
-                return data.favorites as iFavorite[];
-            } catch (error) {
-                console.error('Error fetching user favorites:', error);
-                throw error;
-            }
-        },
-    });
-// console.log(userFavorites)
-    // const handleResultChange = (result: iFavorite[]) => {
-    //     setFilteredData([...result]);  //destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
-    // }
+    const handleResultChange = (result: iFavorite[]) => {  //  destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
+        setFilteredData([...result]);
+    }
 
-    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavorites;
+    const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
+    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavoriteMovies;
 
     return (
         <>
-            {/* <Filter userFavorites={userFavorites} onResultChange={handleResultChange} /> */}
+            <Filter userFavorites={userFavoriteMovies} onResultChange={handleResultChange} />
             <div className={s.list}>
-                {/* <ContentDisplay headerTitle="Favorites" movies={moviesToDisplay} /> */}
+                <div className={s.wrapper}>
+                    {moviesToDisplay?.map((movie: iFavorite) => (
+                        <MovieCard
+                            key={movie.id}
+                            movie={movie}
+                            isQuickView={false}
+                            mediaType='movies'
+                        />
+                    ))}
+                </div>
             </div>
         </>
     )

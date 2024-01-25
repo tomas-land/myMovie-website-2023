@@ -13,17 +13,17 @@ import { usePathname } from 'next/navigation';
 
 
 interface iProps {
-  movies: iMovie[];
+  movies?: iMovie[];
   endpoint?: string;
   profile?: boolean;
   redirectTo?: string;
-  tvSeries: iTvSeries[];
+  tvSeries?: iTvSeries[];
   mediaType: string;
   isQuickView?: boolean;
 }
 
 const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, isQuickView }: iProps) => {
-  const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[]>([]);
+  const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[] | undefined>([]);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const pathname = usePathname();
@@ -32,7 +32,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, is
     try {
       setIsLoading(true);
       const moreSlides = await axios.get(`/api/${mediaType}/${endpoint}`, { params: { page: pageToShow } });
-      setInitialSlides([...initialSlides, ...moreSlides.data]);
+      setInitialSlides([...(initialSlides as (iMovie[] | iTvSeries[])), ...moreSlides.data]);
       setPageToShow(pageToShow + 1);
       setIsLoading(false);
     } catch (error) {
@@ -63,8 +63,8 @@ const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, is
         autoHeight: true,
       }}
     >
-      {initialSlides.length === 0 ? <div className={s.no_content}>No recent activity</div> : null}
-      {initialSlides.map((item) => (
+      {initialSlides?.length === 0 ? <div className={s.no_content}>No recent activity</div> : null}
+      {initialSlides?.map((item) => (
         <SplideSlide key={item.id} className={s.slide}>
           {mediaType === 'movies' ? (
             <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} />
@@ -74,7 +74,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, is
         </SplideSlide>
       ))}
       {/* // Last slide */}
-      {endpoint !== 'top_rated' && initialSlides.length > 0 ? (  // top_rated movies will not have a show more button on the last slide
+      {endpoint !== 'top_rated' && initialSlides ? (  // top_rated movies will not have a show more button on the last slide
         <SplideSlide className={s.slide}>
           <div className={s.last_slide}>
             {isLoading ? (

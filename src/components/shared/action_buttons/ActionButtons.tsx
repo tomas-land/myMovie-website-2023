@@ -45,11 +45,11 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
 
   // fetch user ratings and cache them
-  const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings', isAuthenticated);
+  const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings');
 
   // fetch user favorite movies or cache them
-  const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies', isAuthenticated);
-  const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries', isAuthenticated);
+  const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
+  const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries');
 
   // Mutation to add or remove a movie or tv series from favorites
   const { mutate: toggleFavorite, isPending } = useMutation({
@@ -101,9 +101,8 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
     const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId);
     const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId);
     setIsFavorite(!!favoriteMovie || !!favoriteTvSeries);
-    console.log(userRatings)
+
     const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId || rating.contentId === tvSeriesId);
-    console.log(rated)
     if (rated) {
       setRating(rated.rating);
       setIsRated(true);
@@ -118,7 +117,6 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   };
 
   const toggleRatingContainer = (id: string | undefined) => {
-    console.log(id)
     if (id === currentRatingPopupId) {  // if clicked on the same movie slide, toggle rating popup
       setIsRatingOpened((prev) => !prev);
     } else {                                  // if clicked on another movie first time, set current rating popup id(currentRatingPopupId) and open rating popup 
@@ -145,8 +143,8 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       <div className={s.btns_wrapper}>
         <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
           {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup (global context nescesary)*/}
-          {isAuthenticated && isRatingOpened && currentRatingPopupId === currentSlideId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} movieId={movieId} isRated={isRated} setIsRated={setIsRated} /> : null}
-          <button className={`${s.btn} ${isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(currentSlideId)} disabled={!isAuthenticated}>
+          {isAuthenticated && isRatingOpened && currentRatingPopupId === currentSlideId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} currentSlideId={currentSlideId} isRated={isRated} setIsRated={setIsRated} /> : null}
+          <button className={`${s.btn} ${rating && isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(currentSlideId)} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>
         </Tooltip>

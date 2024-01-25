@@ -1,20 +1,30 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
 
-.list{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    @include breakpoint(1400){
-        grid-template-columns: repeat(4, 1fr);
-    }
-    @include breakpoint(1024){
-        grid-template-columns: repeat(3, 1fr);
-    }
-    @include breakpoint(768){
-        grid-template-columns: repeat(2, 1fr);
-    }
-    @include breakpoint(480){
-        grid-template-columns: repeat(1, 1fr);
+.list {
+    max-width: $main_container;
+    margin: auto;
+    overflow-x: hidden;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+
+    .wrapper {
+        display: grid;
+        justify-items: start;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        @include breakpoint(1400) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @include breakpoint(1024) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include breakpoint(768) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include breakpoint(480) {
+            grid-template-columns: repeat(1, 1fr);
+        }
     }
 }
