@@ -20,8 +20,8 @@ import { iTvSeries } from '@/lib/interfaces/tv_series';
 
 
 interface iProps {
-  movie?: iMovie;
-  tvSeries?: iTvSeries
+  movie?: iMovie | iFavorite;
+  tvSeries?: iTvSeries | iFavorite;
   mediaType: string
 }
 

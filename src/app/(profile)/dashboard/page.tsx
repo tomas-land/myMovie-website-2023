@@ -12,7 +12,7 @@ const Dashboard = async () => {
     return (
         <div className={s.dashboard}>
             <Stats />
-            {/* <MediaDisplay headerTitle='Recent favorite' movies={recentFavoriteMovies} tvSeries={recentFavoriteTvSeries} profile={true} isQuickView={false}/> */}
+            <MediaDisplay headerTitle='Recent favorite' movies={recentFavoriteMovies} tvSeries={recentFavoriteTvSeries} userProfile={true} isQuickView={false} cardWidth='16rem'/>
         </div>
     );
 };

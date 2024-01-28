@@ -28,6 +28,7 @@ const TvSeriesList = () => {
                             // tvSeries={tvSeries}
                             isQuickView={false}
                             mediaType='tv_series'
+                            cardWidth='100%'
                         />
                     ))}
                 </div>

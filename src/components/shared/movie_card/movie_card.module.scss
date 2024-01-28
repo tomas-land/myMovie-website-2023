@@ -11,7 +11,6 @@
   }
   
   .movie_card_wrapper {
-    width: 16rem;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
@@ -93,8 +92,5 @@
         padding: 0.8rem 0;
       }
     }
-  }
-  .movie_card_wrapper_full_width {
-    width: 100%;
   }
 }

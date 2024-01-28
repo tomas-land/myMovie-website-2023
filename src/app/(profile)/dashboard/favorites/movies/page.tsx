@@ -5,8 +5,7 @@ const FavoriteMoviesPage = async () => {
 
     return (
         <div>
-            <MoviesList  />
-            
+            <MoviesList  />    
         </div>
     )
 }

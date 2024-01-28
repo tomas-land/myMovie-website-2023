@@ -11,19 +11,21 @@ import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import path from 'path';
+import { iFavorite } from '@/lib/interfaces/favorite';
 
 
 interface iProps {
-  movies?: iMovie[];
+  movies?: iMovie[] | iFavorite[] | undefined;
+  tvSeries?: iTvSeries[] | iFavorite[] | undefined;
   endpoint?: string;
-  profile?: boolean;
-  tvSeries?: iTvSeries[];
+  userProfile?: boolean;
   mediaType: string;
   isQuickView?: boolean;
+  cardWidth: string;
 }
 
-const Slider = ({ movies, endpoint, profile, tvSeries, mediaType, isQuickView }: iProps) => {
-  const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[] | undefined>([]);
+const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickView, cardWidth }: iProps) => {
+  const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[]>([]);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const pathname = usePathname();
@@ -43,13 +45,13 @@ const Slider = ({ movies, endpoint, profile, tvSeries, mediaType, isQuickView }:
 
   useEffect(() => {
     if (mediaType === 'movies') {
-      setInitialSlides(movies);
+      setInitialSlides(movies || []);
     } else if (mediaType === 'tv_series') {
-      setInitialSlides(tvSeries);
+      setInitialSlides(tvSeries || []);
     }
   }, [mediaType]);
 
-
+  console.log(initialSlides)
 
   return (
     <Splide
@@ -67,20 +69,20 @@ const Slider = ({ movies, endpoint, profile, tvSeries, mediaType, isQuickView }:
       {initialSlides?.map((item) => (
         <SplideSlide key={item.id} className={s.slide}>
           {mediaType === 'movies' ? (
-            <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} />
+            <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} />
           ) : (
-            <MovieCard tvSeries={item as iTvSeries} mediaType={mediaType} isQuickView={isQuickView} />
+            <MovieCard tvSeries={item as iTvSeries} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} />
           )}
         </SplideSlide>
       ))}
       {/* // Last slide */}
-      {endpoint !== 'top_rated' && initialSlides ? (  // top_rated movies will not have a show more button on the last slide
+      {initialSlides?.length > 0 || endpoint === 'top_rated' ? ( // if endpoint is top_rated or initialSlides is empty dont show last slide
         <SplideSlide className={s.slide}>
           <div className={s.last_slide}>
             {isLoading ? (
               <LoadingSpinner />
             ) : (
-              profile ? (
+              userProfile && movies ? (
                 <Link href={`${pathname}/favorites/${mediaType}`} className={s.link}>Show all</Link>
               ) : (
                 <button className={s.btn_more} onClick={handleShowMoreSlides}>

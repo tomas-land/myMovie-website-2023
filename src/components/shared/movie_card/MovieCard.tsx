@@ -8,15 +8,17 @@ import Link from 'next/link';
 import axios from 'axios';
 import MovieActionButtons from '@/components/shared/action_buttons/ActionButtons';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
+import { iFavorite } from '@/lib/interfaces/favorite';
 
 interface iProps {
-  movie?: iMovie;
-  tvSeries?: iTvSeries
+  movie?: iMovie | iFavorite;
+  tvSeries?: iTvSeries | iFavorite;
   isQuickView?: boolean;
   mediaType: string
+  cardWidth: string;
 }
 
-const MovieCard = ({ movie, tvSeries, isQuickView, mediaType }: iProps) => {
+const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProps) => {
   const [isQuickViewOpened, setIsQuickViewOpened] = useState<boolean>(false);
   const [additionalInfo, setAdditionalInfo] = useState<[{ genres: [{ id: string, name: string }], last_air_date?: string, season_numbers?: number }]>([{ genres: [{ id: '', name: '' }], last_air_date: '', season_numbers: 0 }]);
   const blurredImage: string | undefined = movie?.blurDataURL;
@@ -59,7 +61,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType }: iProps) => {
 
   return (
     <div className={s.movie_card} >
-      <div className={`${s.movie_card_wrapper} ${!isQuickView ? s.movie_card_wrapper_full_width : null}`}>
+      <div className={`${s.movie_card_wrapper}`} style={{ width: cardWidth }}>
         <div className={s.poster_wrapper} >
           <Link href={mediaType === 'movies' ? `/movie/${movieId}` : `/tv_series/${tvSeriesId}`}>
             {blurredImage ?
@@ -83,7 +85,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType }: iProps) => {
         </div>
       </div>
       {isQuickView && isQuickViewOpened ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened} additionalInfo={additionalInfo} mediaType={mediaType} /> : null}
-    </div>
+    </div >
   );
 };
 

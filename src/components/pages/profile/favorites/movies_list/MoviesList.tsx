@@ -25,9 +25,10 @@ const MoviesList = () => {
                     {moviesToDisplay?.map((movies: iFavorite) => (
                         <MovieCard
                             key={movies.id}
-                            // tvSeries={tvSeries}
+                            movie={movies}
                             isQuickView={false}
                             mediaType='movies'
+                            cardWidth='100%'
                         />
                     ))}
                 </div>
