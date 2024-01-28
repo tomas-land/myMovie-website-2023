@@ -33,3 +33,23 @@ export async function getTvSeriesById(id: string) {
     }
     return data;
 }
+
+export async function getTvSeriesImagesById(id: string) {
+    const response = await fetch(`${TMDB_BASE_URL}/tv/${id}/images?api_key=${TMDB_API_KEY}&language=en-US&include_image_language=en`);
+    const data = await response.json();
+    const images = data.backdrops;
+    if (!response.ok) {
+      throw new Error('Fetching movie images failed');
+    }
+    return images;
+  }
+  
+  export async function getTvSeriesVideosById(id: string) {
+    const response = await fetch(`${TMDB_BASE_URL}/tv/${id}/videos?api_key=${TMDB_API_KEY}&language=en-US&include_image_language=en&limit=1`);
+    const data = await response.json();
+    const results = data.results;
+    if (!response.ok) {
+      throw new Error('Fetching movie videos failed');
+    }
+    return results;
+  }

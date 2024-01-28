@@ -26,6 +26,10 @@
         font-size: 1.5rem;
       }
     }
+    @include breakpoint(768) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   .content {
     background-color: rgba(0, 0, 0, 0.2);

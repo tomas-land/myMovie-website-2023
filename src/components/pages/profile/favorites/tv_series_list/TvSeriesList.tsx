@@ -1,33 +1,33 @@
 'use client'
 import MovieCard from '@/components/shared/movie_card/MovieCard'
-import s from './movies_list.module.scss'
+import s from './tv_series_list_list.module.scss'
 import Filter from '@/components/shared/filter/Filter';
 import { iFavorite } from '@/lib/interfaces/favorite';
 import { useState } from 'react';
 import useUserData from '@/hooks/reactQuery/useUserData';
 
 
-const MoviesList = () => {
+const TvSeriesList = () => {
     const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
 
     const handleResultChange = (result: iFavorite[]) => {  //  destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
         setFilteredData([...result]);
     }
 
-    const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
-    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavoriteMovies;
+    const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries');
+    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavoriteTvSeries;
 
     return (
         <>
-            <Filter userFavorites={userFavoriteMovies} onResultChange={handleResultChange} />
+            <Filter userFavorites={userFavoriteTvSeries} onResultChange={handleResultChange} />
             <div className={s.list}>
                 <div className={s.wrapper}>
-                    {moviesToDisplay?.map((movies: iFavorite) => (
+                    {moviesToDisplay?.map((tvSeries: iFavorite) => (
                         <MovieCard
-                            key={movies.id}
+                            key={tvSeries.id}
                             // tvSeries={tvSeries}
                             isQuickView={false}
-                            mediaType='movies'
+                            mediaType='tv_series'
                         />
                     ))}
                 </div>
@@ -36,4 +36,4 @@ const MoviesList = () => {
     )
 }
 
-export default MoviesList
+export default TvSeriesList

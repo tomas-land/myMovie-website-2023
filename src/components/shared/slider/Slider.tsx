@@ -10,19 +10,19 @@ import '@splidejs/react-splide/css/core';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import path from 'path';
 
 
 interface iProps {
   movies?: iMovie[];
   endpoint?: string;
   profile?: boolean;
-  redirectTo?: string;
   tvSeries?: iTvSeries[];
   mediaType: string;
   isQuickView?: boolean;
 }
 
-const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, isQuickView }: iProps) => {
+const Slider = ({ movies, endpoint, profile, tvSeries, mediaType, isQuickView }: iProps) => {
   const [initialSlides, setInitialSlides] = useState<iMovie[] | iTvSeries[] | undefined>([]);
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -81,7 +81,7 @@ const Slider = ({ movies, endpoint, profile, redirectTo, tvSeries, mediaType, is
               <LoadingSpinner />
             ) : (
               profile ? (
-                <Link href={`${pathname}/${redirectTo}`} className={s.link}>Show all</Link>
+                <Link href={`${pathname}/favorites/${mediaType}`} className={s.link}>Show all</Link>
               ) : (
                 <button className={s.btn_more} onClick={handleShowMoreSlides}>
                   Show more ..

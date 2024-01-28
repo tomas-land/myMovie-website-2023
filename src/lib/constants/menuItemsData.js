@@ -32,7 +32,7 @@ const menuItemsData = [
       ],
       href: '/lists',
     },
-    { name: 'Reviews (in development)', href: '/reviews' },
+    { name: 'Reviews', href: '/reviews' },
     {
       name: 'Settings',
       subcategories: [

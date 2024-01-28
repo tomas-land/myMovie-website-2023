@@ -16,16 +16,15 @@
   }
   .slide {
     display: flex;
-    width: 16rem;
   }
   .last_slide {
-    display: flex;
+    @include flex-center();
     height: 33rem;
     width: 16rem;
-    @include flex-center();
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
     overflow: hidden;
+
     .btn_more,
     .link {
       background-color: transparent;

@@ -2,18 +2,12 @@
 @import "src/styles/variables";
 
 .list {
-    min-height: 100vh;
     max-width: $main_container;
     margin: auto;
     overflow-x: hidden;
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: 1rem 2rem;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
-
-    @include breakpoint(768) {
-        padding: 2rem 1rem;
-    }
 
     .wrapper {
         display: grid;

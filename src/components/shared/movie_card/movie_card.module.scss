@@ -6,13 +6,12 @@
   display: flex;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
-  // max-width: 16rem;
   @include breakpoint(768) {
     width: 100%;
   }
   
   .movie_card_wrapper {
-    width: 100%;
+    width: 16rem;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
@@ -95,7 +94,7 @@
       }
     }
   }
-  // .movie_card_wrapper_full_width {
-  //   width: 100%;
-  // }
+  .movie_card_wrapper_full_width {
+    width: 100%;
+  }
 }

@@ -1,6 +1,6 @@
 import BackdropImage from '@/components/shared/backdrop_image/BackdropImage';
-import MovieDetails from '@/components/pages/movie_details_page/movie_details/MovieDetails';
-import { getTvSeriesById } from '@/lib/requests/tv_series';
+import TvSeriesDetails from '@/components/pages/details/tv_series/tv_series_details/TvSeriesDetails';
+import { getTvSeriesById, getTvSeriesImagesById, getTvSeriesVideosById } from '@/lib/requests/tv_series';
 
 interface iProps {
   params: {
@@ -11,14 +11,13 @@ interface iProps {
 const TvSeriesPage = async ({ params }: iProps) => {
   const { id } = params;
   const tvSeries = await getTvSeriesById(id);
-  // const movie = await getMovieById(id);
-  // const movieImages = await getMovieImagesById(id);
-  // const movieVideos = await getMovieVideosById(id);
+  const tvSeriesImages = await getTvSeriesImagesById(id);
+  const tvSeriesVideos = await getTvSeriesVideosById(id);
+
   return (
     <div>
-      {/* <BackdropImage movie={movie} />
-      <MovieDetails movie={movie} movieImages={movieImages} movieVideos={movieVideos} /> */}
-      {tvSeries.name}
+      <BackdropImage tvSeries={tvSeries} />
+      <TvSeriesDetails tvSeries={tvSeries} tvSeriesImages={tvSeriesImages} tvSeriesVideos={tvSeriesVideos} />
     </div>
   );
 };

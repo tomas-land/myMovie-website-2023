@@ -1,7 +1,7 @@
 import '@/styles/globals.scss';
 import s from '@/components/pages/homepage/homepage.module.scss'
 import Hero from '@/components/pages/homepage/hero/Hero';
-import ContentDisplay from '@/components/shared/content_display/ContentDisplay';
+import MediaDisplay from '@/components/shared/media_display/MediaDisplay';
 import { getLatestMovies, getUpcomingMovies, getTopRatedMovies } from '@/lib/requests/movies';
 import { getLatestTvSeries, getUpcomingTvSeries } from '@/lib/requests/tv_series';
 // import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
@@ -19,8 +19,8 @@ const Home = async () => {
     <div className={s.homepage}>
       <Hero />
       <div className={s.content_displays_wrapper}>
-        <ContentDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} />
-        <ContentDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} />
+        <MediaDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} />
+        <MediaDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} />
         {/* <ContentDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={latestTvSeries} endpoint='top_rated' /> */}
       </div>
     </div>

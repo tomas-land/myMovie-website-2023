@@ -70,5 +70,3 @@ export async function getMovieVideosById(id: string) {
   }
   return results;
 }
-
-export default { getMovieById, getUpcomingMovies, getLatestMovies, getMovieImagesById, getMovieVideosById, getTopRatedMovies };

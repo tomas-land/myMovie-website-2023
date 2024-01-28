@@ -1,0 +1,34 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
+.scenes_wrapper {
+  button {
+    width: 100%;
+  }
+  .scenes_grid {
+    position: relative;
+    height: 13rem;
+    overflow: hidden;
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    mask: linear-gradient(180deg, rgba(28, 40, 56, 0.9), rgba(28, 40, 56, 0.1));
+
+    .scene {
+      position: relative;
+      height: 10rem;
+
+      .scene_img {
+        object-fit: cover;
+      }
+    }
+  }
+  .remove_mask {
+    mask: none;
+  }
+  .expanded_grid {
+    height: auto;
+    mask: none;
+  }
+}
