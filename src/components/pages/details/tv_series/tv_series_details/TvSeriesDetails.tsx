@@ -21,7 +21,7 @@ interface iProps {
   tvSeriesVideos: iTvSeriesVideo[]
 }
 
-const MovieDetails = ({ tvSeries, tvSeriesImages, tvSeriesVideos }: iProps) => {
+const TvSeriesDetails = ({ tvSeries, tvSeriesImages, tvSeriesVideos }: iProps) => {
   const pathname = usePathname();
   const { openModal, isModalOpened } = useModalContext();
   const { setIsSearchOpen } = useGlobalContext();
@@ -30,7 +30,7 @@ const MovieDetails = ({ tvSeries, tvSeriesImages, tvSeriesVideos }: iProps) => {
   useEffect(() => {
     if (pathname !== '/') setIsSearchOpen(false);
   }, [pathname]);
-console.log(tvSeries)
+
   return (
     <div className={s.movie_details}>
       <div className={s.backdrop}></div>
@@ -57,7 +57,7 @@ console.log(tvSeries)
           {/* Info */}
           <div className={s.extended_info}>
             <div>
-              <span>Created by:</span> {tvSeries.created_by[0].name} 
+              <span>Created by:</span> {tvSeries.created_by[0]?.name} 
             </div>
             <div>
               <span>Runtime:</span> {tvSeries.episode_run_time[0]} min
@@ -107,4 +107,4 @@ console.log(tvSeries)
   );
 };
 
-export default MovieDetails;
+export default TvSeriesDetails;

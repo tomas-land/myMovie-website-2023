@@ -1,39 +1,32 @@
 'use client'
 import MovieCard from '@/components/shared/movie_card/MovieCard'
-import s from './tv_series_list_list.module.scss'
-import Filter from '@/components/shared/filter/Filter';
+import s from './tv_series_list.module.scss'
 import { iFavorite } from '@/lib/interfaces/favorite';
-import { useState } from 'react';
-import useUserData from '@/hooks/reactQuery/useUserData';
+import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 
+interface iProps {
+    moviesToDisplay: iFavorite[]
+}
 
-const TvSeriesList = () => {
-    const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
-
-    const handleResultChange = (result: iFavorite[]) => {  //  destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
-        setFilteredData([...result]);
-    }
-
-    const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries');
-    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavoriteTvSeries;
-
+const TvSeriesList = ({ moviesToDisplay }: iProps) => {
     return (
-        <>
-            <Filter userFavorites={userFavoriteTvSeries} onResultChange={handleResultChange} />
-            <div className={s.list}>
-                <div className={s.wrapper}>
+        <div className={s.list}>
+            {!moviesToDisplay ? <LoadingSpinner /> :
+                (<div className={s.wrapper}>
                     {moviesToDisplay?.map((tvSeries: iFavorite) => (
                         <MovieCard
                             key={tvSeries.id}
-                            // tvSeries={tvSeries}
+                            tvSeries={tvSeries}
                             isQuickView={false}
                             mediaType='tv_series'
                             cardWidth='100%'
                         />
                     ))}
                 </div>
-            </div>
-        </>
+                )
+            }
+            {moviesToDisplay?.length === 0 && <span className={s.no_favorites}>You don&apos;t have any favorite tv series yet</span>}
+        </div>
     )
 }
 

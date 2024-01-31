@@ -1,40 +1,34 @@
 'use client'
 import MovieCard from '@/components/shared/movie_card/MovieCard'
 import s from './movies_list.module.scss'
-import Filter from '@/components/shared/filter/Filter';
 import { iFavorite } from '@/lib/interfaces/favorite';
-import { useState } from 'react';
-import useUserData from '@/hooks/reactQuery/useUserData';
+import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 
+interface iProps {
+    moviesToDisplay: iFavorite[]
+}
 
-const MoviesList = () => {
-    const [filteredData, setFilteredData] = useState<iFavorite[]>([]);
-
-    const handleResultChange = (result: iFavorite[]) => {  //  destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
-        setFilteredData([...result]);
-    }
-
-    const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
-    const moviesToDisplay = filteredData.length > 0 ? filteredData : userFavoriteMovies;
-
+const MoviesList = ({ moviesToDisplay }: iProps) => {
     return (
-        <>
-            <Filter userFavorites={userFavoriteMovies} onResultChange={handleResultChange} />
-            <div className={s.list}>
+        <div className={s.list}>
+            {!moviesToDisplay ? <LoadingSpinner /> : (
                 <div className={s.wrapper}>
-                    {moviesToDisplay?.map((movies: iFavorite) => (
+                    {moviesToDisplay?.map((movie: iFavorite) => (
                         <MovieCard
-                            key={movies.id}
-                            movie={movies}
+                            key={movie.id}
+                            movie={movie}
                             isQuickView={false}
                             mediaType='movies'
                             cardWidth='100%'
                         />
                     ))}
                 </div>
-            </div>
-        </>
+            )
+            }
+            {moviesToDisplay?.length === 0 && <span className={s.no_favorites}>You don&apos;t have any favorite movies yet</span>}
+        </div>
     )
 }
 
 export default MoviesList
+

@@ -2,12 +2,27 @@
 @import "src/styles/variables";
 
 .list {
+    @include flex-center();
+    flex-direction: column;
+    width: 100%;
     max-width: $main_container;
+    min-height: 35rem;
     margin: auto;
     overflow-x: hidden;
-    padding: 1rem 2rem;
+    padding: 2rem;
     background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
+
+    @include breakpoint(768) {
+        padding: 2rem 1rem;
+    }
+
+    .no_favorites {
+        padding: 1rem 2rem;
+        color: $color-1;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+    }
 
     .wrapper {
         display: grid;

@@ -4,8 +4,10 @@ import { redirect } from 'next/navigation';
 import authOptions from '@/lib/auth/authOptions';
 import UserInfo from '@/components/pages/profile/user_info/UserInfo';
 import { getUserByEmail } from '@/lib/requests/user';
-export const revalidate = 0;
-export const dynamic = 'force-dynamic'
+import s from '@/components/pages/profile/dashboard/dashboard.module.scss'
+
+// export const revalidate = 0;
+// export const dynamic = 'force-dynamic'
 
  
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -22,7 +24,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const user = await getUserByEmail(userEmail);
 
   return (
-    <div>
+    <div className={s.dashboard}>
       <UserInfo user={user} session={session} />
       <DashboardMenu />
       <div>

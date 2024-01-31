@@ -15,7 +15,7 @@ const DashboardMenu = () => {
   const [menuItems, setMenuItems] = useState<iMenuItem[]>(menuItemsData);
   const [isSubMenuShown, setIsSubMenuShown] = useState<boolean>(false);
   const [currentSubcategories, setCurrentSubcategories] = useState<{ name: string; href: string }[]>([]);
-  const [mobileView, setMobileView] = useState(window.innerWidth < 768);
+  const [mobileView, setMobileView] = useState(false);
 
   useEffect(() => {
     // Function to update mobile view state

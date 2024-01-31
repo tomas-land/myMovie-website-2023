@@ -51,8 +51,6 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
     }
   }, [mediaType]);
 
-  console.log(initialSlides)
-
   return (
     <Splide
       className={s.slider}

@@ -4,31 +4,31 @@ const menuItemsData = [
       name: 'Favorites',
       subcategories: [
         { name: 'Movies', href: '/dashboard/favorites/movies' },
-        { name: 'TV Series (in development)', href: '/dashboard/favorites/tv-series' },
+        { name: 'TV Series', href: '/dashboard/favorites/tv_series' },
       ],
       href: '/dashboard/favorites',
     },
     {
       name: 'Watchlist',
       subcategories: [
-        { name: 'Movies (in development)', href: '/watchlist/movies' },
-        { name: 'TV Series (in development)', href: '/watchlist/tv-series' },
+        { name: 'Movies (in dev)', href: '/watchlist/movies' },
+        { name: 'TV Series (in dev)', href: '/watchlist/tv-series' },
       ],
       href: '/watchlist',
     },
     {
       name: 'Rated',
       subcategories: [
-        { name: 'Movies (in development)', href: '/rated/movies' },
-        { name: 'TV Series (in development)', href: '/rated/tv-series' },
+        { name: 'Movies (in dev)', href: '/rated/movies' },
+        { name: 'TV Series (in dev)', href: '/rated/tv-series' },
       ],
       href: '/rated',
     },
     {
       name: 'Lists',
       subcategories: [
-        { name: 'Movies (in development)', href: '/lists/movies' },
-        { name: 'Test (in development)', href: '/lists/test' },
+        { name: 'Movies (in dev)', href: '/lists/movies' },
+        { name: 'Test (in dev)', href: '/lists/test' },
       ],
       href: '/lists',
     },
@@ -36,7 +36,7 @@ const menuItemsData = [
     {
       name: 'Settings',
       subcategories: [
-        { name: 'Account (in development)', href: '/settings/movies' },
+        { name: 'Account (in dev)', href: '/settings/movies' },
       ],
       href: '/settings',
     },
