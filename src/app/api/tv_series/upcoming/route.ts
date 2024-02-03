@@ -9,9 +9,10 @@ export async function GET(request: Request) {
   const page = searchParams.get('page');
 
   try {
-    const response = await fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=${page}&primary_release_date.gte=${currentDate}&sort_by=popularity.desc`);
+    const response = await fetch(`${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=${page}&first_air_date.gte=${currentDate}&sort_by=popularity.desc`);
     const data = await response.json();
     const results = filterOutMoviesWithPosters(data.results);
+
     return NextResponse.json(results);
   } catch (error) {
     console.error(error);

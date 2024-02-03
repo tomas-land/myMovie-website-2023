@@ -1,8 +1,9 @@
 export interface iTvSeries {
-  id: number | string;
+  id: number;
   seriesId?: string;
   first_air_date?: string;
   last_air_date?: string;
+  air_date?: string;
   episode_run_time: number[];
   number_of_episodes?: number;
   number_of_seasons?: number;

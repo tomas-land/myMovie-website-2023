@@ -4,6 +4,7 @@ export interface iFavorite {
     name?: string;
     overview?: string;
     release_date?: string;
+    air_date?: string;
     first_air_date?: string;
     poster_path: string;
     vote_average: number;

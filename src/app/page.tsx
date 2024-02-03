@@ -4,7 +4,7 @@ import Hero from '@/components/pages/homepage/hero/Hero';
 import MediaDisplay from '@/components/shared/media_display/MediaDisplay';
 import { getLatestMovies, getUpcomingMovies, getTopRatedMovies } from '@/lib/requests/movies';
 import { getLatestTvSeries, getUpcomingTvSeries } from '@/lib/requests/tv_series';
-// import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
+import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import getBlurredEntitiesUrl from '@/lib/helpers/getBlurredEntitiesUrl';
 
 
@@ -13,7 +13,7 @@ const Home = async () => {
   const latestTvSeries = await getLatestTvSeries();
   const upcomingMovies = await getUpcomingMovies();
   const upcomingTvSeries = await getUpcomingTvSeries();
-  // const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
+  const sortedByVoteTopRatedMovies = sortMoviesByVote(await getTopRatedMovies());
 
   return (
     <div className={s.homepage}>
@@ -21,7 +21,7 @@ const Home = async () => {
       <div className={s.content_displays_wrapper}>
         <MediaDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} cardWidth='16rem'/>
         <MediaDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} cardWidth='16rem'/>
-        {/* <ContentDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={latestTvSeries} endpoint='top_rated' /> */}
+        <MediaDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={latestTvSeries} endpoint='top_rated' isQuickView={true} cardWidth='16rem'/>
       </div>
     </div>
   );

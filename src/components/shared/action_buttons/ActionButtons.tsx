@@ -17,6 +17,7 @@ import { useGlobalContext } from '@/context/GlobalContext';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useRouter } from 'next/navigation';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
+import { currentDate } from '@/lib/dayJS';
 
 
 interface iProps {
@@ -43,7 +44,8 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const title = movie?.title ?? tvSeries?.name;
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
-
+  const isNotReleased = (movie?.release_date && movie.release_date > currentDate) || (tvSeries?.first_air_date && tvSeries.first_air_date > currentDate) ? true : false; // if movie or tv series is not released yet, don't show rating
+  console.log(tvSeries)
   // fetch user ratings and cache them
   const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings');
 
@@ -70,8 +72,7 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
           await axios.post(`/api/favorites/tv_series/save_favorite`, { tv_series_id: tvSeriesId, title: title, poster_path: posterPath, vote_average: voteAverage });
         }
       }
-    }
-    ,
+    },
     // onMutate: () => {
     //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
     //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
@@ -127,27 +128,28 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
 
   return (
     <div className={s.action_btns}>
-      <div className={s.ratings_container}>
-        <Tooltip tooltipText="Average score">
-          <div className={s.average_rating}>
-            <span>{voteAverage?.toFixed(1)}</span>
-          </div>
-        </Tooltip>
-        {isAuthenticated && rating ?
-          (<Tooltip tooltipText="Your score">
-            <div className={s.user_rating}>
-              <span>{rating}</span>
+      {isNotReleased ? null :  // if movie is not released yet, don't show rating
+        <div className={s.ratings_container}>
+          <Tooltip tooltipText="Average score">
+            <div className={s.average_rating}>
+              <span>{voteAverage && voteAverage !== 0 ? voteAverage.toFixed(1) : 0}</span>
             </div>
-          </Tooltip>) : null}
-      </div>
+          </Tooltip>
+          {isAuthenticated && rating ?
+            (<Tooltip tooltipText="Your score">
+              <div className={s.user_rating}>
+                <span>{rating}</span>
+              </div>
+            </Tooltip>) : null}
+        </div>}
       <div className={s.btns_wrapper}>
-        <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
+        {isNotReleased ? null : <Tooltip tooltipText={isAuthenticated ? "Add or remove rating" : "You must sign-in in to rate movies"}>
           {/* if rating popup is opened and current rating popup id is equal to movie id, show rating popup (global context nescesary)*/}
           {isAuthenticated && isRatingOpened && currentRatingPopupId === currentSlideId ? <RatingPopup handleSetIsRatingOpened={setIsRatingOpened} currentSlideId={currentSlideId} isRated={isRated} setIsRated={setIsRated} /> : null}
           <button className={`${s.btn} ${rating && isRated ? s.fill_icon : ''}`} onClick={() => toggleRatingContainer(currentSlideId)} disabled={!isAuthenticated}>
             <FiStar size={25} />
           </button>
-        </Tooltip>
+        </Tooltip>}
         <Tooltip tooltipText={isAuthenticated ? "Add or remove from favorites" : "You must sign-in in to add to favorites"}>
           {isPending ? <button className={`${s.btn} ${s.fill_icon}`}><FiHeart size={25} /></button> :
             <button className={`${s.btn} ${isFavorite ? s.fill_icon : ''}`} onClick={() => toggleFavorite()} disabled={!isAuthenticated}>

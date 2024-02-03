@@ -81,7 +81,9 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
         </div>
         <div className={s.content}>
           <h3 className={s.title}>{title}</h3>
-          <MovieActionButtons movie={movie} tvSeries={tvSeries} mediaType={mediaType} />
+          <div className={s.action_btns}>
+            <MovieActionButtons movie={movie} tvSeries={tvSeries} mediaType={mediaType} />
+          </div>
         </div>
       </div>
       {isQuickView && isQuickViewOpened ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened} additionalInfo={additionalInfo} mediaType={mediaType} /> : null}

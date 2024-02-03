@@ -1,10 +1,10 @@
-@import 'src/styles/mixins';
-@import 'src/styles/variables';
+@import "src/styles/mixins";
+@import "src/styles/variables";
 
 .movie_details {
   position: relative;
-  max-width: 60rem;
-  margin: auto;
+  max-width: 70rem;
+  margin: 0 auto 2rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        line-height: 0.4;
+        line-height: 1.4;
         margin-bottom: 1rem;
         .genre {
           font-size: 1.2rem;
@@ -69,14 +69,21 @@
           }
         }
       }
+      .external_links {
+        padding: 1rem 0;
+        .icon {
+          filter: brightness(0.8);
+        }
+      }
+
       .extended_info {
         font-size: 1rem;
         font-weight: 500;
         letter-spacing: 0.1rem;
         color: $color-1;
-        margin-top: 3rem;
         display: flex;
         flex-direction: column;
+        margin-top: 1rem;
         gap: 1rem;
         span {
           color: $color-1-light;
@@ -98,6 +105,7 @@
   .overview {
     grid-column: 1 / -1;
     margin-top: 3rem;
+
     .overview_title {
       font-size: 1.3rem;
       font-weight: 700;

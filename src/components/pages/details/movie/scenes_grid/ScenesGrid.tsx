@@ -12,11 +12,14 @@ interface iProps {
 
 const ScenesGrid = ({ movieImages, movie }: iProps) => {
   const [isGridExpanded, setIsGridExpanded] = useState(false);
+
   const toggleShowMoreImages = () => {
     setIsGridExpanded((prev) => !prev);
   };
+
   return (
     <div className={s.scenes_wrapper}>
+      <h2 className={s.title}>Backdrops</h2>
       <div className={`${s.scenes_grid} ${isGridExpanded ? s.expanded_grid : ''} ${movieImages.length < 3 ? s.remove_mask : null}`}>
         {movieImages.map((scene) => (
           <div className={s.scene} key={scene.file_path}>

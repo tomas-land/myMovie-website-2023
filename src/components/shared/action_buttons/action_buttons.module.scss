@@ -2,11 +2,11 @@
 @import "src/styles/variables";
 
 .action_btns {
-
   display: flex;
   justify-content: space-between;
   padding: 0 0 1rem;
-  
+  width: 100%;
+
   .ratings_container {
     display: flex;
     align-items: center;
@@ -38,6 +38,7 @@
   }
   .btns_wrapper {
     display: flex;
+    align-items: center;
 
     .btn {
       background-color: transparent;

@@ -1,7 +1,20 @@
-@import 'src/styles/mixins';
-@import 'src/styles/variables';
+@import "src/styles/mixins";
+@import "src/styles/variables";
 
 .scenes_wrapper {
+  max-width: 70rem;
+  margin:auto;
+  padding: 1rem 2rem 2rem;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    color: $color-1-light;
+  }
+
   button {
     width: 100%;
   }
@@ -9,11 +22,17 @@
     position: relative;
     height: 13rem;
     overflow: hidden;
-    margin: 3rem 0;
+    margin: 1rem 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
     mask: linear-gradient(180deg, rgba(28, 40, 56, 0.9), rgba(28, 40, 56, 0.1));
+    @include breakpoint(768) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(480) {
+      grid-template-columns: repeat(1, 1fr);
+    }
 
     .scene {
       position: relative;

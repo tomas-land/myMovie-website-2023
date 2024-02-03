@@ -2,6 +2,7 @@
 import s from './quick_view_card.module.scss';
 import { IoCloseOutline } from 'react-icons/io5';
 import { motion } from 'framer-motion';
+import { currentDate } from '@/lib/dayJS';
 
 
 interface iProps {
@@ -15,7 +16,7 @@ interface iProps {
 }
 
 const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, additionalInfo, mediaType }: iProps) => {
-
+  const isNotReleased = releaseDate && releaseDate > currentDate ? true : false
   const closeQuickView = () => {
     setIsQuickViewOpened(false);
   };
@@ -36,9 +37,9 @@ const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, add
         <div className={s.additional_info}>
           {mediaType === 'tv_series' ? (
             <>
-              <h4 className={s.season_numbers}>Seasons &nbsp; {additionalInfo?.[0]?.season_numbers}</h4>
-              <h4 className={s.last_air_date}>Last air date &nbsp; {additionalInfo?.[0]?.last_air_date}</h4>
-            </>) : (<h4 className={s.release_date}>Release date &nbsp; {releaseDate}</h4>)}
+              {isNotReleased ? null : <h4 className={s.season_numbers}>Seasons: &nbsp; {additionalInfo?.[0]?.season_numbers}</h4>}
+              {isNotReleased ? <h4 className={s.release_date}>Release date: &nbsp; {releaseDate}</h4> : <h4 className={s.last_air_date}>Last air date: &nbsp; {additionalInfo?.[0]?.last_air_date}</h4>}
+            </>) : (<h4 className={s.release_date}>Release date: &nbsp; {releaseDate}</h4>)}
         </div>
       </div>
     </motion.div>

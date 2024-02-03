@@ -3,6 +3,7 @@
 - mobile dashboard menu sliding, on navigation close menu + bg color menu item change
 - close quickcard when other opens 
 - review with integrated AI (translating reviews or generating)
+- 404 page
 
 
 

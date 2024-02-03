@@ -63,6 +63,7 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
         autoHeight: true,
       }}
     >
+      {/* // Initial slides */}
       {initialSlides?.length === 0 ? <div className={s.no_content}>No recent activity</div> : null}
       {initialSlides?.map((item) => (
         <SplideSlide key={item.id} className={s.slide}>
@@ -74,7 +75,7 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
         </SplideSlide>
       ))}
       {/* // Last slide */}
-      {initialSlides?.length > 0 || endpoint === 'top_rated' ? ( // if endpoint is top_rated or initialSlides is empty dont show last slide
+      {initialSlides?.length > 0 && endpoint !== 'top_rated' ? ( // if endpoint is top_rated or initialSlides is empty dont show last slide
         <SplideSlide className={s.slide}>
           <div className={s.last_slide}>
             {isLoading ? (
