@@ -23,6 +23,7 @@ export interface iTvSeries {
   poster_path: string;
   vote_average: number;
   vote_count?: number;
+  imdb_id?: string;
 }
 
 export interface iTvSeriesImage {

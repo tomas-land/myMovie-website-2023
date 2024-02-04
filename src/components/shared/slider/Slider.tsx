@@ -10,7 +10,6 @@ import '@splidejs/react-splide/css/core';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import path from 'path';
 import { iFavorite } from '@/lib/interfaces/favorite';
 
 
@@ -29,6 +28,9 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
   const [pageToShow, setPageToShow] = useState<number>(2);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const pathname = usePathname();
+
+  const [isQuickViewOpened, setIsQuickViewOpened] = useState<boolean>(false);
+  const [openQuickCardID, setOpenQuickCardID] = useState<string | null | undefined>(null);
 
   const handleShowMoreSlides = async () => {
     try {
@@ -51,6 +53,16 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
     }
   }, [mediaType]);
 
+  const handleQuickViewCardOpen = (cardId: string | undefined | null) => {
+    if (isQuickViewOpened && openQuickCardID === cardId) {
+      setIsQuickViewOpened(false);
+      setOpenQuickCardID(null);
+    } else {
+      setIsQuickViewOpened(true);
+      setOpenQuickCardID(cardId);
+    }
+  };
+
   return (
     <Splide
       className={s.slider}
@@ -68,9 +80,9 @@ const Slider = ({ movies, endpoint, userProfile, tvSeries, mediaType, isQuickVie
       {initialSlides?.map((item) => (
         <SplideSlide key={item.id} className={s.slide}>
           {mediaType === 'movies' ? (
-            <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} />
+            <MovieCard movie={item as iMovie} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} handleQuickViewCardOpen={handleQuickViewCardOpen} isQuickViewOpened={isQuickViewOpened} setIsQuickViewOpened={setIsQuickViewOpened} openQuickCardID={openQuickCardID} />
           ) : (
-            <MovieCard tvSeries={item as iTvSeries} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} />
+            <MovieCard tvSeries={item as iTvSeries} mediaType={mediaType} isQuickView={isQuickView} cardWidth={cardWidth} handleQuickViewCardOpen={handleQuickViewCardOpen} isQuickViewOpened={isQuickViewOpened} setIsQuickViewOpened={setIsQuickViewOpened} openQuickCardID={openQuickCardID} />
           )}
         </SplideSlide>
       ))}

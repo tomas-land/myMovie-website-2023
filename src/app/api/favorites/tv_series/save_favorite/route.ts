@@ -8,9 +8,8 @@ export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
     const { tv_series_id, title, poster_path, vote_average } = await req.json();
-
     const user_id = session?.user?.id;
-
+console.log(tv_series_id, title, poster_path, vote_average, user_id)
     try {
         await saveFavoriteTvSeriesPrisma(user_id, tv_series_id, title, poster_path, vote_average);
         return NextResponse.json({ message: 'success' }, { status: 200 });

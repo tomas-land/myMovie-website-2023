@@ -1,9 +1,11 @@
-- likes watchlist  and rated counter in dashboard
 - sign out in mobile menu, if signed in small foto
 - mobile dashboard menu sliding, on navigation close menu + bg color menu item change
-- close quickcard when other opens 
 - review with integrated AI (translating reviews or generating)
 - 404 page
+- ratings model ,add movie title ( for lists)
+- production companies logos monochrome color
+- dynamicaly rerender stats count on change
++ close quickcard when other opens 
 
 
 

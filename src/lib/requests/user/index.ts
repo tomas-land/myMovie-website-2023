@@ -1,8 +1,9 @@
-
 import { getUserByEmailPrisma } from '@/lib/prisma/user/getUserByEmailPrisma';
 import { getRecentFavoriteMoviesPrisma } from '@/lib/prisma/user/getRecentFavoriteMoviesPrisma';
 import { getRecentFavoriteTvSeriesPrisma } from '@/lib/prisma/user/getRecentFavoriteTvSeriesPrisma';
 import { getFavoriteMoviesPrisma } from '@/lib/prisma/user/getFavoriteMoviesPrisma';
+import { getFavoriteTvSeriesPrisma } from '@/lib/prisma/user/getFavoriteTvSeriesPrisma';
+import { getUserRatedTotalPrisma } from '@/lib/prisma/user/getUserRatedTotalPrisma';
 
 
 //// user credentials -------------------------------------------------------------------
@@ -42,6 +43,24 @@ export async function getRecentFavoriteTvSeries() {
         const recentFavoriteRvSeries = await getRecentFavoriteTvSeriesPrisma();
         if (!recentFavoriteRvSeries) throw new Error('Recent favorite tv-series not found')
         return recentFavoriteRvSeries;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export async function getFavoriteTvSeries() {
+    const favoriteTvSeries = await getFavoriteTvSeriesPrisma();
+    if (!favoriteTvSeries) throw new Error('Favorite tv-series not found')
+    return favoriteTvSeries
+}
+
+// user ratings -------------------------------------------------------------------
+export async function getRatedTotal() {
+    try {
+        const ratings = await getUserRatedTotalPrisma();
+        if (!ratings) throw new Error('Ratings not found')
+        return ratings;
     } catch (error) {
         console.error(error);
         throw error;

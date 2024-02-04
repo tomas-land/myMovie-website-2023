@@ -1,10 +1,10 @@
 export interface iMovie {
+  id?: string;
+  movieId?: string;
   adult?: boolean;
   backdrop_path?: string;
   genre_ids?: number[];
   genres?: [{ id: number; name: string }] | undefined;
-  id?: string;
-  movieId?: string;
   budget?: number;
   runtime?: number;
   revenue?: number;

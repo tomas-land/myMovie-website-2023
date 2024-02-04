@@ -45,7 +45,7 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
   const isNotReleased = (movie?.release_date && movie.release_date > currentDate) || (tvSeries?.first_air_date && tvSeries.first_air_date > currentDate) ? true : false; // if movie or tv series is not released yet, don't show rating
-  console.log(tvSeries)
+
   // fetch user ratings and cache them
   const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings');
 
@@ -73,12 +73,6 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
         }
       }
     },
-    // onMutate: () => {
-    //   queryClient.cancelQueries({ queryKey: ['userFavorites'] });
-    //   const previousFavorites = queryClient.getQueryData(['userFavorites']);
-    //   queryClient.setQueryData(['userFavorites'], (old: any) => [...old, { movieId: movie.movieId}]);
-    //   return { previousFavorites };
-    // },
     onSuccess: () => {
       if (mediaType === 'movies') queryClient.invalidateQueries({ queryKey: ['favoriteMovies'] });
       else queryClient.invalidateQueries({ queryKey: ['favoriteTvSeries'] });

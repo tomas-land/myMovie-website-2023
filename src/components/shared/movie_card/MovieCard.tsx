@@ -16,11 +16,15 @@ interface iProps {
   isQuickView?: boolean;
   mediaType: string
   cardWidth: string;
+  handleQuickViewCardOpen?: (cardId: string | undefined | null) => void;
+  isQuickViewOpened?: boolean;
+  setIsQuickViewOpened?: React.Dispatch<React.SetStateAction<boolean>>;
+  openQuickCardID?: string | null | undefined;
 }
 
-const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProps) => {
-  const [isQuickViewOpened, setIsQuickViewOpened] = useState<boolean>(false);
+const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth, handleQuickViewCardOpen, isQuickViewOpened, setIsQuickViewOpened, openQuickCardID }: iProps) => {
   const [additionalInfo, setAdditionalInfo] = useState<[{ genres: [{ id: string, name: string }], last_air_date?: string, season_numbers?: number }]>([{ genres: [{ id: '', name: '' }], last_air_date: '', season_numbers: 0 }]);
+
   const blurredImage: string | undefined = movie?.blurDataURL;
   const movieId = (movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
   const tvSeriesId = (tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
@@ -28,6 +32,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const releaseDate = movie?.release_date ?? tvSeries?.first_air_date;
   const overview = movie?.overview ?? tvSeries?.overview;
+
 
   useEffect(() => {
     if (mediaType === 'movies') {
@@ -46,7 +51,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
         try {
           const response = await axios.get('/api/tv_series/tv_series_by_id', { params: { id: tvSeriesId } });
           const tvSeries = response.data.data;
-          setAdditionalInfo([{ genres: tvSeries.genres, last_air_date: tvSeries.last_air_date, season_numbers: tvSeries.last_episode_to_air.season_number }]);
+          setAdditionalInfo([{ genres: tvSeries.genres, last_air_date: tvSeries.last_air_date, season_numbers: tvSeries.last_episode_to_air?.season_number }]);
         } catch (error) {
           console.error('Error fetching tv series genres:', error);
         }
@@ -54,10 +59,6 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
       fetchTvSeriesGenresAndSeasons();
     }
   }, [mediaType]);
-
-  const toggleQuickView = () => {
-    setIsQuickViewOpened((prevState) => !prevState);
-  };
 
   return (
     <div className={s.movie_card} >
@@ -71,8 +72,8 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
           </Link>
           {isQuickView ?
             (<div className={s.btns}>
-              <button className={s.btn} onClick={toggleQuickView}>
-                {isQuickViewOpened ? 'Close' : 'Quick View'}
+              <button className={s.btn} onClick={() => handleQuickViewCardOpen && handleQuickViewCardOpen(movieId || tvSeriesId)}>
+                {isQuickViewOpened && openQuickCardID === (movieId || tvSeriesId) ? 'Close' : 'Quick View'}
               </button>
               <Link href={mediaType === 'movies' ? `/movie/${movieId}` : `/tv_series/${tvSeriesId}`}>
                 <button className={s.btn}>Full Review</button>
@@ -86,7 +87,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth }: iProp
           </div>
         </div>
       </div>
-      {isQuickView && isQuickViewOpened ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened} additionalInfo={additionalInfo} mediaType={mediaType} /> : null}
+      {isQuickView && isQuickViewOpened && openQuickCardID === (movieId || tvSeriesId) ? <QuickViewCard title={title} releaseDate={releaseDate} overview={overview} setIsQuickViewOpened={setIsQuickViewOpened as React.Dispatch<React.SetStateAction<boolean>>} additionalInfo={additionalInfo} mediaType={mediaType} /> : null}
     </div >
   );
 };

@@ -3,11 +3,11 @@
 
 .number_counter {
     @include flex-center();
-    width: 5rem;
-    height: 5rem;
-    margin-left: 1rem;
-    font-size: 2rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.5rem;
     font-weight: 800;
+    letter-spacing: 0.1rem;
     color: $color-3-light;
     border-radius: 50%;
     background-image: linear-gradient(

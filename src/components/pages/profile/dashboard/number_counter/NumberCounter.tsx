@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import s from './number_counter.module.scss';
 
 
-const NumberCounter = ({ finalValue }: { finalValue: number }) => {
+const NumberCounter = ({ count = 99 }: { count: number }) => {
     const duration = 2000; // Duration in ms
     const elementRef = useRef<HTMLSpanElement>(null);
 
@@ -15,7 +15,7 @@ const NumberCounter = ({ finalValue }: { finalValue: number }) => {
         const animate = (timestamp: number) => {
             if (!start) start = timestamp;
             const progress = timestamp - start;
-            current = customEasing(progress, 0, finalValue, duration);
+            current = customEasing(progress, 0, count, duration);
             if (element) {
                 element.textContent = Math.floor(current).toString();
             }
@@ -23,13 +23,13 @@ const NumberCounter = ({ finalValue }: { finalValue: number }) => {
                 requestAnimationFrame(animate);
             } else {
                 if (element) {
-                    element.textContent = finalValue.toString();
+                    element.textContent = count.toString();
                 }
             }
         };
 
         requestAnimationFrame(animate);
-    }, [finalValue, duration]);
+    }, [count, duration]);
 
     const customEasing = (t: number, b: number, c: number, d: number) => {
         t /= d;

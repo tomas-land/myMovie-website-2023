@@ -17,6 +17,7 @@ interface iProps {
 
 const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, additionalInfo, mediaType }: iProps) => {
   const isNotReleased = releaseDate && releaseDate > currentDate ? true : false
+
   const closeQuickView = () => {
     setIsQuickViewOpened(false);
   };
