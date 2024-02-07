@@ -29,7 +29,6 @@
             justify-content: space-between;
             align-items: center;
             margin: auto;
-            gap: 2rem;
             mask: none;
             z-index: 1000;
             &::-webkit-scrollbar {
@@ -38,8 +37,9 @@
             @include breakpoint(768) {
                 mask: linear-gradient(to right, black 0px, black 70%, transparent);
                 overflow: scroll;
+                gap: 2rem;
             }
-            .item {
+            .menu_item {
                 position: relative;
                 @include flex-center();
                 color: $color-1;
@@ -59,6 +59,10 @@
                     color: $color-1-light;
                 }
             }
+            .active_menu_item {
+                background-color: rgba(0, 0, 0, 0.2);
+                color: $color-1-light;
+            }
             .subcategory_list {
                 position: absolute;
                 top: 100%;
@@ -66,7 +70,7 @@
                 background-color: rgba(0, 0, 0, 0.3);
                 backdrop-filter: blur(10px);
                 box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.3);
-                width: 100%;
+                min-width: 100%;
 
                 .subcategory_item {
                     text-wrap: nowrap;
@@ -91,7 +95,6 @@
         position: absolute;
         top: 3rem;
         z-index: 1000;
-
 
         .subcategory_list {
             top: 100%;

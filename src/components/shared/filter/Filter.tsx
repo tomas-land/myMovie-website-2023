@@ -6,13 +6,14 @@ import filterMovies from '@/lib/helpers/movies/filterMovies';
 import sortMovies from '@/lib/helpers/movies/sortMovies';
 import { BsSortDown, BsSortUp, BsSortAlphaDown, BsSortAlphaDownAlt } from 'react-icons/bs';
 import Tooltip from '../tooltip/Tooltip';
+import { iWatchlistItem } from '@/lib/interfaces/watchlist';
 
 interface iProps {
-    userFavorites: iFavorite[] | undefined;
-    onResultChange: (result: iFavorite[]) => void;
+    data: iFavorite[] | undefined;
+    handleResultChange: (result: iFavorite[] | iWatchlistItem[]) => void;
 }
 
-const Filter = ({ userFavorites, onResultChange }: iProps) => {
+const Filter = ({ data, handleResultChange }: iProps) => {
     const [filterSelect, setFilterSelect] = useState<string>('select');
     const [sortSelect, setSortSelect] = useState<string>('select');
     const [sortOrder, setSortOrder] = useState<string>('desc');
@@ -21,13 +22,14 @@ const Filter = ({ userFavorites, onResultChange }: iProps) => {
     const handleFilterSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
         if (name === 'filterSelect') {
-            const resultData = filterMovies(userFavorites, value) || [];
-            onResultChange(resultData);
+            const resultData = filterMovies(data, value) || [];
+            console.log(resultData)
+            handleResultChange(resultData);
             setFilterSelect(value);
             setSortSelect('select')
         } else if (name === 'sortSelect') {
-            const resultData = sortMovies(userFavorites, value) || [];
-            onResultChange(resultData);
+            const resultData = sortMovies(data, value) || [];
+            handleResultChange(resultData);
             setSortSelect(value);
             setFilterSelect('select')
         }
@@ -39,11 +41,11 @@ const Filter = ({ userFavorites, onResultChange }: iProps) => {
         const newOrder = sortOrder === 'desc' ? 'asc' : 'desc';
         setSortOrder(newOrder);
         if (selectName === 'filterSelect') {
-            const resultData = filterMovies(userFavorites, filterSelect, newOrder) || [];
-            onResultChange(resultData);
+            const resultData = filterMovies(data, filterSelect, newOrder) || [];
+            handleResultChange(resultData);
         } else if (selectName === 'sortSelect') {
-            const resultData = sortMovies(userFavorites, sortSelect, newOrder) || [];
-            onResultChange(resultData);
+            const resultData = sortMovies(data, sortSelect, newOrder) || [];
+            handleResultChange(resultData);
         }
     }
 
@@ -80,4 +82,4 @@ const Filter = ({ userFavorites, onResultChange }: iProps) => {
 
 export default Filter
 
-// todo: add filter by genre, my rating
+// todo: 

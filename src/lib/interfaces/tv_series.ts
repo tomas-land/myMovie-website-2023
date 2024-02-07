@@ -1,6 +1,7 @@
 export interface iTvSeries {
   id: number;
   seriesId?: string;
+  media_id?: string;
   first_air_date?: string;
   last_air_date?: string;
   air_date?: string;
@@ -24,6 +25,7 @@ export interface iTvSeries {
   vote_average: number;
   vote_count?: number;
   imdb_id?: string;
+  isFavorite?: boolean;
 }
 
 export interface iTvSeriesImage {

@@ -1,29 +1,27 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import axios from 'axios';
 import Tooltip from '@/components/shared/tooltip/Tooltip';
 import RatingPopup from '@/components/shared/action_buttons/rating_popup/RatingPopup';
 import { iMovie } from '@/lib/interfaces/movie';
 import { FiHeart, FiStar, FiBookmark } from 'react-icons/fi';
 import { useSession } from 'next-auth/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toastError, toastSuccess } from '@/lib/toasts';
 import { iRating } from '@/lib/interfaces/rating';
 import { iFavorite } from '@/lib/interfaces/favorite';
 import 'react-toastify/dist/ReactToastify.css';
 import s from './action_buttons.module.scss';
 import { useGlobalContext } from '@/context/GlobalContext';
 import useUserData from '@/hooks/reactQuery/useUserData';
-import { useRouter } from 'next/navigation';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { currentDate } from '@/lib/dayJS';
-
+import useToggleFavorite from '@/hooks/reactQuery/useToggleFavorite';
+import useToggleWatchlist from '@/hooks/reactQuery/useToggleWatchlist';
+import { iWatchlistItem } from '@/lib/interfaces/watchlist';
 
 interface iProps {
-  movie?: iMovie | iFavorite;
+  movie?: iMovie | iFavorite | iWatchlistItem;
   tvSeries?: iTvSeries | iFavorite;
-  mediaType: string
+  mediaType: string;
 }
 
 const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
@@ -34,68 +32,44 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const [isRatingOpened, setIsRatingOpened] = useState(false);
   const { currentRatingPopupId, setCurrentRatingPopupId } = useGlobalContext();
   const { status } = useSession();
-  const queryClient = useQueryClient();
-  const router = useRouter();
+
 
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
-  const movieId = (movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
-  const tvSeriesId = (tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
+  const movieId = (movie?.media_id ?? movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
+  const tvSeriesId = (tvSeries?.media_id ?? tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
   const currentSlideId = movieId ?? tvSeriesId;
-  const title = movie?.title ?? tvSeries?.name;
+  const title = movie?.title ?? tvSeries?.title ?? tvSeries?.name;
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const voteAverage = movie?.vote_average ?? tvSeries?.vote_average;
+  const releaseDate = movie?.release_date ?? tvSeries?.release_date ?? tvSeries?.first_air_date;
   const isNotReleased = (movie?.release_date && movie.release_date > currentDate) || (tvSeries?.first_air_date && tvSeries.first_air_date > currentDate) ? true : false; // if movie or tv series is not released yet, don't show rating
 
   // fetch user ratings and cache them
   const { data: userRatings } = useUserData('/api/ratings/all_ratings', 'ratings');
 
-  // fetch user favorite movies or cache them
+  // fetch user favorite movies and cache them
   const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
   const { data: userFavoriteTvSeries } = useUserData('/api/favorites/tv_series/all_favorites', 'favoriteTvSeries');
 
-  // Mutation to add or remove a movie or tv series from favorites
-  const { mutate: toggleFavorite, isPending } = useMutation({
-    mutationFn: async () => {
-      if (mediaType === 'movies') {
-        const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId); // if movie is already in favorites, delete it, else add it to favorites
-        if (favoriteMovie) {
-          await axios.delete(`/api/favorites/movies/delete_favorite?id=${favoriteMovie.id}`);
-        } else {
-          await axios.post(`/api/favorites/movies/save_favorite`, { movie_id: movieId, title: title, poster_path: posterPath, vote_average: voteAverage });
-        }
-      } else {
-        const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId); // if tv series is already in favorites, delete it, else add it to favorites
-        if (favoriteTvSeries) {
-          const res = await axios.delete(`/api/favorites/tv_series/delete_favorite?id=${favoriteTvSeries.id}`);
-          console.log(res)
-        } else {
-          await axios.post(`/api/favorites/tv_series/save_favorite`, { tv_series_id: tvSeriesId, title: title, poster_path: posterPath, vote_average: voteAverage });
-        }
-      }
-    },
-    onSuccess: () => {
-      if (mediaType === 'movies') queryClient.invalidateQueries({ queryKey: ['favoriteMovies'] });
-      else queryClient.invalidateQueries({ queryKey: ['favoriteTvSeries'] });
+  // fetch user watchlist and cache them
+  const { data: userWatchlist } = useUserData('/api/watchlist/all_watchlist', 'watchlist');
 
-      if (isFavorite) {
-        toastSuccess(`Removed from favorite ${mediaType}`)
-        setIsFavorite(false)
-      } else {
-        toastSuccess(`Added to favorite ${mediaType.split('_').join(' ')}`)
-        setIsFavorite(true)
-        router.refresh();
-      }
-    },
-    onError: () => {
-      setIsFavorite(false);
-      toastError('Something went wrong');
-    },
-  });
+  // Custom hook to add or remove a movie or tv series from favorites
+  const { toggleFavorite, togglingFavoritesIsPending } = useToggleFavorite({ movieId, tvSeriesId, title, posterPath, voteAverage, mediaType, setIsFavorite, isFavorite, releaseDate });
+
+  // Custom hook to add or remove a movie or tv series from watchlist
+  const { toggleWatchlist, togglingWatchlistIsPending } = useToggleWatchlist({ mediaType, currentSlideId, title, posterPath, voteAverage, releaseDate, isInWatchlist, setIsInWatchlist });
+
+
+
+
 
   useEffect(() => {
     const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId);
     const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId);
-    setIsFavorite(!!favoriteMovie || !!favoriteTvSeries);
+    const watchlistItem = userWatchlist?.find((watchlistItem: iWatchlistItem) => watchlistItem.media_id === currentSlideId);
+    setIsFavorite(!!favoriteMovie || !!favoriteTvSeries); // if movie or tv series is in favorites, set isFavorite to true
+    setIsInWatchlist(!!watchlistItem); // if movie or tv series is in watchlist, set isInWatchlist to true
 
     const rated = userRatings?.find((rating: iRating) => rating.contentId === movieId || rating.contentId === tvSeriesId);
     if (rated) {
@@ -105,11 +79,7 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
       setRating(null);
       setIsRated(false);
     }
-  }, [isAuthenticated, userFavoriteMovies, userFavoriteTvSeries, userRatings, isRated]);
-
-  const toggleWatchlist = () => {
-    setIsInWatchlist((prevState) => !prevState);
-  };
+  }, [isAuthenticated, userRatings, isRated]);
 
   const toggleRatingContainer = (id: string | undefined) => {
     if (id === currentRatingPopupId) {  // if clicked on the same movie slide, toggle rating popup
@@ -145,15 +115,16 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
           </button>
         </Tooltip>}
         <Tooltip tooltipText={isAuthenticated ? "Add or remove from favorites" : "You must sign-in in to add to favorites"}>
-          {isPending ? <button className={`${s.btn} ${s.fill_icon}`}><FiHeart size={25} /></button> :
+          {togglingFavoritesIsPending ? <button className={`${s.btn} ${s.fill_icon}`}><FiHeart size={25} /></button> :
             <button className={`${s.btn} ${isFavorite ? s.fill_icon : ''}`} onClick={() => toggleFavorite()} disabled={!isAuthenticated}>
               <FiHeart size={25} />
             </button>}
         </Tooltip>
-        <Tooltip tooltipText={isAuthenticated ? "Add or remove from watchlist (in development mode)" : "You must sign-in in to add to watchlist(in development mode)"}>
-          <button className={`${s.btn} ${isInWatchlist ? s.fill_icon : ''}`} disabled={!isAuthenticated}>
-            <FiBookmark size={25} onClick={toggleWatchlist} />
-          </button>
+        <Tooltip tooltipText={isAuthenticated ? "Add or remove from watchlist" : "You must sign-in in to add to watchlist"}>
+          {togglingWatchlistIsPending ? <button className={`${s.btn} ${s.fill_icon}`}><FiBookmark size={25} /></button> :
+            <button className={`${s.btn} ${isInWatchlist ? s.fill_icon : ''}`} onClick={() => toggleWatchlist()} disabled={!isAuthenticated}>
+              <FiBookmark size={25} />
+            </button>}
         </Tooltip>
       </div>
     </div>

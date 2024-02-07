@@ -1,5 +1,5 @@
 'use client'
-import { use, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import s from './dashboard_menu.module.scss';
 import Link from 'next/link';
 import menuItemsData from '@/lib/constants/menuItemsData';
@@ -16,6 +16,13 @@ const DashboardMenu = () => {
   const [isSubMenuShown, setIsSubMenuShown] = useState<boolean>(false);
   const [currentSubcategories, setCurrentSubcategories] = useState<{ name: string; href: string }[]>([]);
   const [mobileView, setMobileView] = useState(false);
+  const [isActiveMenuItem, setIsActiveMenuItem] = useState<boolean>(true);
+  const [activeMenuItemIndex, setActiveMenuItemIndex] = useState<number|null>(null)
+
+  useEffect(() => {
+    const item = menuItems.find((item, index) => index === activeMenuItemIndex)
+    setIsActiveMenuItem(!!item)
+  }, [activeMenuItemIndex])
 
   useEffect(() => {
     // Function to update mobile view state
@@ -54,19 +61,22 @@ const DashboardMenu = () => {
     setIsSubMenuShown(false);
   }
 
+const highlightActiveMenuItem = (index:number ) => {
+setActiveMenuItemIndex(index)
+}
   return (
     <div className={s.dashboard_menu} onMouseLeave={handleMouseOut}>
       <div className={s.wrapper}>
         <ul className={s.list} >
           {/* // map through menu items and show them */}
           {menuItems.map((item, index) => (
-            <li key={index} className={s.item} onMouseEnter={() => handleMouseOver(item)}>
+            <li key={index} className={`${s.menu_item} ${index === activeMenuItemIndex ? s.active_menu_item : ''}`} onMouseOver={() => handleMouseOver(item)} onClick={closeDashboardMenu}>
               {item.name}
               {/* // if the item has subcategories, show them */}
               {isSubMenuShown && item.subcategories === currentSubcategories ? (
                 <ul className={s.subcategory_list}>
                   {currentSubcategories.map((subcategory, subIndex) => (
-                    <li key={subIndex} className={s.subcategory_item}>
+                    <li key={subIndex} className={s.subcategory_item} onClick={()=>highlightActiveMenuItem(index)}>
                       <Link href={subcategory.href}>
                         {subcategory.name}
                       </Link>

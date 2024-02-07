@@ -9,10 +9,11 @@ import axios from 'axios';
 import MovieActionButtons from '@/components/shared/action_buttons/ActionButtons';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { iFavorite } from '@/lib/interfaces/favorite';
+import { iWatchlistItem } from '@/lib/interfaces/watchlist';
 
 interface iProps {
-  movie?: iMovie | iFavorite;
-  tvSeries?: iTvSeries | iFavorite;
+  movie?: iMovie | iFavorite
+  tvSeries?: iTvSeries | iFavorite
   isQuickView?: boolean;
   mediaType: string
   cardWidth: string;
@@ -32,7 +33,6 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth, handleQ
   const posterPath = movie?.poster_path ?? tvSeries?.poster_path;
   const releaseDate = movie?.release_date ?? tvSeries?.first_air_date;
   const overview = movie?.overview ?? tvSeries?.overview;
-
 
   useEffect(() => {
     if (mediaType === 'movies') {

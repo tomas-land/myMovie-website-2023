@@ -20,6 +20,8 @@ export interface iMovie {
   vote_count?: number;
   blurDataURL?: string;
   imdb_id?: string;
+  isFavorite?: boolean;
+  media_id?: string;
 }
 
 export interface iMovieImage {

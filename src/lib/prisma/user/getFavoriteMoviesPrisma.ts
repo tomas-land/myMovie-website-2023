@@ -10,7 +10,7 @@ export async function getFavoriteMoviesPrisma() {
         const data = await prisma.favoriteMovie.findMany({
             where: {
                 userId: user_id,
-                isDeleted: false
+                isFavorite: true
             },
         });
         return data;

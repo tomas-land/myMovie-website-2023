@@ -17,7 +17,7 @@ interface iProps {
 
 const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, additionalInfo, mediaType }: iProps) => {
   const isNotReleased = releaseDate && releaseDate > currentDate ? true : false
-
+  const limitedOverview = overview && overview?.length > 700 ? overview?.slice(0, 700) + '...' : overview;
   const closeQuickView = () => {
     setIsQuickViewOpened(false);
   };
@@ -34,7 +34,7 @@ const QuickViewCard = ({ title, releaseDate, overview, setIsQuickViewOpened, add
             <span className={s.genre} key={genre.id}>{genre.name}</span>
           ))}
         </div>
-        <p className={s.overview}>{overview}</p>
+        <p className={s.overview}>{limitedOverview}</p>
         <div className={s.additional_info}>
           {mediaType === 'tv_series' ? (
             <>

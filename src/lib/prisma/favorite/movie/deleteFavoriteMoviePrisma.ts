@@ -7,10 +7,10 @@ export async function deleteFavoriteMoviePrisma(favoriteId: string | null) {
                 id: favoriteId as string,
             },
             data: {
-                isDeleted: true,
+                isFavorite: false,
             },
         });
-        return;
+        return
     } catch (error) {
         console.error('Error deleting favorite item:', error);
         throw new Error('Failed to delete favorite item');

@@ -5,7 +5,7 @@ export async function getAllFavoriteMoviesPrisma(user_id: string | null) {
         const favorites = await prisma.favoriteMovie.findMany({
             where: {
                 userId: user_id as string,
-                isDeleted: false, // Include only non-deleted favorites
+                isFavorite: true, // Include only favorite items
 
             },
             orderBy: {

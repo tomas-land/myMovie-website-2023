@@ -10,7 +10,7 @@ export async function getFavoriteTvSeriesPrisma() {
         const data = await prisma.favoriteTvSeries.findMany({
             where: {
                 userId: user_id,
-                isDeleted: false
+                isFavorite: true
             },
         });
         return data;

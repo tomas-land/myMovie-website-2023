@@ -9,10 +9,10 @@ export async function DELETE(request: NextRequest) {
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
     const searchParams = request.nextUrl.searchParams
-    const favoriteID = searchParams.get('id')
+    const favoriteId = searchParams.get('id')
 
     try {
-        await deleteFavoriteTvSeriesPrisma(favoriteID);
+        await deleteFavoriteTvSeriesPrisma(favoriteId);
         return NextResponse.json({ message: 'success' }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: 'Error saving favorite' }, { status: 500 });

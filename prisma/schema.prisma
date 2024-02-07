@@ -59,27 +59,35 @@ model VerificationToken {
 }
 
 model FavoriteMovie {
-  id           String   @id @default(cuid())  // this is the id of the favorite movie
+  id           String    @id @default(cuid()) // this is the id of the favorite movie
   title        String
   poster_path  String
   vote_average Float
-  movieId      String    // this is the id of the TMDB movie
-  createdAt    DateTime @default(now())
+  movieId      String // this is the id of the TMDB movie
+  createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
   userId       String
-  isDeleted    Boolean  @default(false) // for soft deletion, to show recent favorite movies even they are removed from favorites
+  isFavorite   Boolean   @default(true) // for soft deletion, to show recent favorite movies even they are removed from favorites
+  release_date String
+  mediaType    MediaType @default(movies)
+
+  @@unique([userId, movieId]) // theses two fields should be unique, to be able to use prisma upsert method
 }
 
 model FavoriteTvSeries {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   title        String
   poster_path  String
   vote_average Float
   seriesId     String
-  createdAt    DateTime @default(now())
+  createdAt    DateTime  @default(now())
   updatedAt    DateTime? @updatedAt
   userId       String
-  isDeleted    Boolean  @default(false) // for soft deletion, to show recent favorite series even they are removed from favorites
+  isFavorite   Boolean   @default(true) // for soft deletion, to show recent favorite series even they are removed from favorites
+  release_date String
+  mediaType    MediaType @default(tv_series)
+
+  @@unique([userId, seriesId]) // theses two fields should be unique, to be able to use prisma upsert method
 }
 
 model Rating {
@@ -90,4 +98,22 @@ model Rating {
   userId    String
 
   @@unique([userId, contentId]) // theses two fields should be unique, to be able to use prisma upsert method
+}
+
+model Watchlist {
+  id           String    @id @default(cuid()) // auto generated id ( CUID (Collision-Proof Unique IDentifier) )
+  media_id     String    @unique // the id of the movie or series in TMDB
+  title        String
+  poster_path  String
+  vote_average Float
+  release_date String
+  mediaType    MediaType
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+  userId       String // the id of the user who added this content to his/her watchlist
+}
+
+enum MediaType {
+  movies
+  tv_series
 }

@@ -11,8 +11,8 @@ const menuItemsData = [
     {
       name: 'Watchlist',
       subcategories: [
-        { name: 'Movies (in dev)', href: '/watchlist/movies' },
-        { name: 'TV Series (in dev)', href: '/watchlist/tv-series' },
+        { name: 'Movies', href: '/dashboard/watchlist/movies' },
+        { name: 'TV Series', href: '/dashboard/watchlist/tv_series' },
       ],
       href: '/watchlist',
     },
@@ -20,7 +20,7 @@ const menuItemsData = [
       name: 'Rated',
       subcategories: [
         { name: 'Movies (in dev)', href: '/rated/movies' },
-        { name: 'TV Series (in dev)', href: '/rated/tv-series' },
+        { name: 'TV Series (in dev)', href: '/rated/tv_series' },
       ],
       href: '/rated',
     },

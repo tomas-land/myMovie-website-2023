@@ -6,9 +6,7 @@
   display: flex;
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
-  @include breakpoint(768) {
-    width: 100%;
-  }
+  width: 100%;
   
   .movie_card_wrapper {
     display: flex;

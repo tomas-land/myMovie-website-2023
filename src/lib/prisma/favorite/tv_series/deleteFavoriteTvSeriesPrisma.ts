@@ -7,7 +7,7 @@ export async function deleteFavoriteTvSeriesPrisma(favoriteId: string | null) {
                 id: favoriteId as string,
             },
             data: {
-                isDeleted: true,
+                isFavorite: false,
             },
         });
         return;
