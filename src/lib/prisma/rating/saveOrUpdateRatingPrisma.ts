@@ -1,12 +1,20 @@
+import { string } from "zod";
 import prisma from "../prisma";
+import { $Enums } from "@prisma/client"; // Import the $Enums namespace
 
-export async function saveOrUpdateRatingPrisma(userId: string, contentId: string, rating: string) {
+
+type MediaType = {
+    movies: 'movies';
+    tv_series: 'tv_series';
+}
+
+export async function saveOrUpdateRatingPrisma(userId: string, current_slide_id: string, rating: string, title: string, posterPath: string, voteAverage: number, releaseDate: string, mediaType: string) {
     try {
-        const newRating = await prisma.rating.upsert({
+        const newRating = await prisma.ratedItem.upsert({
             where: {
-                userId_contentId: {
+                userId_media_id: {
                     userId: userId,
-                    contentId: contentId,
+                    media_id: current_slide_id,
                 },
             },
             update: {
@@ -14,8 +22,13 @@ export async function saveOrUpdateRatingPrisma(userId: string, contentId: string
             },
             create: {
                 userId: userId,
-                contentId: contentId,
+                media_id: current_slide_id,
                 rating: rating,
+                title: title,
+                poster_path: posterPath,
+                vote_average: voteAverage,
+                release_date: releaseDate,
+                mediaType: mediaType as $Enums.MediaType
             },
         });
         return newRating;

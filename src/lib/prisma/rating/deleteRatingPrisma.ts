@@ -1,12 +1,12 @@
 import prisma from "../prisma";
 
-export async function deleteRatingPrisma(userId: string, contentId: string) {
+export async function deleteRatingPrisma(userId: string, current_slide_id: string) {
     try {
-        const deletedRating = await prisma.rating.delete({
+        const deletedRating = await prisma.ratedItem.delete({
             where: {
-                userId_contentId: {
+                userId_media_id: {
                     userId: userId,
-                    contentId: contentId
+                    media_id: current_slide_id
                 }
             }
         });

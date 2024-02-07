@@ -1,21 +1,21 @@
 export interface iTvSeries {
-  id: number;
+  id: string;
   seriesId?: string;
   media_id?: string;
   first_air_date?: string;
   last_air_date?: string;
   air_date?: string;
-  episode_run_time: number[];
+  episode_run_time?: number[];
   number_of_episodes?: number;
   number_of_seasons?: number;
-  created_by:[{name:string}];
+  created_by?: [{ name: string }];
   production_companies?: [{ name: string; id: number; logo_path: string; origin_country: string }];
   backdrop_path?: string;
   release_date?: string;
   genre_ids?: number[];
   genres?: [{ id: number; name: string }] | undefined;
   name?: string;
-  title?: string;
+  title: string;
   origin_country?: string[];
   original_language?: string;
   original_name?: string;

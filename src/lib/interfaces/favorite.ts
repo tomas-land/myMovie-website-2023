@@ -1,5 +1,5 @@
 export interface iFavorite {
-  id: string;
+  id: string ;
   title: string;
   name?: string;
   overview?: string;
@@ -18,6 +18,9 @@ export interface iFavorite {
   contentId?: string;
   isFavorite?: boolean;
   media_id?: string;
+  episode_run_time?: number[];
+  created_by?:[{name:string}];
+  rating?: string;
 }
 
 

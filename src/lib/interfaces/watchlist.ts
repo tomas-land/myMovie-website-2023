@@ -16,4 +16,7 @@ export interface iWatchlistItem {
     createdAt: Date;
     updatedAt: Date | null;
     blurDataURL?: string;
+    episode_run_time?: number[];
+    created_by?:[{name:string}];
+    rating?: string;
 }

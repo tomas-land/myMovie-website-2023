@@ -6,6 +6,9 @@ export async function getAllFromWatchlistPrisma(user_id: string | null) {
             where: {
                 userId: user_id as string,
             },
+            orderBy: {
+                createdAt: 'desc',
+            },
         });
         return watchlist;
     } catch (error) {

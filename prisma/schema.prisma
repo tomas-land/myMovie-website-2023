@@ -90,14 +90,20 @@ model FavoriteTvSeries {
   @@unique([userId, seriesId]) // theses two fields should be unique, to be able to use prisma upsert method
 }
 
-model Rating {
-  id        String   @id @default(cuid())
-  contentId String // Represents the ID of the favorite content, can be person id, or movie id or, series id
-  rating    String
-  createdAt DateTime @default(now())
-  userId    String
+model RatedItem {
+  id           String    @id @default(cuid())
+  media_id      String // the id of the movie or series in TMDB
+  rating       String
+  title        String
+  poster_path  String
+  vote_average Float
+  release_date String
+  mediaType    MediaType
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+  userId       String
 
-  @@unique([userId, contentId]) // theses two fields should be unique, to be able to use prisma upsert method
+  @@unique([userId, media_id]) // theses two fields should be unique, to be able to use prisma upsert method
 }
 
 model Watchlist {

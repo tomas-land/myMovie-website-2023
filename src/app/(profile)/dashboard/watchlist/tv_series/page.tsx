@@ -3,8 +3,8 @@ import TvSeriesList from '@/components/pages/profile/favorites/tv_series_list/Tv
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
-import { iFavorite } from '@/lib/interfaces/favorite';
 import { iWatchlistItem } from '@/lib/interfaces/watchlist';
+import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 
 const WatchlistTvSeriesPage = () => {
@@ -21,7 +21,9 @@ const WatchlistTvSeriesPage = () => {
 
     return (
         <div>
-            <Filter data={filteredOutTvSeries} handleResultChange={handleResultChange} />
+            <ProfileHeader title={'My tv-series watchlist'}>
+                <Filter data={filteredOutTvSeries} handleResultChange={handleResultChange} />
+            </ProfileHeader>
             <TvSeriesList moviesToDisplay={moviesToDisplay} />
         </div>
     )

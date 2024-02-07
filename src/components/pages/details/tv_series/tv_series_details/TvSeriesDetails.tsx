@@ -72,8 +72,8 @@ const TvSeriesDetails = ({ tvSeries, tvSeriesVideos }: iProps) => {
           </div>
           {/* Info */}
           <div className={s.extended_info}>
-            {tvSeries.created_by.length && !isNotReleased ? <div><span>Created by: </span>{tvSeries.created_by[0]?.name}</div> : null}
-            {tvSeries.episode_run_time.length && !isNotReleased ? <div><span>Episode run time:</span> {tvSeries.episode_run_time[0]} min</div> : null}
+            {tvSeries.created_by?.length && !isNotReleased ? <div><span>Created by: </span>{tvSeries.created_by[0]?.name}</div> : null}
+            {tvSeries.episode_run_time?.length && !isNotReleased ? <div><span>Episode run time:</span> {tvSeries.episode_run_time[0]} min</div> : null}
             {tvSeries.first_air_date ? <div><span>First air date:</span> {tvSeries.first_air_date}</div> : null}
             {tvSeries.last_air_date ? <div><span>Last air date:</span> {tvSeries.last_air_date}</div> : null}
             {tvSeries.number_of_seasons && !isNotReleased ? <div><span>Number of seasons:</span> {tvSeries.number_of_seasons}</div> : null}

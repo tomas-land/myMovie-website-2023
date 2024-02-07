@@ -7,10 +7,11 @@ import sortMovies from '@/lib/helpers/movies/sortMovies';
 import { BsSortDown, BsSortUp, BsSortAlphaDown, BsSortAlphaDownAlt } from 'react-icons/bs';
 import Tooltip from '../tooltip/Tooltip';
 import { iWatchlistItem } from '@/lib/interfaces/watchlist';
+import { iRatedItem } from '@/lib/interfaces/rated';
 
 interface iProps {
-    data: iFavorite[] | undefined;
-    handleResultChange: (result: iFavorite[] | iWatchlistItem[]) => void;
+    data: iFavorite[] | iRatedItem[] | iWatchlistItem[] | undefined;
+    handleResultChange: (result: iFavorite[] | iWatchlistItem[] | iRatedItem[]) => void;
 }
 
 const Filter = ({ data, handleResultChange }: iProps) => {
@@ -37,7 +38,7 @@ const Filter = ({ data, handleResultChange }: iProps) => {
         setSelectName(name);
     }
 
-    const toggleFilterSortOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const toggleFilterSortOrder = () => {
         const newOrder = sortOrder === 'desc' ? 'asc' : 'desc';
         setSortOrder(newOrder);
         if (selectName === 'filterSelect') {
@@ -65,8 +66,9 @@ const Filter = ({ data, handleResultChange }: iProps) => {
                     <select className={s.select} name="sortSelect" onChange={handleFilterSortChange} value={sortSelect}>
                         <option disabled >select</option>
                         <option value="popularity">popularity</option>
-                        <option value="date_added">date added</option>{/* when added to favorites */}
+                        <option value="date_added">date added</option>{/* date when added to favorites */}
                         <option value="alphabetical">alphabeticaly</option>
+                        { (data as iRatedItem[])?.[0]?.rating ? <option value="rating">rating</option> : null}
                     </select>
                 </div>
                 <Tooltip tooltipText="Order: Ascending / Descending">

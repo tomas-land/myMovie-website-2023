@@ -7,7 +7,6 @@ import { iFavorite } from '@/lib/interfaces/favorite';
 
 const Dashboard = async () => {
     const recentFavoriteMovies: iFavorite[] = await getRecentFavoriteMovies()
-    console.log(recentFavoriteMovies)
     const recentFavoriteTvSeries: iFavorite[] = await getRecentFavoriteTvSeries()
     return (
         <div>

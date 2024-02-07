@@ -10,7 +10,7 @@
     margin: auto;
     overflow-x: hidden;
     padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: $card-bg-color;
 
     @include breakpoint(768) {
         padding: 2rem 1rem;
@@ -25,6 +25,9 @@
     }
 
     .wrapper {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 2rem;
+        padding: 1rem;
         display: grid;
         justify-items: start;
         grid-template-columns: repeat(5, 1fr);

@@ -13,9 +13,14 @@ interface iProps {
     currentSlideId: string | undefined;
     isRated: boolean;
     setIsRated: (value: boolean) => void;
+    title?: string;
+    posterPath?: string;
+    voteAverage?: number;
+    releaseDate?: string;
+    mediaType: string;
 }
 
-const RatingPopup = ({ handleSetIsRatingOpened, currentSlideId, isRated, setIsRated }: iProps) => {
+const RatingPopup = ({ handleSetIsRatingOpened, currentSlideId, isRated, setIsRated, title, posterPath, voteAverage, releaseDate, mediaType }: iProps) => {
     const [selectedRating, setSelectedRating] = useState<string | null>(null);
     const queryClient = useQueryClient();
 
@@ -27,7 +32,7 @@ const RatingPopup = ({ handleSetIsRatingOpened, currentSlideId, isRated, setIsRa
 
     // save rating to db, or update if already rated 
     const { mutate: rateMovie } = useMutation({
-        mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { current_slide_id: currentSlideId, rating: selectedRating }),
+        mutationFn: async () => await axios.post(`/api/ratings/save_rating`, { current_slide_id: currentSlideId, rating: selectedRating, title: title, posterPath: posterPath, voteAverage: voteAverage, releaseDate: releaseDate, mediaType: mediaType }),
         onSuccess: () => {
             const message = isRated ? 'Rating updated' : 'Thank you for your rating';
             toastSuccess(message);

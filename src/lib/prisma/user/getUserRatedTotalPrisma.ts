@@ -8,7 +8,7 @@ export async function getUserRatedTotalPrisma() {
     const user_id = session.user.id;
 
     try {
-        const data = await prisma.rating.findMany({
+        const data = await prisma.ratedItem.findMany({
             where: {
                 userId: user_id,
 
