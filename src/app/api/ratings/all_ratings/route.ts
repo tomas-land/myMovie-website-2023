@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
     const user_id = session?.user?.id;
     try {
-        const ratings = await getAllRatedMoviesPrisma(user_id);
+        const ratings = await getAllRatedMoviesPrisma();
         return NextResponse.json({ ratings }, { status: 200 });
     } catch (error) {
         console.log(error)

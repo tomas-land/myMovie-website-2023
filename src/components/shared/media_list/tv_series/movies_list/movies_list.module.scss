@@ -2,11 +2,9 @@
 @import "src/styles/variables";
 
 .list {
-    @include flex-center();
     flex-direction: column;
-    width: 100%;
     max-width: $main_container;
-    min-height: 35rem;
+    min-height: 38rem;
     margin: auto;
     overflow-x: hidden;
     padding: 2rem;
@@ -15,16 +13,24 @@
     @include breakpoint(768) {
         padding: 2rem 1rem;
     }
-
+    .loading_spinner{
+        @include flex_center;
+        height: 35rem;
+    }
     .no_favorites {
+        h1{
+        width: 100%;
         padding: 1rem 2rem;
         color: $color-1;
         font-size: 1.5rem;
-        font-weight: 700;
+        font-weight: 600;
         letter-spacing: 0.1rem;
+        }
     }
 
     .wrapper {
+        width: 100%;
+        height:34rem;
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 2rem;
         padding: 1rem;

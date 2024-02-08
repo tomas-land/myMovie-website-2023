@@ -1,10 +1,12 @@
 import { getUserByEmailPrisma } from '@/lib/prisma/user/getUserByEmailPrisma';
-import { getRecentFavoriteMoviesPrisma } from '@/lib/prisma/user/getRecentFavoriteMoviesPrisma';
-import { getRecentFavoriteTvSeriesPrisma } from '@/lib/prisma/user/getRecentFavoriteTvSeriesPrisma';
-import { getFavoriteMoviesPrisma } from '@/lib/prisma/user/getFavoriteMoviesPrisma';
-import { getFavoriteTvSeriesPrisma } from '@/lib/prisma/user/getFavoriteTvSeriesPrisma';
-import { getUserRatedTotalPrisma } from '@/lib/prisma/user/getUserRatedTotalPrisma';
-
+import { getRecentFavoriteMoviesPrisma } from '@/lib/prisma/favorite/movie/getRecentFavoriteMoviesPrisma';
+import { getRecentFavoriteTvSeriesPrisma } from '@/lib/prisma/favorite/tv_series/getRecentFavoriteTvSeriesPrisma';
+import { getFavoriteMoviesPrisma } from '@/lib/prisma/favorite/movie/getFavoriteMoviesPrisma';
+import { getFavoriteTvSeriesPrisma } from '@/lib/prisma/favorite/tv_series/getFavoriteTvSeriesPrisma';
+import { getUserRatedTotalPrisma } from '@/lib/prisma/rating/getUserRatedTotalPrisma';
+import { getAllFromWatchlistPrisma } from '@/lib/prisma/watchlist/getAllFromWatchlistPrisma';
+import { getUpcomingMoviesFromWatchlistPrisma } from '@/lib/prisma/watchlist/getUpcomingMoviesFromWatchlistPrisma';
+import { getUpcomingTvSeriesFromWatchlistPrisma } from '@/lib/prisma/watchlist/getUpcomingTvSeriesFromWatchlistPrisma';
 
 //// user credentials -------------------------------------------------------------------
 export async function getUserByEmail(email: string) {
@@ -61,6 +63,40 @@ export async function getRatedTotal() {
         const ratings = await getUserRatedTotalPrisma();
         if (!ratings) throw new Error('Ratings not found')
         return ratings;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+// user watchlist -------------------------------------------------------------------
+export async function getWatchlist() {
+    try {
+        const watchlist = await getAllFromWatchlistPrisma();
+        if (!watchlist) throw new Error('Watchlist not found')
+        return watchlist;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export async function getUpcomingMoviesFromWatchlist() {
+    try {
+        const upcomingMovies = await getUpcomingMoviesFromWatchlistPrisma();
+        if (!upcomingMovies) throw new Error('Upcoming movies not found')
+        return upcomingMovies;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export async function getUpcomingTvSeriesFromWatchlist() {
+    try {
+        const upcomingTvSeries = await getUpcomingTvSeriesFromWatchlistPrisma();
+        if (!upcomingTvSeries) throw new Error('Upcoming tv-series not found')
+        return upcomingTvSeries;
     } catch (error) {
         console.error(error);
         throw error;

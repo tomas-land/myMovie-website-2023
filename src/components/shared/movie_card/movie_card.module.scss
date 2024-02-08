@@ -7,6 +7,7 @@
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
+  min-height: 33rem;
   
   .movie_card_wrapper {
     display: flex;
@@ -15,10 +16,10 @@
     
     .poster_wrapper {
       border-radius: 1rem 1rem 0 0;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.1);
       overflow: hidden;
       position: relative;
-      
+
       .poster {
         opacity: 1;
         border-radius: 1rem 1rem 0 0;
@@ -35,7 +36,7 @@
         gap: 2rem;
         position: absolute;
         inset: 10% 0 0 0;
-
+        
         .btn {
           background-color: transparent;
           color: $color-1;
@@ -60,7 +61,7 @@
             display: none;
           }
         }
-
+        
         .poster {
           opacity: 0.1;
           transform: scale(1.1);
@@ -74,14 +75,34 @@
         }
       }
     }
-
+    
     .content {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 0 0.8rem;
-
+      position: relative;
+      
+      .upcoming_release_date{
+        position: absolute;
+        width:40%;
+        transform: translateY(-98%) translateX(0.1%);
+       right: 0;
+        margin: auto;
+        span{
+          background-color: #110f18;
+          color: $color-1;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.1rem;
+          padding: 0.3rem 0;
+          text-align: center;
+          display: block;
+          border-radius: 2rem 0 0 0;
+        }
+      }
+   
       .title {
         line-height: 1.2rem;
         font-weight: 700;

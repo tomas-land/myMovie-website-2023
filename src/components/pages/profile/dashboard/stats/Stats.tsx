@@ -1,6 +1,8 @@
-import { getFavoriteMovies, getFavoriteTvSeries, getRatedTotal } from '@/lib/requests/user'
+import { getFavoriteMovies, getFavoriteTvSeries, getRatedTotal, getWatchlist } from '@/lib/requests/user'
 import s from './stats.module.scss'
 import NumberCounter from '@/components/pages/profile/dashboard/number_counter/NumberCounter'
+import _ from 'lodash'
+
 
 const StatCard = ({ title, count }: { title: string, count: number }) => {
     return (
@@ -12,20 +14,24 @@ const StatCard = ({ title, count }: { title: string, count: number }) => {
 }
 
 const Stats = async () => {
+
     const favoriteMoviesCount = (await getFavoriteMovies()).length
     const favoriteTvSeriesCount = (await getFavoriteTvSeries()).length
     const favoriteActorsCount = 99
-    const watchlistCount = 99
-    const ratedCount = ((await getRatedTotal()).length)
-    const averageScore = 99
-
+    const watchlistCount = (await getWatchlist()).length
+    const ratedTotalCount = (await getRatedTotal()).length
+    
+    // Convert string ratings to numbers using map, and use loadsh function to get average
+    const numericRatings = (await getRatedTotal()).map(item => Number(item.rating));
+    const averageScore = Number(( _.mean(numericRatings)).toFixed(1))
+  
     return (
         <div className={s.stats_container}>
             <StatCard title="Favorite Movies" count={favoriteMoviesCount} />
             <StatCard title="Favorite TV Series" count={favoriteTvSeriesCount} />
             <StatCard title="Favorite Actors" count={favoriteActorsCount} />
             <StatCard title="Watchlist" count={watchlistCount} />
-            <StatCard title="Rated" count={ratedCount} />
+            <StatCard title="Rated" count={ratedTotalCount} />
             <StatCard title="Average Score" count={averageScore} />
         </div>
     )

@@ -9,7 +9,7 @@ import axios from 'axios';
 import MovieActionButtons from '@/components/shared/action_buttons/ActionButtons';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { iFavorite } from '@/lib/interfaces/favorite';
-import { iWatchlistItem } from '@/lib/interfaces/watchlist';
+
 
 interface iProps {
   movie?: iMovie | iFavorite
@@ -81,6 +81,7 @@ const MovieCard = ({ movie, tvSeries, isQuickView, mediaType, cardWidth, handleQ
             </div>) : null}
         </div>
         <div className={s.content}>
+          {isQuickViewOpened ? null : <div className={s.upcoming_release_date}><span>{releaseDate}</span></div>}
           <h3 className={s.title}>{title}</h3>
           <div className={s.action_btns}>
             <MovieActionButtons movie={movie} tvSeries={tvSeries} mediaType={mediaType} />

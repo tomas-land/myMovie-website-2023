@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     const user_id = session?.user?.id;
     
     try {
-        const watchlist = await getAllFromWatchlistPrisma(user_id);
+        const watchlist = await getAllFromWatchlistPrisma();
         return NextResponse.json({ watchlist }, { status: 200 });
     } catch (error) {
         console.log(error)

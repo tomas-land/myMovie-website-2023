@@ -1,5 +1,5 @@
 "use client"
-import MoviesList from '@/components/pages/profile/favorites/movies_list/MoviesList';
+import MoviesList from '@/components/shared/media_list/movies/MoviesList';
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
@@ -10,12 +10,12 @@ import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 const RatedTvSeriesPage = () => {
     const [filteredData, setFilteredData] = useState<iTvSeries[]>([]);
-    const [initialSortOrder, setInitialSortOrder] = useState<string>('asc');
+    const [initialSortOrder, setInitialSortOrder] = useState<string>('desc');
 
     // fetching user favorite movies from cache
     const { data: userRatedMovies } = useUserData('/api/ratings/all_ratings', 'ratings');
-    const filteredOutMovies = userRatedMovies?.filter((item: iRatedItem) => item.mediaType === 'tv_series');
-    const initialData = sortMovies(filteredOutMovies, 'rating', initialSortOrder);
+    const filteredOutTvSeries = userRatedMovies?.filter((item: iRatedItem) => item.mediaType === 'tv_series');
+    const initialData = sortMovies(filteredOutTvSeries, 'rating', initialSortOrder);
 
     //  destructuring filtered data and adding result as array , to force rerender ,because on sort component is not rerendering
     const handleResultChange = (result: iTvSeries[]) => setFilteredData([...result]);
@@ -26,7 +26,7 @@ const RatedTvSeriesPage = () => {
             <ProfileHeader title={'My rated tv-series'}>
                 <Filter data={initialData} handleResultChange={handleResultChange} />
             </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} />
+            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any rated tv-series yet`} />
         </div>
     )
 }

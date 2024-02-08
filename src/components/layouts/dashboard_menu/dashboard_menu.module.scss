@@ -7,7 +7,6 @@
         position: relative;
     }
     .wrapper {
-        padding: 0 1rem;
         width: 100%;
         display: flex;
         margin: auto;
@@ -37,7 +36,6 @@
             @include breakpoint(768) {
                 mask: linear-gradient(to right, black 0px, black 70%, transparent);
                 overflow: scroll;
-                gap: 2rem;
             }
             .menu_item {
                 position: relative;
@@ -48,6 +46,7 @@
                 cursor: pointer;
                 height: 100%;
                 width: 100%;
+                padding: 0 1rem;
                 @include breakpoint(768) {
                     position: static;
                     &:last-child {

@@ -1,5 +1,5 @@
 "use client"
-import TvSeriesList from '@/components/pages/profile/favorites/tv_series_list/TvSeriesList';
+import TvSeriesList from '@/components/shared/media_list/tv_series/TvSeriesList';
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ const FavoriteTvSeriesPage = () => {
             <ProfileHeader title={'My favorite tv-series'}>
                 <Filter data={userFavoriteTvSeries} handleResultChange={handleResultChange} />
             </ProfileHeader>
-            <TvSeriesList moviesToDisplay={moviesToDisplay} />
+            <TvSeriesList moviesToDisplay={moviesToDisplay} text={`You don't have any favorite tv-series yet`}/>
         </div>
     )
 }

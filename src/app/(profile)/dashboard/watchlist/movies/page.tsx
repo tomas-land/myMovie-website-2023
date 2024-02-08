@@ -1,5 +1,5 @@
 "use client"
-import MoviesList from '@/components/pages/profile/favorites/movies_list/MoviesList';
+import MoviesList from '@/components/shared/media_list/movies/MoviesList';
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
@@ -27,7 +27,7 @@ const WatchlistMoviesPage = () => {
             <ProfileHeader title={'My movies watchlist'}>
                 <Filter data={filteredOutMovies} handleResultChange={handleResultChange} />
             </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} />
+            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any movies in the watchlist yet`}/>
         </div>
     )
 }

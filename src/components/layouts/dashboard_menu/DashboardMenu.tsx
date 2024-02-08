@@ -8,8 +8,9 @@ import { useRouter } from 'next/navigation'
 
 interface iMenuItem {
   name: string;
-  subcategories?: { name: string; href: string }[];
+  subcategories?: { name: string; href: string;}[];
   href?: string;
+  index?:number
 }
 
 const DashboardMenu = () => {
@@ -40,7 +41,7 @@ const DashboardMenu = () => {
   // on mouse over, if the item has subcategories, show them ,else hide menu
   const handleMouseOver = (item: iMenuItem) => {
     if (item.subcategories) {
-      setCurrentSubcategories(item.subcategories);
+      setCurrentSubcategories(item.subcategories)      
       setIsSubMenuShown(true);
     } else {
       setCurrentSubcategories([]);
@@ -58,24 +59,31 @@ const DashboardMenu = () => {
   //   setCurrentSubcategories([]);
   //   setIsSubMenuShown(false);
   // }
-
-  const handleOpenSubMenu = (item: iMenuItem, index: number) => {  // if the item has subcategories, show them, else navigate to the item href
+  const handleOpenSubMenu = (item: iMenuItem, index: number) => {
+    const activeInx = item.index ?? 0;
+    setActiveMenuItemIndex(activeInx);  // if the item has subcategories, show them, else navigate to the item href
     if (item.subcategories) {
       setCurrentSubcategories(item.subcategories);
       setIsSubMenuShown(true);
     } else {
       setCurrentSubcategories([]);
-      setIsSubMenuShown(false);
       if (item.href) {
         router.push(item.href);
-        setActiveMenuItemIndex(index)
+        setActiveMenuItemIndex(index);
       }
+      setIsSubMenuShown(false);
     }
   }
 
   const highlightActiveMenuItem = (index: number) => {
     setActiveMenuItemIndex(index)
   }
+
+  const closeSubMenu = () => {
+    setCurrentSubcategories([]);
+    setIsSubMenuShown(false);
+  }
+
   return (
     <div className={s.dashboard_menu} onMouseLeave={handleMouseOut}>
       <div className={s.wrapper}>
@@ -109,7 +117,7 @@ const DashboardMenu = () => {
           {isSubMenuShown ? (
             <ul className={s.subcategory_list}>
               {currentSubcategories.map((subcategory, subIndex) => (
-                <li key={subIndex} className={s.subcategory_item} >
+                <li key={subIndex} className={s.subcategory_item} onClick={closeSubMenu} >
                   <Link href={subcategory.href}>
                     {subcategory.name}
                   </Link>

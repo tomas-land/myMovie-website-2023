@@ -1,9 +1,8 @@
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth/authOptions";
-import prisma from "../prisma";
+import prisma from "../../prisma";
 
-
-export async function getRecentFavoriteMoviesPrisma() {
+export async function getFavoriteMoviesPrisma() {
     const session = await getServerSession(authOptions);
     const user_id = session.user.id;
 
@@ -11,13 +10,8 @@ export async function getRecentFavoriteMoviesPrisma() {
         const data = await prisma.favoriteMovie.findMany({
             where: {
                 userId: user_id,
-
+                isFavorite: true
             },
-            orderBy: {
-                createdAt: 'desc'
-            },
-            take: 8,
-            distinct: ['movieId']
         });
         return data;
     } catch (error) {

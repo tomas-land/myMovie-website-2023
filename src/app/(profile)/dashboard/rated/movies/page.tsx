@@ -1,5 +1,5 @@
 "use client"
-import MoviesList from '@/components/pages/profile/favorites/movies_list/MoviesList';
+import MoviesList from '@/components/shared/media_list/movies/MoviesList';
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 const RatedMoviesPage = () => {
     const [filteredData, setFilteredData] = useState<iMovie[]>([]);
-    const [initialSortOrder, setInitialSortOrder] = useState<string>('asc');
+    const [initialSortOrder, setInitialSortOrder] = useState<string>('desc');
 
     // fetching user favorite movies from cache
     const { data: userRatedMovies } = useUserData('/api/ratings/all_ratings', 'ratings');
@@ -27,7 +27,7 @@ const RatedMoviesPage = () => {
             <ProfileHeader title={'My rated movies'}>
                 <Filter data={initialData} handleResultChange={handleResultChange} />
             </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} />
+            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any rated movies yet`}/>
         </div>
     )
 }

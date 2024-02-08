@@ -26,7 +26,7 @@ export default function sortMovies(data: iFavorite[] | iRatedItem[] | iWatchlist
             sortedData?.sort((a, b) => {
                 const ratingA = Number((a as iRatedItem)?.rating) ?? 0;
                 const ratingB = Number((b as iRatedItem)?.rating) ?? 0;
-                return sortOrder === 'asc' ? ratingB - ratingA : ratingA - ratingB;
+                return sortOrder === 'asc' ? ratingA - ratingB : ratingB - ratingA;
             });
             break;
         default:
