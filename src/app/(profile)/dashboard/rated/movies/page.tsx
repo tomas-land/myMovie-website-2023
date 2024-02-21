@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iRatedItem } from '@/lib/interfaces/rated';
 import sortMovies from '@/lib/helpers/movies/sortMovies';
-import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 
 const RatedMoviesPage = () => {
@@ -24,10 +23,8 @@ const RatedMoviesPage = () => {
 
     return (
         <div>
-            <ProfileHeader title={'My rated movies'}>
-                <Filter data={initialData} handleResultChange={handleResultChange} />
-            </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any rated movies yet`}/>
+            <Filter data={initialData} handleResultChange={handleResultChange} />
+            <MoviesList movies={moviesToDisplay} text={`You don't have any rated movies yet`} headerTitle='My rated movies' />
         </div>
     )
 }

@@ -2,7 +2,7 @@
 import s from './search.module.scss';
 import { BsFillEmojiFrownFill } from 'react-icons/bs';
 import { useState, useEffect, useRef, use } from 'react';
-import SearchResultItem from '@/components/shared/search/search_result_item/SearchResultItem';
+import SearchResultItem from '@/components/shared/search_header/search_result_item/SearchResultItem';
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { useDebounce } from 'use-debounce';
 import { useGlobalContext } from '@/context/GlobalContext';

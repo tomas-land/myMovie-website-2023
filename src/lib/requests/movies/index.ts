@@ -70,3 +70,12 @@ export async function getMovieVideosById(id: string) {
   }
   return results;
 }
+
+export async function getMovieGenres() {
+  const response = await fetch(`${TMDB_BASE_URL}/genre/movie/list?api_key=${TMDB_API_KEY}&language=en-US`);
+  const {genres} = await response.json();
+  if (!genres) {
+    throw new Error('Fetching movie genres failed');
+  }
+  return genres;
+}

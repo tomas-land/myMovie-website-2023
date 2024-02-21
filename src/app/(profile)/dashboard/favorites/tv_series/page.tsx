@@ -4,8 +4,6 @@ import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
 import { iFavorite } from '@/lib/interfaces/favorite';
-import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
-
 
 
 const FavoriteTvSeriesPage = () => {
@@ -19,10 +17,8 @@ const FavoriteTvSeriesPage = () => {
 
     return (
         <div>
-            <ProfileHeader title={'My favorite tv-series'}>
-                <Filter data={userFavoriteTvSeries} handleResultChange={handleResultChange} />
-            </ProfileHeader>
-            <TvSeriesList moviesToDisplay={moviesToDisplay} text={`You don't have any favorite tv-series yet`}/>
+            <Filter data={userFavoriteTvSeries} handleResultChange={handleResultChange} />
+            <TvSeriesList moviesToDisplay={moviesToDisplay} text={`You don't have any favorite tv-series yet`} headerTitle='My favorite tv-series' />
         </div>
     )
 }

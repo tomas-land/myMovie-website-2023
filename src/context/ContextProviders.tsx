@@ -1,17 +1,17 @@
 'use client';
 import { ModalContextProvider } from './ModalContext';
-import { AuthProvider } from './AuthProvider';
+import { AuthContext } from './AuthContext';
 import { GlobalContextProvider } from './GlobalContext';
 import TanStackProvider from './TanStackContext';
 
 export const ContextProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <TanStackProvider>
-      <AuthProvider>
+      <AuthContext>
         <GlobalContextProvider>
           <ModalContextProvider>{children}</ModalContextProvider>
         </GlobalContextProvider>
-      </AuthProvider>
+      </AuthContext>
     </TanStackProvider>
   );
 };

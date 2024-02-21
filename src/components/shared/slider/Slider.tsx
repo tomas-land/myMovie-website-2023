@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import React, { useState, useRef, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import MovieCard from '@/components/shared/movie_card/MovieCard';

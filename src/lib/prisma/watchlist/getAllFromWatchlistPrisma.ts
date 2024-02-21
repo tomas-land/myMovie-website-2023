@@ -9,7 +9,7 @@ export async function getAllFromWatchlistPrisma() {
     try {
         const watchlist = await prisma.watchlist.findMany({
             where: {
-                userId: user_id as string,
+                userId: user_id as string
             },
             orderBy: {
                 createdAt: 'desc',

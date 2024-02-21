@@ -4,20 +4,28 @@ import s from './movies_list.module.scss'
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 interface iProps {
-  moviesToDisplay: iMovie[] | iTvSeries[] | undefined;
-  text: string;
+  movies: iMovie[] | iTvSeries[] | undefined;
+  headerTitle?: string;
+  text?: string;
 }
 
-const MoviesList = ({ moviesToDisplay, text }: iProps) => {
+const MoviesList = ({ movies, headerTitle, text }: iProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { selectedGenreId } = useGlobalContext();
+  const [moviesToDisplay, setMoviesToDisplay] = useState<iMovie[] | iTvSeries[] | undefined>(movies);
 
   useEffect(() => {
-    setIsLoading(moviesToDisplay === undefined);
-  }, [moviesToDisplay]);
+    if (selectedGenreId) {
+      const filteredMoviesByGenre = movies?.filter((movie) => movie.genre_ids?.includes(selectedGenreId));
+      setMoviesToDisplay(filteredMoviesByGenre);
+    }
+    setIsLoading(movies === undefined);
+  }, [movies, selectedGenreId]);
 
   return (
     <div className={s.list}>
@@ -29,19 +37,22 @@ const MoviesList = ({ moviesToDisplay, text }: iProps) => {
         </div>
       )}
 
-      {!isLoading && moviesToDisplay && moviesToDisplay?.length > 0 && (
-        <div className={s.wrapper}>
-          {moviesToDisplay?.map((movie: iMovie | iTvSeries) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              isQuickView={false}
-              mediaType='movies'
-              cardWidth='100%'
-            />
-          ))}
-        </div>
-      )}
+      {!isLoading && moviesToDisplay ? (
+        <>
+          <h1 className={s.headerTitle}>{headerTitle}</h1>
+          <div className={s.wrapper}>
+            {moviesToDisplay?.map((movie: iMovie | iTvSeries) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                isQuickView={false}
+                mediaType='movies'
+                cardWidth='100%'
+              />
+            ))}
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };

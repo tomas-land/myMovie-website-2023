@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { iRatedItem } from '@/lib/interfaces/rated';
 import sortMovies from '@/lib/helpers/movies/sortMovies';
-import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 const RatedTvSeriesPage = () => {
     const [filteredData, setFilteredData] = useState<iTvSeries[]>([]);
@@ -23,10 +22,8 @@ const RatedTvSeriesPage = () => {
 
     return (
         <div>
-            <ProfileHeader title={'My rated tv-series'}>
-                <Filter data={initialData} handleResultChange={handleResultChange} />
-            </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any rated tv-series yet`} />
+            <Filter data={initialData} handleResultChange={handleResultChange} />
+            <MoviesList movies={moviesToDisplay} text={`You don't have any rated tv-series yet`} headerTitle='My rated tv-series' />
         </div>
     )
 }

@@ -24,7 +24,6 @@ const Filter = ({ data, handleResultChange }: iProps) => {
         const { name, value } = e.target;
         if (name === 'filterSelect') {
             const resultData = filterMovies(data, value) || [];
-            console.log(resultData)
             handleResultChange(resultData);
             setFilterSelect(value);
             setSortSelect('select')

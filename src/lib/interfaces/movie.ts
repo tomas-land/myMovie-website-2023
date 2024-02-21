@@ -46,3 +46,8 @@ export interface iMovieVideo {
   published_at: string;
   id: string;
 }
+
+export interface iMovieGenre {
+  id: number;
+  name: string;
+}

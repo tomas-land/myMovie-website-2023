@@ -9,7 +9,7 @@ import { FiLogOut, FiSearch, FiUser } from 'react-icons/fi';
 import MainMenu from '@/components/layouts/menu/main_menu/MainMenu';
 import MobileMenu from '@/components/layouts/menu/mobile_menu/MobileMenu';
 import CustomLink from '@/components/shared/custom_links/CustomLink';
-import Search from '@/components/shared/search/search/Search';
+import Search from '@/components/shared/search_header/search/Search';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from "next-auth/react"
 import SignOutButton from '@/components/pages/auth/signout_button/SignOutButton';

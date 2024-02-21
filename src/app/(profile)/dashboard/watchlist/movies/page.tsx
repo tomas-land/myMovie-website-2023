@@ -4,7 +4,6 @@ import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
 import { iWatchlistItem } from '@/lib/interfaces/watchlist';
-import ProfileHeader from '@/components/layouts/profile_header/ProfileHeader';
 
 
 const WatchlistMoviesPage = () => {
@@ -24,10 +23,8 @@ const WatchlistMoviesPage = () => {
 
     return (
         <div>
-            <ProfileHeader title={'My movies watchlist'}>
-                <Filter data={filteredOutMovies} handleResultChange={handleResultChange} />
-            </ProfileHeader>
-            <MoviesList moviesToDisplay={moviesToDisplay} text={`You don't have any movies in the watchlist yet`}/>
+            <Filter data={filteredOutMovies} handleResultChange={handleResultChange} />
+            <MoviesList movies={moviesToDisplay} text={`You don't have any movies in the watchlist yet`} headerTitle='My movies watchlist' />
         </div>
     )
 }

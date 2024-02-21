@@ -13,7 +13,7 @@
     @include breakpoint(768) {
         padding: 2rem 1rem;
     }
-    .loading_spinner{
+    .loading_spinner {
         @include flex_center;
         height: 35rem;
     }
@@ -25,7 +25,18 @@
         font-weight: 700;
         letter-spacing: 0.1rem;
     }
+    .headerTitle {
+        margin-bottom: 1rem;
+        width: fit-content;
+        font-weight: 800;
+        font-size: 2rem;
+        letter-spacing: 0.1rem;
+        @include text_gradient();
 
+        @include breakpoint(768) {
+            font-size: 1.5rem;
+        }
+    }
     .wrapper {
         width: 100%;
         min-height: 35rem;

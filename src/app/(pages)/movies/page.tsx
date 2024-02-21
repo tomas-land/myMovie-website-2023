@@ -1,14 +1,21 @@
-import React from 'react';
-import s from '@/components/shared/logo/logo.module.scss';
-import Image from 'next/image';
+import { getLatestMovies, getMovieGenres } from '@/lib/requests/movies';
+import MoviesList from '@/components/shared/media_list/movies/MoviesList';
+import { iMovie } from '@/lib/interfaces/movie';
+import { iMovieGenre } from '@/lib/interfaces/movie';
+import GenreTags from '@/components/shared/genre_tags/GenreTags';
 
 
 const MoviesPage = async () => {
 
+    const latestMovies: iMovie[] = await getLatestMovies(); // getBlurredEntitiesUrl() is used to get the blurred backdrop image url for next image placeholder
+    const movieGenres: iMovieGenre[] = await getMovieGenres();
+
     return (
-        <div style={{ height: '100vh', textAlign: 'center' }}>
-            <h1 style={{ marginTop: '8rem', color: '#854d6c' }}>🎬 Sorry... still in progress 🎬</h1>
-            <Image className={s.image} src="/6.svg" alt="logo" fill />
+        <div style={{ minHeight: '100vh' }}>
+            <GenreTags genres={movieGenres} />
+            {/* //Aside-filter */}
+            {/* // Search bar */}
+            <MoviesList movies={latestMovies} headerTitle='Latest Movies' />
         </div>
     );
 }

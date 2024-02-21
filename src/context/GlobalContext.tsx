@@ -8,6 +8,8 @@ interface iGlobalContextProps {
     setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
     currentRatingPopupId: string | null | undefined;
     setCurrentRatingPopupId: Dispatch<SetStateAction<string | null | undefined>>;
+    selectedGenreId: number | null | undefined;
+    setSelectedGenreId: Dispatch<SetStateAction<number | null | undefined>>;
 }
 
 const GlobalContext = createContext<iGlobalContextProps | undefined>(undefined);
@@ -19,7 +21,7 @@ export const useGlobalContext = (): iGlobalContextProps => {
     }
     return context;
 };
-
+// GlobalContext purpose is to keep not complex global states and functions that are used in multiple components
 export const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
     // search bar =======================================================================================================
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -33,6 +35,9 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
     // rating popup =====================================================================================================
     const [currentRatingPopupId, setCurrentRatingPopupId] = useState<string | null | undefined>(null);
 
+    // selected genre ====================================================================================================
+    const [selectedGenreId, setSelectedGenreId] = useState<number | null | undefined>(null);
+
 
     const contextValue: iGlobalContextProps = {
         isSearchOpen,
@@ -41,7 +46,10 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
         isInputFocused,
         setIsInputFocused,
         currentRatingPopupId,
-        setCurrentRatingPopupId
+        setCurrentRatingPopupId,
+        selectedGenreId,
+        setSelectedGenreId,
+
     };
 
     return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
