@@ -20,7 +20,7 @@ const TrailerModal = ({ movieVideos }: iProps) => {
     // Prevent the modal from closing when clicking on the modal content
     e.stopPropagation();
   };
-  
+
   return (
     <div className={s.trailer_modal} onClick={closeModal}>
       <div className={s.modal_content} onClick={handleModalContentClick}>

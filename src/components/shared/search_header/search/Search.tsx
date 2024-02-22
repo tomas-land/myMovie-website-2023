@@ -6,18 +6,17 @@ import SearchResultItem from '@/components/shared/search_header/search_result_it
 import LoadingSpinner from '@/components/shared/loading_spinner/LoadingSpinner';
 import { useDebounce } from 'use-debounce';
 import { useGlobalContext } from '@/context/GlobalContext';
- 
+
 
 const Search = () => {
-  const [isSearchFieldExtended, setIsSearchFieldExtended] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [searchResultsData, setSearchResultsData] = useState<any[]>([]);
   const [isResultsShown, setIsResultsShown] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const resultsRef = useRef<HTMLDivElement | null>(null);
+  const searchRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [query] = useDebounce(searchQuery, 1000);
-  const { isInputFocused } = useGlobalContext();
+  const { isInputFocused, setIsSearchOpen, isSearchOpen } = useGlobalContext();
 
   useEffect(() => {
     if (isInputFocused && inputRef.current) {
@@ -27,8 +26,6 @@ const Search = () => {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleResultsClose);
-
-
     if (!searchQuery) {
       setIsResultsShown(false);
     } else {
@@ -40,18 +37,14 @@ const Search = () => {
     };
   }, [query]);
 
-  const handleSearchFieldExtension = () => {
-    setIsSearchFieldExtended(true);
-  };
-
   const handleResultsClose = (e: MouseEvent) => {
-    setIsSearchFieldExtended(false);
-    if (resultsRef.current && e.target instanceof Node) {
-      const isClickInsideResults = resultsRef.current.contains(e.target as Node);
+    if (searchRef.current && e.target instanceof Node) {
+      const isClickInsideResults = searchRef.current.contains(e.target as Node);
       const isClickInsideInput = inputRef.current?.contains(e.target as Node);
       // Check if the click occurred outside the results div and not inside the input
       if (!isClickInsideResults && !isClickInsideInput) {
-        setIsResultsShown(false);
+        // setIsResultsShown(false);
+        setIsSearchOpen(false);
         setSearchQuery('');
       }
     }
@@ -89,14 +82,18 @@ const Search = () => {
   };
 
   return (
-    <div className={`${s.search} ${isSearchFieldExtended ? s.input_extended : ''}`}>
-      <input className={s.input} placeholder="Search for a movie, series, actors.." ref={inputRef} value={searchQuery} maxLength={40} onClick={handleSearchFieldExtension} onChange={(e) => setSearchQuery(e.target.value)} />
-      {isResultsShown && (
-        <div className={s.results} ref={resultsRef}>
-          {renderResults()}
-        </div>
-      )}
-    </div>
+    <>
+      {isSearchOpen && (
+        <div className={`${s.search}`} ref={searchRef}>
+          <input className={s.input} placeholder="Search for a movie, series, actors.." ref={inputRef} value={searchQuery} maxLength={40} onChange={(e) => setSearchQuery(e.target.value)} />
+          {isResultsShown && (
+            <div className={s.results} >
+              {renderResults()}
+            </div>
+          )}
+        </div>)
+      }
+    </>
   );
 };
 

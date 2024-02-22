@@ -30,6 +30,7 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
     const toggleSearch = () => {
         setIsSearchOpen((prev) => !prev);
         setIsInputFocused(true);
+        
     };
 
     // rating popup =====================================================================================================

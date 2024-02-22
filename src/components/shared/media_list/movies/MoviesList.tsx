@@ -12,9 +12,10 @@ interface iProps {
   movies: iMovie[] | iTvSeries[] | undefined;
   headerTitle?: string;
   text?: string;
+  query?: string;
 }
 
-const MoviesList = ({ movies, headerTitle, text }: iProps) => {
+const MoviesList = ({ movies, headerTitle, text, query }: iProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { selectedGenreId } = useGlobalContext();
   const [moviesToDisplay, setMoviesToDisplay] = useState<iMovie[] | iTvSeries[] | undefined>(movies);
@@ -23,6 +24,10 @@ const MoviesList = ({ movies, headerTitle, text }: iProps) => {
     if (selectedGenreId) {
       const filteredMoviesByGenre = movies?.filter((movie) => movie.genre_ids?.includes(selectedGenreId));
       setMoviesToDisplay(filteredMoviesByGenre);
+    }
+    if (query) {
+      const filteredMoviesByQuery = movies?.filter((movie) => movie.title?.toLowerCase().includes(query.toLowerCase()));
+      setMoviesToDisplay(filteredMoviesByQuery);
     }
     setIsLoading(movies === undefined);
   }, [movies, selectedGenreId]);
