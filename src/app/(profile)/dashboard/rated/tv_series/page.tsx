@@ -1,11 +1,11 @@
 "use client"
-import MoviesList from '@/components/shared/media_list/movies/MoviesList';
 import Filter from '@/components/shared/filter/Filter';
 import useUserData from '@/hooks/reactQuery/useUserData';
 import { useState } from 'react';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { iRatedItem } from '@/lib/interfaces/rated';
 import sortMovies from '@/lib/helpers/movies/sortMovies';
+import TvSeriesList from '@/components/shared/media_list/tv_series/TvSeriesList';
 
 const RatedTvSeriesPage = () => {
     const [filteredData, setFilteredData] = useState<iTvSeries[]>([]);
@@ -23,7 +23,7 @@ const RatedTvSeriesPage = () => {
     return (
         <div>
             <Filter data={initialData} handleResultChange={handleResultChange} />
-            <MoviesList movies={moviesToDisplay} text={`You don't have any rated tv-series yet`} headerTitle='My rated tv-series' />
+            <TvSeriesList movies={moviesToDisplay} text={`You don't have any rated tv-series yet`} headerTitle='My rated tv-series' />
         </div>
     )
 }

@@ -18,35 +18,26 @@ interface iProps {
 const MoviesList = ({ movies, headerTitle, text, query }: iProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { selectedGenreId } = useGlobalContext();
-  const [moviesToDisplay, setMoviesToDisplay] = useState<iMovie[] | iTvSeries[] | undefined>(movies);
+  const [resultText, setResultText] = useState<string | undefined>(text);
 
   useEffect(() => {
-    if (selectedGenreId) {
-      const filteredMoviesByGenre = movies?.filter((movie) => movie.genre_ids?.includes(selectedGenreId));
-      setMoviesToDisplay(filteredMoviesByGenre);
-    }
-    if (query) {
-      const filteredMoviesByQuery = movies?.filter((movie) => movie.title?.toLowerCase().includes(query.toLowerCase()));
-      setMoviesToDisplay(filteredMoviesByQuery);
-    }
     setIsLoading(movies === undefined);
-  }, [movies, selectedGenreId]);
+  }, [movies]);
 
   return (
     <div className={s.list}>
-      {isLoading && <div className={s.loading_spinner}><LoadingSpinner /></div>}
+      <h1 className={s.headerTitle}>{headerTitle}</h1>
 
-      {!isLoading && !moviesToDisplay?.length && (
-        <div className={s.no_favorites}>
-          <h1>{text}</h1>
-        </div>
-      )}
+      {!isLoading && (
+        <div className={s.wrapper}>
+          {movies?.length === 0 && (
+            <div className={s.no_results}>
+              <h1>{resultText}</h1>
+            </div>
+          )}
 
-      {!isLoading && moviesToDisplay ? (
-        <>
-          <h1 className={s.headerTitle}>{headerTitle}</h1>
-          <div className={s.wrapper}>
-            {moviesToDisplay?.map((movie: iMovie | iTvSeries) => (
+          {movies ? (
+            movies?.map((movie: iMovie | iTvSeries) => (
               <MovieCard
                 key={movie.id}
                 movie={movie}
@@ -54,10 +45,17 @@ const MoviesList = ({ movies, headerTitle, text, query }: iProps) => {
                 mediaType='movies'
                 cardWidth='100%'
               />
-            ))}
-          </div>
-        </>
-      ) : null}
+            ))
+          ) : null}
+        </div>
+      )}
+
+      {isLoading && (
+        <div className={s.loading_spinner}>
+          <LoadingSpinner />
+        </div>
+      )}
+      
     </div>
   );
 };

@@ -1,6 +1,10 @@
 import prisma from "../../prisma";
+import { getServerSession } from "next-auth";
+import authOptions from "@/lib/auth/authOptions";
 
-export async function getAllFavoriteMoviesPrisma(user_id: string | null) {
+export async function getAllFavoriteMoviesPrisma() {
+    const session = await getServerSession(authOptions);
+    const user_id = session.user.id;
     try {
         const favorites = await prisma.favoriteMovie.findMany({
             where: {

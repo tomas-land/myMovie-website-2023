@@ -21,7 +21,7 @@ const WatchlistTvSeriesPage = () => {
     return (
         <div>
             <Filter data={filteredOutTvSeries} handleResultChange={handleResultChange} />
-            <TvSeriesList moviesToDisplay={moviesToDisplay} text={`You don't have any tv-series in the watchlist yet`} headerTitle='My tv-series watchlist' />
+            <TvSeriesList movies={moviesToDisplay} text={`You don't have any rated tv-series yet`} headerTitle='My tv-series watchlist' />
         </div>
     )
 }

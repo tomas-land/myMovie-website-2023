@@ -3,6 +3,7 @@ import { toastError, toastSuccess } from '@/lib/toasts';
 import axios from 'axios';
 import { iFavorite } from '@/lib/interfaces/favorite'
 import useUserData from './useUserData';
+import { useRouter } from 'next/navigation';
 
 interface iCustomHookProps {
     mediaType: string;
@@ -19,6 +20,7 @@ interface iCustomHookProps {
 
 const useToggleFavorite = ({ mediaType, movieId, tvSeriesId, title, posterPath, voteAverage, isFavorite, setIsFavorite, releaseDate, currentSlideId }: iCustomHookProps) => {
     const queryClient = useQueryClient();
+    const router = useRouter();
 
     // fetch user favorite movies and cache them
     const { data: userFavoriteMovies } = useUserData('/api/favorites/movies/all_favorites', 'favoriteMovies');
@@ -34,6 +36,7 @@ const useToggleFavorite = ({ mediaType, movieId, tvSeriesId, title, posterPath, 
                     await axios.delete(`/api/favorites/movies/delete_favorite?id=${favoriteMovie.id}`);
                 } else {
                     await axios.post(`/api/favorites/movies/save_favorite`, { movie_id: movieId, title: title, poster_path: posterPath, vote_average: voteAverage, release_date: releaseDate });
+                    // router.refresh();
                  }
             } else if (mediaType === 'tv_series') {
                 const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId?.toString()); // if tv series is already in favorites, delete it, else add it to favorites
@@ -47,7 +50,6 @@ const useToggleFavorite = ({ mediaType, movieId, tvSeriesId, title, posterPath, 
         onSuccess: () => {
             if (mediaType === 'movies') queryClient.invalidateQueries({ queryKey: ['favoriteMovies'] });
             else queryClient.invalidateQueries({ queryKey: ['favoriteTvSeries'] });
-
             if (isFavorite) {
                 toastSuccess(`Removed from favorite ${mediaType}`)
                 setIsFavorite(false)

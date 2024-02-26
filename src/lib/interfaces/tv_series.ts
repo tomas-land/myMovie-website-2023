@@ -22,7 +22,7 @@ export interface iTvSeries {
   overview?: string;
   popularity?: number;
   poster_path: string;
-  vote_average: number;
+  vote_average?: number;
   vote_count?: number;
   imdb_id?: string;
   isFavorite?: boolean;

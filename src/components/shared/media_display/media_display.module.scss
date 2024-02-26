@@ -1,9 +1,9 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
 
-.content_display {
+.media_display {
   max-width: $main_container;
-  min-height: 39rem;
+  height: auto;
   margin: 0 auto;
   background-color: $card-bg-color;
   backdrop-filter: blur(10px);

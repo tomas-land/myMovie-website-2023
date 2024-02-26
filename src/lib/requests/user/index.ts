@@ -1,7 +1,7 @@
 import { getUserByEmailPrisma } from '@/lib/prisma/user/getUserByEmailPrisma';
 import { getRecentFavoriteMoviesPrisma } from '@/lib/prisma/favorite/movie/getRecentFavoriteMoviesPrisma';
 import { getRecentFavoriteTvSeriesPrisma } from '@/lib/prisma/favorite/tv_series/getRecentFavoriteTvSeriesPrisma';
-import { getFavoriteMoviesPrisma } from '@/lib/prisma/favorite/movie/getFavoriteMoviesPrisma';
+import { getAllFavoriteMoviesPrisma } from '@/lib/prisma/favorite/movie/getAllFavoriteMoviesPrisma';
 import { getFavoriteTvSeriesPrisma } from '@/lib/prisma/favorite/tv_series/getFavoriteTvSeriesPrisma';
 import { getUserRatedTotalPrisma } from '@/lib/prisma/rating/getUserRatedTotalPrisma';
 import { getAllFromWatchlistPrisma } from '@/lib/prisma/watchlist/getAllFromWatchlistPrisma';
@@ -34,7 +34,7 @@ export async function getRecentFavoriteMovies() {
 }
 
 export async function getFavoriteMovies() {
-    const favoriteMovies = await getFavoriteMoviesPrisma();
+    const favoriteMovies = await getAllFavoriteMoviesPrisma();
     if (!favoriteMovies) throw new Error('Favorite movies not found')
     return favoriteMovies
 }

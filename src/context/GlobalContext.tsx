@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, useContext, Dispatch, SetStateAction, useRef } from 'react';
 
 interface iGlobalContextProps {
     isSearchOpen: boolean;
@@ -39,7 +39,7 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
     // selected genre ====================================================================================================
     const [selectedGenreId, setSelectedGenreId] = useState<number | null | undefined>(null);
 
-
+ 
     const contextValue: iGlobalContextProps = {
         isSearchOpen,
         setIsSearchOpen,
@@ -50,7 +50,6 @@ export const GlobalContextProvider = ({ children }: { children: React.ReactNode 
         setCurrentRatingPopupId,
         selectedGenreId,
         setSelectedGenreId,
-
     };
 
     return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;

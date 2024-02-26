@@ -11,10 +11,10 @@ import { iTvSeries } from '@/lib/interfaces/tv_series';
 
 
 const Home = async () => {
-  const latestMovies = await getBlurredEntitiesUrl(await getLatestMovies()); // getBlurredEntitiesUrl() is used to get the blurred backdrop image url for next image placeholder
-  const latestTvSeries = await getLatestTvSeries();
-  const upcomingMovies = await getUpcomingMovies();
-  const upcomingTvSeries = await getUpcomingTvSeries();
+  const latestMovies:iMovie[] = await getBlurredEntitiesUrl(await getLatestMovies()); // getBlurredEntitiesUrl() is used to get the blurred backdrop image url for next image placeholder
+  const latestTvSeries:iTvSeries[] = await getLatestTvSeries();
+  const upcomingMovies:iMovie[] = await getUpcomingMovies();
+  const upcomingTvSeries:iTvSeries[] = await getUpcomingTvSeries();
   const sortedByVoteTopRatedMovies: iMovie[] = sortMoviesByVote(await getTopRatedMovies()) as iMovie[];
   const sortedByVoteTopRatedTvSeries: iTvSeries[] = sortMoviesByVote(await getTopRatedTvSeries()) as iTvSeries[];
 

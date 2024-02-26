@@ -12,10 +12,10 @@ import { iFavorite } from '@/lib/interfaces/favorite';
 
 
 interface iProps {
-  movie?: iMovie | iFavorite
-  tvSeries?: iTvSeries | iFavorite
+  movie?: iMovie;
+  tvSeries?: iTvSeries;
   isQuickView?: boolean;
-  mediaType: string
+  mediaType: string;
   cardWidth: string;
   handleQuickViewCardOpen?: (cardId: string | undefined | null) => void;
   isQuickViewOpened?: boolean;

@@ -6,10 +6,9 @@ import { getAllFavoriteMoviesPrisma } from "@/lib/prisma/favorite/movie/getAllFa
 export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
-    const user_id = session?.user?.id;
 
     try {
-        const favoriteMovies =await getAllFavoriteMoviesPrisma(user_id);
+        const favoriteMovies =await getAllFavoriteMoviesPrisma();
         return NextResponse.json({ favoriteMovies }, { status: 200 });
     } catch (error) {
         console.log(error)

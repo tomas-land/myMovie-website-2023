@@ -11,7 +11,7 @@ interface iGenreTagsProps {
 }
 
 const GenreTags = ({ genres }: iGenreTagsProps) => {
-    const { setSelectedGenreId } = useGlobalContext();
+    const { selectedGenreId, setSelectedGenreId } = useGlobalContext();
 
     const handleGenreClick = (genreID: number) => {
         setSelectedGenreId(genreID);
@@ -31,7 +31,7 @@ const GenreTags = ({ genres }: iGenreTagsProps) => {
                 }}
             >
                 {genres.map((genre) => (
-                    <SplideSlide key={genre.id} className={s.tag}>
+                    <SplideSlide key={genre.id} className={`${s.tag} ${selectedGenreId === genre.id ? s.active : ''}`}>
                         <div onClick={() => handleGenreClick(genre.id)}>{genre.name}</div>
                     </SplideSlide>
                 ))}

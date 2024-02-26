@@ -18,7 +18,7 @@ export async function getUpcomingMoviesFromWatchlistPrisma() {
                
             },
             orderBy: {
-                createdAt: 'asc',
+                release_date: 'asc',
             },
         });
         return watchlist;

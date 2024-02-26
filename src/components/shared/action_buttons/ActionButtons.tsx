@@ -33,7 +33,6 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   const { currentRatingPopupId, setCurrentRatingPopupId } = useGlobalContext();
   const { status } = useSession();
 
-
   const isAuthenticated = status === 'authenticated';  // passing to tooltip component to show tooltip only if authentificated
   const movieId = (movie?.media_id ?? movie?.movieId ?? movie?.id)?.toString();  // movie.id comes from external api , movie.movieId comes from db as favorite movie, if no movie.movieId use movie.id by default
   const tvSeriesId = (tvSeries?.media_id ?? tvSeries?.seriesId ?? tvSeries?.id)?.toString();  // tvSeries.id comes from external api , tvSeries.tvSeriesId comes from db as favorite tvSeries, if no tvSeries.tvSeriesId use tvSeries.id by default
@@ -60,11 +59,11 @@ const ActionButtons = ({ movie, tvSeries, mediaType }: iProps) => {
   // Custom hook to add or remove a movie or tv-series from watchlist
   const { toggleWatchlist, togglingWatchlistIsPending } = useToggleWatchlist({ mediaType, currentSlideId, title, posterPath, voteAverage, releaseDate, isInWatchlist, setIsInWatchlist });
 
-  useEffect(() => {
+useEffect(() => {
     const favoriteMovie = userFavoriteMovies?.find((favorite: iFavorite) => favorite.movieId === movieId);
     const favoriteTvSeries = userFavoriteTvSeries?.find((favorite: iFavorite) => favorite.seriesId === tvSeriesId);
     const watchlistItem = userWatchlist?.find((watchlistItem: iWatchlistItem) => watchlistItem.media_id === currentSlideId);
-    setIsFavorite(!!favoriteMovie || !!favoriteTvSeries); // if movie or tv series is in favorites, set isFavorite to true
+    setIsFavorite(!!favoriteMovie || !!favoriteTvSeries ); // if movie or tv series is in favorites, set isFavorite to true
     setIsInWatchlist(!!watchlistItem); // if movie or tv series is in watchlist, set isInWatchlist to true
 
     const rated = userRatings?.find((rating: iRatedItem) => rating.media_id === movieId || rating.media_id === tvSeriesId);

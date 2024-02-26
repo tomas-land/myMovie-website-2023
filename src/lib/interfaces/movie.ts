@@ -1,5 +1,5 @@
 export interface iMovie {
-  id?: string;
+  id: string;
   movieId?: string;
   adult?: boolean;
   backdrop_path?: string;

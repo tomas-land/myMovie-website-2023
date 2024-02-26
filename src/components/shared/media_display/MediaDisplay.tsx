@@ -12,8 +12,8 @@ import { useState } from 'react';
 interface iProps {
   headerTitle: string;
   endpoint?: string;
-  movies?:  iMovie[] | iFavorite[];
-  tvSeries?: iTvSeries[] | iFavorite[];
+  movies?:  iMovie[];
+  tvSeries?: iTvSeries[];
   userProfile?: boolean;
   isQuickView?: boolean;
   cardWidth: string;
@@ -27,7 +27,7 @@ const MediaDisplay = ({ headerTitle, endpoint, movies, tvSeries, userProfile, is
   }
 
   return (
-    < div className={s.content_display} >
+    < div className={s.media_display} >
       <div className={s.header}>
         <div className={s.title}>{headerTitle}</div>
         <MediaSlider selectMediaType={selectMediaType} selectedMediaType={mediaType} />
