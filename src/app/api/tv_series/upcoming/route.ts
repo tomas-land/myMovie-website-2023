@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { TMDB_BASE_URL, TMDB_API_KEY } from '@/lib/config';
 import { currentDate } from '@/lib/dayJS';
-import filterOutMoviesWithPosters from '@/lib/helpers/filterOutMoviesWithPosters';
+import filterOutMoviesWithPosters from '@/lib/helpers/person/filterOutMoviesWithPosters';
 
 
 export async function GET(request: Request) {

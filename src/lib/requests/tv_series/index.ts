@@ -1,7 +1,7 @@
 import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
 import { currentDate, TwoMonthsBeforeDate, periodOFLast6months } from '@/lib/dayJS';
-import filterOutMoviesWithPosters from '@/lib/helpers/filterOutMoviesWithPosters';
-import filterOutMoviesWithAverageAboveZero from '@/lib/helpers/filterOutMoviesWithAverageAboveZero';
+import filterOutMoviesWithPosters from '@/lib/helpers/person/filterOutMoviesWithPosters';
+import filterOutMoviesWithAverageAboveZero from '@/lib/helpers/movies/filterOutMoviesWithAverageAboveZero';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 
 export async function getLatestTvSeries(numberOfPages: number) {

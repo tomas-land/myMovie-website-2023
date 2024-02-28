@@ -19,7 +19,7 @@ const MoviesPage = async ({ searchParams }: {
     const query = searchParams?.query || ''; // Get query from searchParams if it exists or set it to an empty string
     
     return (
-        <div style={{ minHeight: '100vh' }}>
+        <div>
             <GenreTags genres={tvSeriesGenres} />
             <SearchBar />
             <LatestTvSeries tvSeries={latestTvSeries} headerTitle='Latest Tv-series' query={query}/>

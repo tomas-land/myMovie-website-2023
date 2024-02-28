@@ -6,6 +6,7 @@ export interface iPerson {
   homepage?: string | null;
   id: number;
   known_for_department: string;
+  poster_path: string;
   name: string;
   place_of_birth: string;
   profile_path: string;

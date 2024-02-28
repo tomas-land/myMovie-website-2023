@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { TMDB_BASE_URL, TMDB_API_KEY } from '@/lib/config';
 import { currentDate, TwoMonthsBeforeDate } from '@/lib/dayJS';
 import getBlurredEntitiesUrl from '@/lib/helpers/getBlurredEntitiesUrl';
-import filterOutMoviesWithPosters from '@/lib/helpers/filterOutMoviesWithPosters';
+import filterOutMoviesWithPosters from '@/lib/helpers/person/filterOutMoviesWithPosters';
 
 
 export async function GET(request: Request) {
