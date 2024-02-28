@@ -33,6 +33,7 @@ const MobileMenu = ({ links, closeMobileMenu, isMobileMenuOpen, setIsMobileMenuO
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' });
   };
+  
   return (
     <div className={`${s.mobile_menu} ${s.open}`}>
       <div className={s.hamburger_wrapper}>

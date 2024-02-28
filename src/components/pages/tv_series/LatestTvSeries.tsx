@@ -2,36 +2,38 @@
 import React, { useEffect, useState } from 'react'
 import { iMovie } from '@/lib/interfaces/movie'
 import { iTvSeries } from '@/lib/interfaces/tv_series'
-import s from './latest_movies.module.scss'
+import s from './latest_tv_series.module.scss'
 import MovieCard from '@/components/shared/movie_card/MovieCard'
 import { useGlobalContext } from '@/context/GlobalContext'
-import { useSearchParams, usePathname, useRouter, redirect } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 
 interface iProps {
-    latestMovies: iMovie[];
+    tvSeries: iTvSeries[] ;
     headerTitle: string;
     query: string;
 }
 
-const LatestMovies = ({ latestMovies, headerTitle, query }: iProps) => {
-    const [initialData, setInitialData] = useState<iMovie[] | iTvSeries[] | undefined>(latestMovies)
+const LatestMovies = ({ tvSeries, headerTitle, query }: iProps) => {
+    const [initialData, setInitialData] = useState<iMovie[] | iTvSeries[] | undefined>(tvSeries)
     const { selectedGenreId, setSelectedGenreId } = useGlobalContext();
     const pathname = usePathname()
     const { replace } = useRouter()
 
     useEffect(() => {
         if (query) {
-            const filteredMoviesByQuery = latestMovies.filter((movie: iMovie) => movie.title.toLowerCase().includes(query.toLowerCase()))
+            const filteredMoviesByQuery = tvSeries.filter((tv_series) => tv_series?.name?.toLowerCase().includes(query.toLowerCase()))
             setInitialData(filteredMoviesByQuery)
             setSelectedGenreId(null)
         }
-        if (selectedGenreId) {
-            const filteredMoviesByGenre = latestMovies.filter((movie: iMovie) => movie.genre_ids?.includes(selectedGenreId))
+        else if (selectedGenreId) {
+            const filteredMoviesByGenre = tvSeries.filter((tv_series) => tv_series.genre_ids?.includes(selectedGenreId))
             setInitialData(filteredMoviesByGenre)
             replace(`${pathname}`)
+        } else {
+            setInitialData(tvSeries)
         }
-    }, [query, selectedGenreId, pathname])
+    }, [query, selectedGenreId, pathname, tvSeries])
 
     useEffect(() => {
         setSelectedGenreId(null); // Set selectedGenreId to null on component mount to reset the genre filter
@@ -41,13 +43,14 @@ const LatestMovies = ({ latestMovies, headerTitle, query }: iProps) => {
         <div className={s.list}>
             <h1 className={s.headerTitle}>{headerTitle}</h1>
             <div className={s.wrapper}>
+                {initialData?.length === 0 && <div className={s.no_results}><h1>No tv-series found</h1></div>}
                 {initialData ? (
-                    initialData?.map((movie: iMovie | iTvSeries) => (
+                    initialData?.map((tvSeries: iTvSeries) => (
                         <MovieCard
-                            key={movie.id}
-                            movie={movie}
+                            key={tvSeries.id}
+                            tvSeries={tvSeries}
                             isQuickView={false}
-                            mediaType='movies'
+                            mediaType='tv_series'
                             cardWidth='100%'
                         />
                     ))

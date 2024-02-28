@@ -1,5 +1,5 @@
 'use client';
-import { iMovieGenre } from '@/lib/interfaces/movie'
+import { iGenre } from '@/lib/interfaces/movie'
 import s from './genre_tags.module.scss'
 import React from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -7,7 +7,7 @@ import '@splidejs/react-splide/css/core';
 import { useGlobalContext } from '@/context/GlobalContext';
 
 interface iGenreTagsProps {
-    genres: iMovieGenre[]
+    genres: iGenre[]
 }
 
 const GenreTags = ({ genres }: iGenreTagsProps) => {
@@ -23,16 +23,26 @@ const GenreTags = ({ genres }: iGenreTagsProps) => {
                 className={s.genres}
                 options={{
                     rewind: true,
-                    gap: '1rem',
                     pagination: false,
+                    gap: 10,
                     arrows: false,
                     autoWidth: true,
                     autoHeight: true,
+                    breakpoints: {
+                        768: {
+                            gap: 5,
+                        },
+                    },
                 }}
             >
+                {/*first tag for selecting all genres */}
+                <SplideSlide key={0} onClick={() => setSelectedGenreId(null)}>
+                    <span className={`${s.tag} ${selectedGenreId === null ? s.active : ''}`}>All</span>
+                </SplideSlide>
+                {/* map through all genres and display them */}
                 {genres.map((genre) => (
-                    <SplideSlide key={genre.id} className={`${s.tag} ${selectedGenreId === genre.id ? s.active : ''}`}>
-                        <div onClick={() => handleGenreClick(genre.id)}>{genre.name}</div>
+                    <SplideSlide key={genre.id} onClick={() => handleGenreClick(genre.id)}>
+                        <span className={`${s.tag} ${selectedGenreId === genre.id ? s.active : ''}`}>{genre.name}</span>
                     </SplideSlide>
                 ))}
             </Splide>

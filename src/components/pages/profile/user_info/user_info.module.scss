@@ -18,16 +18,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
             @include breakpoint(768) {
                 justify-content: flex-start;
             }
 
-            overflow: hidden;
             .image {
                 border-radius: 50%;
                 border: 1px solid $color-3-light;
                 fill: $color-3-light;
-                object-fit: cover;
+                object-fit: cover
             }
         }
         .info {

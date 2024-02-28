@@ -13,10 +13,6 @@
         padding: 2rem 1rem;
     }
 
-    .loading_spinner {
-        @include flex_center;
-        margin-top: 8rem;
-    }
     .no_results {
         h1 {
             width: 100%;
@@ -47,22 +43,9 @@
         }
     }
 
-    .headerTitle {
-        margin-bottom: 1rem;
-        width: fit-content;
-        font-weight: 800;
-        font-size: 2rem;
-        letter-spacing: 0.1rem;
-        @include text_gradient();
-
-        @include breakpoint(768) {
-            font-size: 1.5rem;
-        }
-    }
-
     .wrapper {
         width: 100%;
-        min-height:35rem;
+        min-height: 35rem;
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 2rem;
         padding: 1rem;

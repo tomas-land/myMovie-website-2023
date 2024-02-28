@@ -4,13 +4,14 @@
 .genres {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
     background: rgba($color: #000000, $alpha: 0.3);
-    margin: 8rem auto 1rem;
+    margin: 7rem auto 1rem;
     max-width: $main_container;
     padding: 0.8rem;
     mask: linear-gradient(to right, black 0px, black 97%, transparent);
-
+    @include breakpoint(768) {
+        margin: 5rem auto 1rem;
+    }
     .tag {
         @include flex-center();
         padding: 0.4rem 0.8rem;
@@ -27,8 +28,8 @@
         transition: all ease-in-out 200ms;
         &:hover {
             background-color: $color-2;
-        color: $color-1-light;
-        border: 2px solid $color-1-dark;
+            color: $color-1-light;
+            border: 2px solid $color-1-dark;
         }
     }
     .active {

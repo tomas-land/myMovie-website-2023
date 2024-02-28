@@ -1,19 +1,23 @@
 import { TMDB_API_KEY, TMDB_BASE_URL } from '@/lib/config.js';
-import { currentDate, startOFYear, TwoMonthsBeforeDate, periodOFLast6months } from '@/lib/dayJS';
+import { currentDate, startOFYear, periodOFLast6months } from '@/lib/dayJS';
 import { iMovie } from '@/lib/interfaces/movie';
 import filterOutMoviesWithPosters from '@/lib/helpers/filterOutMoviesWithPosters';
 import filterOutMoviesWithAverageAboveZero from '@/lib/helpers/filterOutMoviesWithAverageAboveZero';
 
 
-export async function getLatestMovies() {
-  const response = await fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${TwoMonthsBeforeDate}&release_date.lte=${currentDate}`);
-  const data = await response.json();
-  const results = filterOutMoviesWithPosters(data.results);
+export async function getLatestMovies(numberOfPages: number) {
+  const allMovies: iMovie[] = [];
+  for (let i = 1; i <= numberOfPages; i++) {
+    const response = await fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}&primary_release_date.gte=${startOFYear}&primary_release_date.lte=${currentDate}&sort_by=popularity.desc&page=${i}&vote_average.gte=4&with_original_language=en`);
+    const data = await response.json();
+    const results = filterOutMoviesWithPosters(filterOutMoviesWithAverageAboveZero(data.results));
+    if (!response.ok) {
+      throw new Error('Fetching failed');
+    }
 
-  if (!response.ok) {
-    throw new Error('Fetching failed');
+    allMovies.push(...results);
   }
-  return results;
+  return allMovies;
 }
 
 export async function getUpcomingMovies() {

@@ -27,17 +27,6 @@ const DashboardMenu = () => {
     setIsActiveMenuItem(!!currentMenuItem) // if the current menu item is active, set it to true or false
   }, [activeMenuItemIndex])
 
-  // useEffect(() => {
-  //   // Function to update mobile view state
-  //   const updateMobileView = () => setMobileView(window.innerWidth < 768);
-  //   // Add event listener for window resize
-  //   window.addEventListener('resize', updateMobileView);
-  //   // Initial cleanup of the event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('resize', updateMobileView);
-  //   };
-  // }, []);
-
   // on mouse over, if the item has subcategories, show them ,else hide menu
   const handleMouseOver = (item: iMenuItem) => {
     if (item.subcategories) {

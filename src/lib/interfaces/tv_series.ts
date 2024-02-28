@@ -51,7 +51,10 @@ export interface iTvSeriesVideo {
   id: string;
 }
 
-
+export interface iGenre {
+  id: number;
+  name: string;
+}
 
 
 

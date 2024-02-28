@@ -19,7 +19,7 @@ const UserInfo = ({ user, session }: iUserInfo) => {
         <div className={s.user_info}>
             <div className={s.container}>
                 <div className={s.image_wrapper}>
-                    {image ? <Image src={image} alt="User Avatar" width={40} height={40} className={s.image} /> : <FaUser size={40} className={s.image} />}
+                    {image ? <Image src={image} alt="User Avatar" width={40} height={40} className={s.image} /> : <FaUser size={45} className={s.image} />}
                 </div>
                 <div className={s.info}>
                     <div className={s.name_email_wrapper}>

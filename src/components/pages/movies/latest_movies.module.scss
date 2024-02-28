@@ -13,10 +13,6 @@
         padding: 2rem 1rem;
     }
 
-    .loading_spinner {
-        @include flex_center;
-        margin-top: 8rem;
-    }
     .no_results {
         h1 {
             width: 100%;

@@ -20,10 +20,6 @@ const MoviesList = ({ movies, headerTitle, text, query }: iProps) => {
   const { selectedGenreId } = useGlobalContext();
   const [resultText, setResultText] = useState<string | undefined>(text);
 
-  useEffect(() => {
-    setIsLoading(movies === undefined);
-  }, [movies]);
-
   return (
     <div className={s.list}>
       <h1 className={s.headerTitle}>{headerTitle}</h1>

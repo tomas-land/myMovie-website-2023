@@ -47,7 +47,7 @@ export interface iMovieVideo {
   id: string;
 }
 
-export interface iMovieGenre {
+export interface iGenre {
   id: number;
   name: string;
 }
