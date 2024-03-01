@@ -1,7 +1,9 @@
-
+"use client"
 import Image from 'next/image';
 import HeroImage from '/public/hero_blur_edges.png';
 import s from './hero.module.scss';
+import MovingText from 'react-moving-text'
+
 
 const Hero = () => {
   return (
@@ -10,11 +12,27 @@ const Hero = () => {
       <div className={s.hero_overlay}>
         <div className={s.hero_content}>
           <div className={s.hero_title_wrapper}>
-            <h1 className={s.hero_title}>Discover </h1>
-            <h1 className={s.hero_title}>Collect </h1>
-            <h1 className={s.hero_title}>Recall</h1>
+            <MovingText
+              type="fadeIn"
+              duration="3000ms"
+              delay="0s"
+              direction="normal"
+              timing="ease-in-out"
+              iteration="1"
+              fillMode="none">
+              <h1 className={s.hero_title}>Discover Collect Review </h1>
+            </MovingText>
+            <MovingText
+              type="fadeInFromBottom"
+              duration="3000ms"
+              delay="0s"
+              direction="normal"
+              timing="ease-in-out"
+              iteration="1"
+              fillMode="none">
+              <p className={s.hero_subtitle}>Make your movies collection great again</p>
+            </MovingText>
           </div>
-          <p className={s.hero_subtitle}>Make your movies collection great again</p>
         </div>
       </div>
     </section>

@@ -30,7 +30,8 @@
 
       .hero_title_wrapper {
         display: flex;
-        gap: 2rem;
+        flex-direction: column;
+        gap: 1rem;
 
         @include breakpoint(1024) {
           flex-direction: column;
