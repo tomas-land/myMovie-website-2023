@@ -1,5 +1,5 @@
-@import 'src/styles/mixins';
-@import 'src/styles/variables';
+@import "src/styles/mixins";
+@import "src/styles/variables";
 
 .hero {
   position: relative;
@@ -10,6 +10,7 @@
   .hero_image {
     object-fit: cover;
     filter: opacity(0.25);
+    mask: linear-gradient(to bottom, black 80%, transparent);
     @include breakpoint(480) {
       object-position: 5%;
     }
@@ -64,7 +65,7 @@
           font-size: 1.5rem;
         }
       }
-      .search_wrapper{
+      .search_wrapper {
         width: 100%;
         display: flex;
         justify-content: center;

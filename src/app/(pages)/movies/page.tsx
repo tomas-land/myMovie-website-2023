@@ -4,7 +4,6 @@ import { iGenre } from '@/lib/interfaces/movie';
 import GenreTags from '@/components/shared/genre_tags/GenreTags';
 import SearchBar from '@/components/shared/search_page/SearchBar';
 import LatestMovies from '@/components/pages/movies/LatestMovies';
-export const revalidate = 60;
 
 
 const MoviesPage = async ({ searchParams }: {
@@ -21,7 +20,7 @@ const MoviesPage = async ({ searchParams }: {
     return (
         <div>
             <GenreTags genres={movieGenres} />
-            <SearchBar />
+            <SearchBar placeholder='Search from latest movies...'/>
             <LatestMovies movies={latestMovies} headerTitle='Latest movies' query={query}/>
         </div>
     );

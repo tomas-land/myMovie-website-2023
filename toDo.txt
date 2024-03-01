@@ -19,6 +19,7 @@
 INSTRUCTIONS
 
 PRISMA //////////////////////////////////////////////////////////
+add model to schema
 prisma on local dev:  npx prisma migrate dev
                       npx prisma generate 
 to check with prisma studio: npx prisma studio

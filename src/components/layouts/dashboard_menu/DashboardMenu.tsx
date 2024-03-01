@@ -44,10 +44,6 @@ const DashboardMenu = () => {
     setIsSubMenuShown(false);
   };
 
-  // const closeDashboardMenu = () => {
-  //   setCurrentSubcategories([]);
-  //   setIsSubMenuShown(false);
-  // }
   const handleOpenSubMenu = (item: iMenuItem, index: number) => {
     const activeInx = item.index ?? 0;
     setActiveMenuItemIndex(activeInx);  // if the item has subcategories, show them, else navigate to the item href

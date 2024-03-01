@@ -6,13 +6,17 @@
     max-width: $main_container;
     min-height: 38rem;
     margin: auto;
+    overflow-x: hidden;
     padding: 2rem;
     background-color: $card-bg-color;
-    
     @include breakpoint(768) {
         padding: 2rem 1rem;
     }
-    
+
+    .loading_spinner {
+        @include flex_center;
+        margin-top: 8rem;
+    }
     .no_results {
         h1 {
             width: 100%;
@@ -29,7 +33,7 @@
             }
         }
     }
-    
+
     .headerTitle {
         margin-bottom: 2rem;
         width: fit-content;

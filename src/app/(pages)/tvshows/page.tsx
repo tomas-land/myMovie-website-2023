@@ -21,7 +21,7 @@ const MoviesPage = async ({ searchParams }: {
     return (
         <div>
             <GenreTags genres={tvSeriesGenres} />
-            <SearchBar />
+            <SearchBar placeholder='Search from latest tv-series...' />
             <LatestTvSeries tvSeries={latestTvSeries} headerTitle='Latest Tv-series' query={query}/>
         </div>
     );

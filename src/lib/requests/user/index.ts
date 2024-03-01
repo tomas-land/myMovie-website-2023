@@ -7,6 +7,8 @@ import { getUserRatedTotalPrisma } from '@/lib/prisma/rating/getUserRatedTotalPr
 import { getAllFromWatchlistPrisma } from '@/lib/prisma/watchlist/getAllFromWatchlistPrisma';
 import { getUpcomingMoviesFromWatchlistPrisma } from '@/lib/prisma/watchlist/getUpcomingMoviesFromWatchlistPrisma';
 import { getUpcomingTvSeriesFromWatchlistPrisma } from '@/lib/prisma/watchlist/getUpcomingTvSeriesFromWatchlistPrisma';
+import { getFavoriteActorsPrisma } from '@/lib/prisma/favorite/actor/getFavoriteActorsPrisma';
+import { revalidatePath } from 'next/cache';
 
 //// user credentials -------------------------------------------------------------------
 export async function getUserByEmail(email: string) {
@@ -55,6 +57,18 @@ export async function getFavoriteTvSeries() {
     const favoriteTvSeries = await getFavoriteTvSeriesPrisma();
     if (!favoriteTvSeries) throw new Error('Favorite tv-series not found')
     return favoriteTvSeries
+}
+
+// user favorite actors -------------------------------------------------------------------
+export async function getFavoriteActors() {
+    try {
+        const favoriteActors = await getFavoriteActorsPrisma();
+        if (!favoriteActors) throw new Error('Favorite actors not found')
+        return favoriteActors;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 // user ratings -------------------------------------------------------------------

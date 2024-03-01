@@ -1,5 +1,6 @@
 export interface iFavorite {
-  id: string ;
+  id: string;
+  personId?: number;
   title: string;
   name?: string;
   overview?: string;
@@ -19,8 +20,18 @@ export interface iFavorite {
   isFavorite?: boolean;
   media_id?: string;
   episode_run_time?: number[];
-  created_by?:[{name:string}];
+  created_by?: [{ name: string }];
   rating?: string;
 }
 
+export interface iFavoriteActor {
+  id: string;
+  name: string;
+  profile_path: string;
+  popularity?: number | null;
+  personId: number;
+  createdAt: Date;
+  updatedAt?: Date | null;
+  userId: string;
+}
 

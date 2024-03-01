@@ -5,8 +5,11 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { MdClose } from "react-icons/md";
 
+interface iSearchBarProps {
+    placeholder: string
+}
 
-const SearchBar = () => {
+const SearchBar = ({ placeholder }: iSearchBarProps) => {
     const searchParams = useSearchParams()
     const { replace } = useRouter()
     const pathname = usePathname()
@@ -37,11 +40,11 @@ const SearchBar = () => {
             <div className={s.wrapper}>
                 <input className={s.search_input}
                     type="text"
-                    placeholder="Search from latest movies..."
+                    placeholder={placeholder}
                     onChange={e => handleSearch(e.target.value)}
                     value={searchValue}
                 />
-                {searchValue && <button className={s.clear_search_btn} onClick={handleClearSearch}><MdClose size={25}/></button>}
+                {searchValue && <button className={s.clear_search_btn} onClick={handleClearSearch}><MdClose size={25} /></button>}
             </div>
         </div>
     )

@@ -10,6 +10,7 @@ const menuItemsData = [
     subcategories: [
       { name: 'Movies', href: '/dashboard/favorites/movies' },
       { name: 'TV Series', href: '/dashboard/favorites/tv_series' },
+      { name: 'Actors', href: '/dashboard/favorites/actors' },
     ],
     index: 1
   },
