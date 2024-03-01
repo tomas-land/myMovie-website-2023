@@ -8,6 +8,7 @@ import { sortMoviesByVote } from '@/lib/helpers/movies/sortMoviesByVote';
 import getBlurredEntitiesUrl from '@/lib/helpers/getBlurredEntitiesUrl';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
+import { GlowingStarsBackgroundCard } from '@/components/shared/star_background/StarBackground';
 
 
 const Home = async () => {
@@ -19,14 +20,16 @@ const Home = async () => {
   const sortedByVoteTopRatedTvSeries: iTvSeries[] = sortMoviesByVote(await getTopRatedTvSeries()) as iTvSeries[];
 
   return (
-    <div className={s.homepage}>
-      <Hero />
-      <div className={s.content_displays_wrapper}>
-        <MediaDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} cardWidth='16rem' />
-        <MediaDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} cardWidth='16rem' />
-        <MediaDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={sortedByVoteTopRatedTvSeries} endpoint='top_rated' isQuickView={true} cardWidth='16rem' />
+    <GlowingStarsBackgroundCard >
+      <div className={s.homepage}>
+        <Hero />
+        <div className={s.content_displays_wrapper}>
+          <MediaDisplay headerTitle="Latest" movies={latestMovies} tvSeries={latestTvSeries} endpoint='latest' isQuickView={true} cardWidth='16rem' />
+          <MediaDisplay headerTitle="Upcoming" movies={upcomingMovies} tvSeries={upcomingTvSeries} endpoint='upcoming' isQuickView={true} cardWidth='16rem' />
+          <MediaDisplay headerTitle="Top Rated" movies={sortedByVoteTopRatedMovies} tvSeries={sortedByVoteTopRatedTvSeries} endpoint='top_rated' isQuickView={true} cardWidth='16rem' />
+        </div>
       </div>
-    </div>
+    </GlowingStarsBackgroundCard>
   );
 };
 

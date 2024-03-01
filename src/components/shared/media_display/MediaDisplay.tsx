@@ -2,7 +2,6 @@
 import MediaSlider from '../media_slider/MediaSlider';
 import s from './media_display.module.scss';
 import Slider from '@/components/shared/slider/Slider';
-import { iFavorite } from '@/lib/interfaces/favorite';
 import { iMovie } from '@/lib/interfaces/movie';
 import { iTvSeries } from '@/lib/interfaces/tv_series';
 import { useState } from 'react';

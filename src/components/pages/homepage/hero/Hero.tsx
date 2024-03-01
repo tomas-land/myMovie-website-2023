@@ -4,7 +4,6 @@ import HeroImage from '/public/hero_blur_edges.png';
 import s from './hero.module.scss';
 import MovingText from 'react-moving-text'
 
-
 const Hero = () => {
   return (
     <section className={s.hero}>
