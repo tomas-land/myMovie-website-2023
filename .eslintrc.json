@@ -1,3 +1,4 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "ignorePatterns": ["tailwind.css", "src/styles/globals.scss", "node_modules/"]
 }

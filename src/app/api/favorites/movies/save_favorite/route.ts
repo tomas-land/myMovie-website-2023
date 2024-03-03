@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     if (!session) return NextResponse.json({ message: 'No session found' }, { status: 401 });
     const { movie_id, title, poster_path, vote_average, release_date } = await req.json();
     const user_id = session?.user?.id;
-    
+
     try {
 
         await saveOrUpdateFavoriteMoviePrisma(user_id, movie_id, title, poster_path, vote_average, release_date);

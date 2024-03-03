@@ -15,7 +15,7 @@ export const GlowingStarsBackgroundCard = ({
     return (
         <div
             className={cn(
-                "h-[auto] w-[100%] absolute ",
+                "h-auto w-full",
                 className
             )}
         >
@@ -48,7 +48,7 @@ export const Illustration = () => {
 
     return (
         <div
-            className="h-full w-full absolute z-0 top-0 left-0"
+            className="w-full h-full absolute z-0"
             style={{
                 display: "grid",
                 gridTemplateColumns: `repeat(${columns}, 1fr)`,

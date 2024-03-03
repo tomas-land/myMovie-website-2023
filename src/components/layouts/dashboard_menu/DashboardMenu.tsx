@@ -8,21 +8,24 @@ import { useRouter } from 'next/navigation'
 
 interface iMenuItem {
   name: string;
-  subcategories?: { name: string; href: string;}[];
+  subcategories?: { name: string; href: string; }[];
   href?: string;
-  index?:number
+  index?: number
 }
 
 const DashboardMenu = () => {
   const [menuItems, setMenuItems] = useState<iMenuItem[]>(menuItemsData);
   const [isSubMenuShown, setIsSubMenuShown] = useState<boolean>(false);
   const [currentSubcategories, setCurrentSubcategories] = useState<{ name: string; href: string }[]>([]);
-  const [mobileView, setMobileView] = useState(window.innerWidth < 768);
+  const [mobileView, setMobileView] = useState(false);
   const [isActiveMenuItem, setIsActiveMenuItem] = useState<boolean>(false);
   const [activeMenuItemIndex, setActiveMenuItemIndex] = useState<number>(0)
   const router = useRouter();
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setMobileView(true);
+    }
     const currentMenuItem = menuItems.find((item, index) => index === activeMenuItemIndex)
     setIsActiveMenuItem(!!currentMenuItem) // if the current menu item is active, set it to true or false
   }, [activeMenuItemIndex])
@@ -30,7 +33,7 @@ const DashboardMenu = () => {
   // on mouse over, if the item has subcategories, show them ,else hide menu
   const handleMouseOver = (item: iMenuItem) => {
     if (item.subcategories) {
-      setCurrentSubcategories(item.subcategories)      
+      setCurrentSubcategories(item.subcategories)
       setIsSubMenuShown(true);
     } else {
       setCurrentSubcategories([]);

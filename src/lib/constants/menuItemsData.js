@@ -32,10 +32,7 @@ const menuItemsData = [
   },
   {
     name: 'Lists',
-    subcategories: [
-      { name: 'Movies (in dev)', href: '/lists/movies' },
-      { name: 'Test (in dev)', href: '/lists/test' },
-    ],
+    href: '/dashboard/lists',
     index: 4
   },
   {

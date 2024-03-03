@@ -4,13 +4,14 @@
 .tooltip_wrapper {
   position: relative;
   display: inline-block;
-  
+
   .tooltip {
     position: absolute;
-    bottom: 125%;
+    bottom: 130%;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content;
+    max-width: max-content;
+    width: 25rem;
     z-index: 2000;
     background: $color-2;
     font-size: 0.8rem;
@@ -19,16 +20,18 @@
     color: $color-1;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
     @include breakpoint(768) {
       display: none;
     }
-    
+
     &::before {
       content: "";
       position: absolute;
-      top: 125%;
+      right: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      bottom: 0;
+      transform: translate(-50%, 80%);
       border: solid 0.6rem;
       border-color: $color-2 transparent transparent transparent;
     }

@@ -11,6 +11,10 @@
     background-color: $card-bg-color;
     @include breakpoint(768) {
         padding: 2rem 1rem;
+        width: 100%;
+    }
+    @include breakpoint(480) {
+        padding: 1rem;
     }
 
     .loading_spinner {

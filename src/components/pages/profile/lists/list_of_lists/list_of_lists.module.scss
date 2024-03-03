@@ -1,0 +1,104 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
+.lists {
+    max-width: $main_container;
+    margin: 0 auto;
+    padding: 2rem;
+    background: $card-bg-color;
+    @include breakpoint(768) {
+        padding: 2rem 1rem;
+    }
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 1rem;
+        .title {
+            width: fit-content;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.1rem;
+            @include text_gradient();
+        }
+        .btns {
+            display: flex;
+            gap: 1rem;
+            .btn {
+                display: block;
+                font-size: 1.7rem;
+                color: $btn-color;
+                cursor: pointer;
+            }
+        }
+    }
+    .list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+        .list_item {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background: $card-bg-color;
+            cursor: pointer;
+            width: 100%;
+            &:hover {
+                background-color: rgba($color: #000000, $alpha: 0.3);
+            }
+            @include breakpoint(480) {
+                gap: 1.5rem;
+            }
+            .wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 1rem;
+                .icon_title_wrapper {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    .list_item_title {
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        letter-spacing: 0.1rem;
+                        color: $color-1;
+                    }
+                    .list_item_icon {
+                        font-size: 1.4rem;
+                        color: $color-1;
+                    }
+                    .items_count {
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: $color-1-dark;
+                    }
+                }
+            }
+            .btns {
+                display: flex;
+                gap: 1rem;
+                @include breakpoint(480) {
+                    width: 100%;
+                }
+                .btn {
+                    display: block;
+                    font-size: 1.5rem;
+                    color: $color-1;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .divider {
+        margin-top: 2rem;
+        width: 100%;
+        height: 1px;
+        background: $color-1;
+    }
+}
